@@ -8,11 +8,13 @@ In this exercise you will practice some of the essential tools for bioinformatic
 - **MD5 checksums** for data integrity  
 - **Git & GitLab** for version control and collaboration (basic)
 
-By the end, you will have compressed biological sequences files, transferred them into a new folder, verified their integrity, and tracked your work with git.  
+By the end, you will have compressed biological sequences files, transferred them into a new folder, verified their integrity, and tracked your work with git.
+
+The only thing you will need is a unix terminal but we higly encourage you to use Visual Studio Code.
 
 ---
 
-## 1. Clone the Repository
+## 1. Clone the Repository from GitLab
 
 First, get a local copy of this repository.
 
@@ -22,10 +24,21 @@ Open the terminal in your system and type:
 git clone https://gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on.git
 ```
 
-A new folder called stepping-stone-hands-on has been created. Use the cd command to move inside it and start to dive in its content.
+A new folder called stepping-stone-hands-on has been created.
+
+If you encounter any trouble cloning the repo we will provide it in a zipped folder.
+
+Use the cd command to move inside it and start to dive in its content.
 
 ```bash
 cd stepping-stone-hands-on
+```
+
+To be able to work with git version control (even locally) you need to set a minimum configuration. For this exercise we will set a repo-only configuration. In case you already worked with git globally in your system you won't need to run this step.
+
+```bash
+git config user.name "Seminar Student" # change it with your name
+git config user.email "student@example.com" # change it with your institution email
 ```
 
 ## 2. Inspect the contents of the Repository
@@ -70,7 +83,7 @@ Based on the result of the following command,
 pwd
 ```
 
-what's the absolute path and the relative path? What's the relative path of this README? (having in mind that you are in the data/ folder).
+what's the absolute and relative path of 01.fastq file? What's the relative path of this README? (having in mind that you are in the data/ folder).
 
 ## 3. Compression of files
 
@@ -102,9 +115,7 @@ gzip *.fastq
 
 The following message has been prompted in the terminal:
 
-```text
-gzip: 01.fastq.gz already exists; do you wish to overwrite (y or n)? 
-```
+🖥️ `gzip: 01.fastq.gz already exists; do you wish to overwrite (y or n)?`
 
 We can choose yes (y) or no (n). What would be the result depending on our answer? And if we used the -k option?
 
@@ -114,9 +125,18 @@ List the files and their corresponding info in a human-readable format to compar
 ls -lh 
 ```
 
+Take a look at 01.fastq and 01.fast.gz respective sizes. 425K vs. 75K. The size has been dimished by almost 6 times.
+
+With gzip you can control the compression level with -1 to -9 options. But bear in mind that greater compression will take longer to finish. Default value is -6.
+
+```bash
+gzip -1 file.fastq   # very fast, larger file
+gzip -9 file.fastq   # slower, smaller file
+```
+
 ## 4. MD5 Checksum Generation
 
-As we said earlier, our main goal is to copy the compressed files to the input_data directory. Transfering large files between directories or different machines is a very common task in bioinformatics. Some biological datasets can be heavy reaching several GB or TB and problems might arise because of connection failures. Luckily there's a tool to check that the transfer has been done correctly and the copied files haven't been corrupted.
+As we said earlier, our main goal is to copy the compressed files to the input_data directory. Transfering large files between directories or different machines is a very common task in bioinformatics. Some biological datasets can be heavy in size reaching several GB or TB and problems might arise because of connection failures. Luckily there's a tool to check that the transfer has been done correctly and the copied files haven't been corrupted.
 
 First we need to generate the md5sums in the origin directory:
 
@@ -189,11 +209,11 @@ git log --oneline
 
 You will see something like:
 
-```text
-a1b2c3d Compressed FASTQ files, copied to input_data/ and verified its integrity.
-d4e5f6g input_data/ directory created.
-789abcd  Initial commit.
-```
+🖥️ `a1b2c3d Compressed FASTQ files, copied to input_data/ and verified its integrity.`
+
+🖥️ `d4e5f6g input_data/ directory created.`
+
+🖥️ `789abcd  Initial commit.`
 
 Now we can move back to the initial commit with:
 
@@ -211,3 +231,22 @@ We have moved back to the previous commit, right after the creation of input_dat
 
 ## 6. Automatize the whole workflow in a script
 
+In the scripts folder there's a couple bash scripts that automatize the whole proces in a single run.
+
+Simply run the following command from the root directory of the repo.
+
+```bash
+sh script_1.sh
+```
+
+Now you can try the second script. Remeber to get back to the previous commit stage.
+
+```bash
+git checkout d4e5f6g #change with your actual hash
+```
+
+And do the same with the script_2.sh:
+
+```bash
+sh script_2.sh
+```
