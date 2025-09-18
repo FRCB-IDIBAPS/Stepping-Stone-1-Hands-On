@@ -24,7 +24,7 @@ Open the terminal in your system and type:
 git clone https://gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on.git
 ```
 
-A new folder called stepping-stone-hands-on has been created. 
+A new folder called stepping-stone-hands-on has been created.
 
 If you encounter any trouble cloning the repo we will provide it in a zipped folder.
 
@@ -231,4 +231,22 @@ We have moved back to the previous commit, right after the creation of input_dat
 
 ## 6. Automatize the whole workflow in a script
 
-In the scripts folder there's a few bash scripts that 
+In the scripts folder there's a couple bash scripts that automatize the whole proces in a single run.
+
+Simply run the following command from the root directory of the repo.
+
+```bash
+sh script_1.sh
+```
+
+Now you can try the second script. Remeber to get back to the previous commit stage.
+
+```bash
+git checkout d4e5f6g #change with your actual hash
+```
+
+And do the same with the script_2.sh:
+
+```bash
+sh script_2.sh
+```
