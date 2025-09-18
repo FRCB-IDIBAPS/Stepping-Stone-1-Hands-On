@@ -19,8 +19,13 @@ First, get a local copy of this repository.
 Open the terminal in your system and type:
 
 ```bash
-git clone <REPO_URL>
-cd <REPO_NAME>
+git clone https://gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on.git
+```
+
+A new folder called stepping-stone-hands-on has been created. Use the cd command to move inside it and start to dive in its content.
+
+```bash
+cd stepping-stone-hands-on
 ```
 
 ## 2. Inspect the contents of the Repository
@@ -55,6 +60,7 @@ Now move to the data/ directory, get the list of its content and print the first
 
 ```bash
 cd data/
+ls -lh
 head -n 16 01.fastq
 ```
 
@@ -76,7 +82,7 @@ gzip 01.fastq
 
 Observe the newly generated file. Where is the original uncompressed file?
 
-Unzip the recently compressed file again:
+Unzip the recently compressed file again with gunzip:
 
 ```bash
 gunzip 01.fastq.gz
@@ -204,3 +210,4 @@ tree
 We have moved back to the previous commit, right after the creation of input_data/.
 
 ## 6. Automatize the whole workflow in a script
+
