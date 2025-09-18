@@ -12,7 +12,7 @@ By the end, you will have compressed biological sequences files, transferred the
 
 ---
 
-## 1. Clone the Repository
+## 1. Clone the Repository from GitLab
 
 First, get a local copy of this repository.
 
@@ -26,6 +26,13 @@ A new folder called stepping-stone-hands-on has been created. Use the cd command
 
 ```bash
 cd stepping-stone-hands-on
+```
+
+To be able to work with git version control (even locally) you need to set a minimum configuration. For this exercise we will set a repo-only configuration. In case you already worked with git previously you won't need to run this step.
+
+```bash
+git config user.name "Seminar Student" # change it with your name
+git config user.email "student@example.com" # change it with your institution email
 ```
 
 ## 2. Inspect the contents of the Repository
@@ -70,7 +77,7 @@ Based on the result of the following command,
 pwd
 ```
 
-what's the absolute path and the relative path? What's the relative path of this README? (having in mind that you are in the data/ folder).
+what's the absolute and relative path of 01.fastq file? What's the relative path of this README? (having in mind that you are in the data/ folder).
 
 ## 3. Compression of files
 
@@ -102,8 +109,8 @@ gzip *.fastq
 
 The following message has been prompted in the terminal:
 
-```text
-gzip: 01.fastq.gz already exists; do you wish to overwrite (y or n)? 
+```console
+gzip: 01.fastq.gz already exists; do you wish to overwrite (y or n)?
 ```
 
 We can choose yes (y) or no (n). What would be the result depending on our answer? And if we used the -k option?
@@ -114,9 +121,18 @@ List the files and their corresponding info in a human-readable format to compar
 ls -lh 
 ```
 
+Take a look at 01.fastq and 01.fast.gz respective sizes. 425K vs. 75K. The size has been dimished by almost 6 times.
+
+With gzip you can control the compression level with -1 to -9 options. But bear in mind that greater compression will take longer to finish. Default value is -6.
+
+```bash
+gzip -1 file.fastq   # very fast, larger file
+gzip -9 file.fastq   # slower, smaller file
+```
+
 ## 4. MD5 Checksum Generation
 
-As we said earlier, our main goal is to copy the compressed files to the input_data directory. Transfering large files between directories or different machines is a very common task in bioinformatics. Some biological datasets can be heavy reaching several GB or TB and problems might arise because of connection failures. Luckily there's a tool to check that the transfer has been done correctly and the copied files haven't been corrupted.
+As we said earlier, our main goal is to copy the compressed files to the input_data directory. Transfering large files between directories or different machines is a very common task in bioinformatics. Some biological datasets can be heavy in size reaching several GB or TB and problems might arise because of connection failures. Luckily there's a tool to check that the transfer has been done correctly and the copied files haven't been corrupted.
 
 First we need to generate the md5sums in the origin directory:
 
@@ -189,7 +205,7 @@ git log --oneline
 
 You will see something like:
 
-```text
+```console
 a1b2c3d Compressed FASTQ files, copied to input_data/ and verified its integrity.
 d4e5f6g input_data/ directory created.
 789abcd  Initial commit.
@@ -211,3 +227,4 @@ We have moved back to the previous commit, right after the creation of input_dat
 
 ## 6. Automatize the whole workflow in a script
 
+In the scripts folder there's a few bash scripts that 
