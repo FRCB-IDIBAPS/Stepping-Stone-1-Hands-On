@@ -8,7 +8,9 @@ In this exercise you will practice some of the essential tools for bioinformatic
 - **MD5 checksums** for data integrity  
 - **Git & GitLab** for version control and collaboration (basic)
 
-By the end, you will have compressed biological sequences files, transferred them into a new folder, verified their integrity, and tracked your work with git.  
+By the end, you will have compressed biological sequences files, transferred them into a new folder, verified their integrity, and tracked your work with git.
+
+The only thing you will need is a unix terminal but we higly encourage you to use Visual Studio Code.
 
 ---
 
@@ -22,13 +24,17 @@ Open the terminal in your system and type:
 git clone https://gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on.git
 ```
 
-A new folder called stepping-stone-hands-on has been created. Use the cd command to move inside it and start to dive in its content.
+A new folder called stepping-stone-hands-on has been created. 
+
+If you encounter any trouble cloning the repo we will provide it in a zipped folder.
+
+Use the cd command to move inside it and start to dive in its content.
 
 ```bash
 cd stepping-stone-hands-on
 ```
 
-To be able to work with git version control (even locally) you need to set a minimum configuration. For this exercise we will set a repo-only configuration. In case you already worked with git previously you won't need to run this step.
+To be able to work with git version control (even locally) you need to set a minimum configuration. For this exercise we will set a repo-only configuration. In case you already worked with git globally in your system you won't need to run this step.
 
 ```bash
 git config user.name "Seminar Student" # change it with your name
@@ -109,9 +115,7 @@ gzip *.fastq
 
 The following message has been prompted in the terminal:
 
-```console
-gzip: 01.fastq.gz already exists; do you wish to overwrite (y or n)?
-```
+🖥️ `gzip: 01.fastq.gz already exists; do you wish to overwrite (y or n)?`
 
 We can choose yes (y) or no (n). What would be the result depending on our answer? And if we used the -k option?
 
@@ -205,11 +209,11 @@ git log --oneline
 
 You will see something like:
 
-```console
-a1b2c3d Compressed FASTQ files, copied to input_data/ and verified its integrity.
-d4e5f6g input_data/ directory created.
-789abcd  Initial commit.
-```
+🖥️ `a1b2c3d Compressed FASTQ files, copied to input_data/ and verified its integrity.`
+
+🖥️ `d4e5f6g input_data/ directory created.`
+
+🖥️ `789abcd  Initial commit.`
 
 Now we can move back to the initial commit with:
 
