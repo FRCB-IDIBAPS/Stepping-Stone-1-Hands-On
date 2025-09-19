@@ -60,15 +60,6 @@ First we will create the destination folder inside the scripts/ directory. We wi
 mkdir scripts/input_data
 ```
 
-This has been the fisrt change in our project. Let's commit it (we will come back at it later):
-
-```bash
-git add .
-git commit -m "input_data/ directory created."
-```
-
-Don't worry if you don't understand what we just did here. We will see it later.
-
 Now move to the data/ directory, get the list of its content and print the first 16 lines of 01.fastq file in the terminal:
 
 ```bash
@@ -211,14 +202,12 @@ You will see something like:
 
 🖥️ `a1b2c3d Compressed FASTQ files, copied to input_data/ and verified its integrity.`
 
-🖥️ `d4e5f6g input_data/ directory created.`
-
 🖥️ `789abcd  Initial commit.`
 
 Now we can move back to the initial commit with:
 
 ```bash
-git checkout d4e5f6g #change with your actual hash
+git checkout 789abcd #change with your actual hash
 ```
 
 Look at the repo structure again. You can do it with the tree command:
@@ -227,7 +216,7 @@ Look at the repo structure again. You can do it with the tree command:
 tree
 ```
 
-We have moved back to the previous commit, right after the creation of input_data/.
+We have moved back to the initial stage where only the fastq files are in the data/ directory.
 
 ## 6. Automatize the whole workflow in a script
 
@@ -242,7 +231,7 @@ sh script_1.sh
 Now you can try the second script. Remeber to get back to the previous commit stage.
 
 ```bash
-git checkout d4e5f6g #change with your actual hash
+git checkout 789abcd #change with your actual hash
 ```
 
 And do the same with the script_2.sh:
