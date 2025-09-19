@@ -278,10 +278,11 @@ cat scripts/script_2.sh
 
 Both scripts are doing exactly the same process but using different syntax. Both ways are correct but are not the only ones to perform such a task.
 
-We have seen a single tool for compressing files (gzip) but there are a lot more: tar, bgzip (speficic for vcf files), etc.
+We have now completed the full workflow ✅, both step by step and through automation 🤖.
+Along the way, we used gzip for compression 📦, but many other tools exist (e.g. tar, bgzip for VCF files).
+For integrity checks, we used a single checksums.md5 file, but another common approach is generating one .md5 file per data file.
 
-There are other ways to perform md5sum, for example to generate an md5 file for each one of the files to transfer instead of redirecting the results to a single file (> checksums.md5) and then transfering both (each file and their respective md5).
+With git, we only scratched the surface. We focused on local commits to track progress, but platforms like GitLab or GitHub add collaboration 🤝, issue tracking 📝, and much more.
 
-git is an extremely powerfull tool for version control. We have only seen a limited part of it. Also we haven't done any git push. GitHub or GitLab (as in our case) offer a wide range of possibilities for collaborative work.
-
-Go out and explore. Open code is the best topic to learn by yourself.
+The key takeaway: there are often multiple correct ways to achieve the same task in bioinformatics.
+🔍 Explore, experiment, and don’t hesitate to adapt workflows to your needs.
