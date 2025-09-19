@@ -14,11 +14,17 @@ The only thing you will need is a unix terminal but we higly encourage you to us
 
 ---
 
-## 1. Clone the Repository from GitLab
+## 1. Get the Repository
 
-First, get a local copy of this repository.
+### 1.1 Cloning from GitLab
 
-Open the terminal in your system and type:
+The Research Computing Platform manages the [IDIBAPS' institutional GitLab](https://gitlab.com/frcb_idibaps)
+
+Inside there are different groups and projects. One of them is the project of this seminar. If you are reading this you might have been invited to the following project: [Stepping Stone Hands On](https://gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on)
+
+If this is your case you should have a temporary username and password to be able to directly clone the repo in your system.
+
+To do so, open the terminal (preferably in Visual Studio Code) in your system and type:
 
 ```bash
 git clone https://gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on.git
@@ -26,12 +32,12 @@ git clone https://gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on.
 
 A new folder called stepping-stone-hands-on has been created.
 
-If you encounter any trouble cloning the repo we will provide it in a zipped folder.
+(If you encounter any trouble cloning the repo we will provide it in a zipped folder.)
 
-Use the cd command to move inside it and start to dive in its content.
+Use the cd command to move inside it.
 
 ```bash
-cd stepping-stone-hands-on
+cd stepping-stone-hands-on/
 ```
 
 To be able to work with git version control (even locally) you need to set a minimum configuration. For this exercise we will set a repo-only configuration. In case you already worked with git globally in your system you won't need to run this step.
@@ -39,6 +45,24 @@ To be able to work with git version control (even locally) you need to set a min
 ```bash
 git config user.name "Seminar Student" # change it with your name
 git config user.email "student@example.com" # change it with your institution email
+```
+
+### 1.2 Downloading a zipped version
+
+In the [Stepping Stone Hands On](https://gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on) page there is blue dropdown button called 'Code'. If you click it you could download a zipped version of this repository. Copy and extract it elsewhere in your system and move inside the folder called stepping-stone-hands-on-main
+
+```bash
+cd stepping-stone-hands-on-main/
+```
+
+When you download a repo with a zip you get its contents but you don't get the .git folder where all the commited changes are stored. So we need to initialize a new git repository. We will explain this commands more in detail later.
+
+```bash
+git init
+git config user.name "Seminar Student" # change it with your name
+git config user.email "student@example.com" # change it with your institution email
+git add.
+git commit -m "Initial commit."
 ```
 
 ## 2. Inspect the contents of the Repository
@@ -68,13 +92,13 @@ ls -lh
 head -n 16 01.fastq
 ```
 
-Based on the result of the following command,
+❓ Based on the result of the following command,
 
 ```bash
 pwd
 ```
 
-what's the absolute and relative path of 01.fastq file? What's the relative path of this README? (having in mind that you are in the data/ folder).
+What's the absolute and relative path of **01.fastq file**? What's the relative path of this **README**? (having in mind that you are in the data/ folder). 🤔
 
 ## 3. Compression of files
 
@@ -108,7 +132,7 @@ The following message has been prompted in the terminal:
 
 🖥️ `gzip: 01.fastq.gz already exists; do you wish to overwrite (y or n)?`
 
-We can choose yes (y) or no (n). What would be the result depending on our answer? And if we used the -k option?
+We can choose yes (y) or no (n). What would be the result depending on our answer? And if we used the -k option? 🤔
 
 List the files and their corresponding info in a human-readable format to compare the size of them before and after compression.
 
@@ -116,18 +140,17 @@ List the files and their corresponding info in a human-readable format to compar
 ls -lh 
 ```
 
-Take a look at 01.fastq and 01.fast.gz respective sizes. 425K vs. 75K. The size has been dimished by almost 6 times.
+Take a look at 01.fastq and 01.fast.gz respective sizes. **425K vs. 75K**. The size has been dimished by almost 6 times. 💡
 
 With gzip you can control the compression level with -1 to -9 options. But bear in mind that greater compression will take longer to finish. Default value is -6.
 
-```bash
-gzip -1 file.fastq   # very fast, larger file
-gzip -9 file.fastq   # slower, smaller file
-```
+💻 `gzip -1 file.fastq   # very fast, larger file`
+
+💻 `gzip -9 file.fastq   # slower, smaller file`
 
 ## 4. MD5 Checksum Generation
 
-As we said earlier, our main goal is to copy the compressed files to the input_data directory. Transfering large files between directories or different machines is a very common task in bioinformatics. Some biological datasets can be heavy in size reaching several GB or TB and problems might arise because of connection failures. Luckily there's a tool to check that the transfer has been done correctly and the copied files haven't been corrupted.
+As we said earlier, our main goal 🎯 is to copy the compressed files to the input_data directory. Transfering large files between directories or different machines is a very common task in bioinformatics. Some biological datasets can be heavy in size reaching several GB or TB and problems might arise because of connection failures. Luckily there's a tool to check that the transfer has been done correctly and the copied files haven't been corrupted.
 
 First we need to generate the md5sums in the origin directory:
 
@@ -144,7 +167,7 @@ Now we can transfer the files from the origin to the destination folder.
 cp *.fastq.gz ../scripts/input_data
 ```
 
-Remember we are using ../ because our current working directory is still data/ so we need to go up one level before moving to scripts/ folder.
+🤔 Remember we are using ../ because our current working directory is still data/ so we need to go up one level before moving to scripts/ folder.
 
 ```bash
 cd ../scripts/input_data
@@ -178,7 +201,13 @@ This tells us what files have been created or modified. Now we can decide which 
 git add data/*.gz data/checksums.md5
 ```
 
-We can also use the following expression if we want to add them all:
+Run the git status again to see the prgress.
+
+```bash
+git status
+```
+
+As you can see, we forgot to include the input_data/ folder and its content. Luckily we have the following command to add to the commit stage all the changes that have been done:
 
 ```bash
 git add .
@@ -190,7 +219,7 @@ All the changes that we want to be tracked need to be associated with a descripi
 git commit -m "Compressed FASTQ files, copied to input_data/ and verified its integrity."
 ```
 
-Now imagine this is not part of a training seminar but a real world project. And you realize you made some mistake during the process. With git your can move through different commits and branches (we won't explain branches in detail here).
+Now imagine this was not part of a training seminar but a real world project. And you realize you made some mistake during the process. With git your can move through different commits and branches (we won't explain branches in detail here).
 
 Every commit has its own ID. You can see it with:
 
@@ -225,7 +254,7 @@ In the scripts folder there's a couple bash scripts that automatize the whole pr
 Simply run the following command from the root directory of the repo.
 
 ```bash
-sh script_1.sh
+sh scripts/script_1.sh
 ```
 
 Now you can try the second script. Remeber to get back to the previous commit stage.
@@ -237,5 +266,22 @@ git checkout 789abcd #change with your actual hash
 And do the same with the script_2.sh:
 
 ```bash
-sh script_2.sh
+sh scripts/script_2.sh
 ```
+
+Inspect the scripts. If you are working with Visual Stucio Code you can directly open the files. But from the terminal:
+
+```bash
+cat scripts/script_1.sh
+cat scripts/script_2.sh
+```
+
+Both scripts are doing exactly the same process but using different syntax. Both ways are correct but are not the only ones to perform such a task.
+
+We have seen a single tool for compressing files (gzip) but there are a lot more: tar, bgzip (speficic for vcf files), etc.
+
+There are other ways to perform md5sum, for example to generate an md5 file for each one of the files to transfer instead of redirecting the results to a single file (> checksums.md5) and then transfering both (each file and their respective md5).
+
+git is an extremely powerfull tool for version control. We have only seen a limited part of it. Also we haven't done any git push. GitHub or GitLab (as in our case) offer a wide range of possibilities for collaborative work.
+
+Go out and explore. Open code is the best topic to learn by yourself.
