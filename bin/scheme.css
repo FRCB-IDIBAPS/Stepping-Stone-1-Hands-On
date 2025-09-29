@@ -1,0 +1,439 @@
+/* 🌙 Dark mode theme for your bioinformatics tutorial */
+body {
+    background-color: #ffffff;
+    color: #3d2e2e;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    margin: 40px auto; 
+    max-width: 1200px;
+    font-size: 13px;
+}
+  
+  /* Headings */
+h1 {
+  color: #6d3a3a;
+  font-weight: 600;
+}
+  
+h1, h2, h3, h4, h5, h6 {
+  color: #3d2e2e;
+  font-weight: 550;
+}
+  /* Links */
+a {
+  color: #0023bd;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+  
+/* Paragraphs */
+p {
+  color: #3d2e2e;
+  font-size: 13px;
+  font-style: oblique;
+}
+
+  /* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px solid #0f0f0f;
+  margin: 2em 0;
+}
+  
+  /* Code blocks */
+pre {
+  background-color: #75757577;
+  font-size: 13px;
+  color: #000000;
+  padding: 12px 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "Fira Code", Consolas, "Courier New", monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+code {
+  background-color: #000000be;
+  color:#7ccaff;
+  border-radius: 0px;
+}
+  
+  /* Tables */
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: none;
+  border-top: none;
+  width: 100%;
+  margin: 20px 0;
+  font-size: 13px;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  border: none;
+  border-top: none;
+  background-color: #75757577;
+  color: #3d2e2e;
+  font-size: 13px;
+  font-weight: 600;
+}
+td {
+  background-color: #eee9e985;
+}
+
+/* Lists */
+ul, ol {
+  margin-left: 1.5em;
+}
+li {
+  margin-bottom: 0.5em;
+}
+.spacer {
+  height: 100px; /* space height */
+}
+
+/* Blockquote (if used) */
+blockquote {
+  border-left: 4px solid #ca0a0a;
+  padding-left: 1em;
+  color: #cccccc;
+  margin: 1em 0;
+}
+
+#lbreak {
+  white-space: pre-line;
+}
+.tab {
+  display: inline-block;
+  margin-left: 4em;
+}
+
+.outblock {
+  background-color: #a8a6a65b;
+  font-size: 13px;
+  color: #000000;
+  padding: 12px 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "Fira Code", Consolas, "Courier New", monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.outerminal {
+  background-color: #181717f6;
+  font-size: 13px;
+  color: #e5f31a;
+  padding: 12px 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "Fira Code", Consolas, "Courier New", monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.blue-button {
+  background-color: #0260c5; /* bright blue */
+  color: white;              /* text color */
+  border: none;              /* remove default border */
+  padding: 8px 10px;         /* spacing inside button */
+  border-radius: 4px;        /* rounded corners */
+  cursor: pointer;           /* pointer on hover */
+  font-size: 12px;
+}
+
+.blue-button:hover {
+  background-color: #0056b3; /* darker blue on hover */
+}
+
+.folder {
+  font-family: monospace;
+  color: #4dabf7; /* blue folder */
+}
+
+strong.bad {
+  color: red;
+}
+strong.good {
+  color: rgb(100, 202, 69);
+}
+i.good {
+  color: rgb(100, 202, 69);
+}
+strong.relevant {
+  color: rgb(69, 78, 202);
+}
+i.relevant {
+  color: rgb(69, 78, 202);
+}
+i.commit {
+  color: rgb(240, 240, 240);
+}
+.highlight-block, .highlight-block1,.highlight-block2, .highlight-block3,
+.highlight-block4, .highlight-block5, .highlight-block6,.highlight-block7, .highlight-git{
+  color: #000000;             /* light text */
+  font-family: "Courier New", Courier, monospace; /* coding-like font */
+  padding: 0.75em 1em;        /* space inside */
+  border-radius: 6px;         /* rounded corners */
+  margin: 1em 0;              /* spacing above/below */
+  display: block;             /* full-width element */
+  width: 100%;                /* stretch across container */
+  box-sizing: border-box;     /* include padding inside width */
+}
+.highlight-block {
+  background-color: #91abf1;
+}
+.highlight-block1 {
+  background-color: #9d7fce;
+}
+.highlight-block2 {
+  background-color: #c7f191;
+}
+.highlight-block3 {
+  background-color: #eb9d0bd2;
+}
+.highlight-block4 {
+  background-color: #eb0b0b88;
+}
+.highlight-block5 {
+  background-color: #6e6e6e;
+  color: #ffffff;
+  font-family: "Inconsolata", "Courier New", monospace;
+}
+.highlight-block6 {
+  background-color: #0bebcd88;
+}
+.highlight-block7 {
+  background-color: #16bcee88;
+}
+.highlight-git {
+  background-color: #d80beb88;
+}
+.folder {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "Roboto Mono", "Courier New", monospace;
+}
+.folder .icon {
+  width: 1.1em;
+  height: 0.75em;
+  position: relative;
+  display: inline-block;
+}
+/* folder body */
+.folder .icon::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background: currentColor;
+}
+/* small tab */
+.folder .icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -0.25em;
+  width: 0.45em;
+  height: 0.45em;
+  border-radius: 2px;
+  background: currentColor;
+}
+.folder.blue { color: #4dabf7; }
+.folder.green { color: #2ecc71; }
+.folder.orange { color: #e67e22; }
+
+.folder-name { color: var(--text, #5f5f5f); }
+
+/* Table of Contents */
+/* Styling for the Table of Contents */
+.toc-list {
+  font-family: "Roboto Mono", "Courier New", monospace;
+  font-size: 1rem;
+  color: #000000;
+  padding: 0;
+  list-style-type: none;
+
+}
+.toc-list ol {
+  padding-inline-start: 6ch;
+  list-style-type: none;
+  color: #000000;
+}
+
+.toc-list li > a, .toc-list li > ol > a {
+  font-weight: bold;
+  margin-block-start: 1em;
+  text-decoration: none;
+  color: #000000;
+  display: grid;
+  grid-template-columns: auto max-content;
+  align-items: end;
+}
+
+.toc-list li > a > .page, .toc-list li > ol > a > .page {
+  text-align: right;
+}
+.toc-list li > a > .title,.toc-list li > ol > a > .title {
+  position: relative;
+  overflow: hidden;
+}
+.toc-list li > a .leaders::after, .toc-list li > ol > a .leaders::after {
+  position: absolute;
+  padding-left: .25ch;
+  content: " . . . . . . . . . . . . . . . . . . . "
+      ". . . . . . . . . . . . . . . . . . . . . . . "
+      ". . . . . . . . . . . . . . . . . . . . . . . "
+      ". . . . . . . . . . . . . . . . . . . . . . . "
+      ". . . . . . . . . . . . . . . . . . . . . . . "
+      ". . . . . . . . . . . . . . . . . . . . . . . "
+      ". . . . . . . . . . . . . . . . . . . . . . . ";
+  text-align: right;
+}
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+.answer-block summary {
+  cursor: pointer;
+  background-color: #8ac2fd; /* blue button */
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  font-weight: bold;
+  display: inline-block;
+  list-style: none; /* removes the default triangle */
+}
+
+.answer-block summary::marker {
+  display: none; /* also removes marker in some browsers */
+}
+
+.answer-block summary:hover {
+  background-color: #0056b3;
+}
+
+.answer-block[open] summary {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.answer-block p {
+  margin: 0;
+  padding: 0.5em 1em;
+  background-color: #f8f9fa;
+  border: 1px solid #007bff;
+  border-top: none;
+  font-family: "Courier New", Courier, monospace;
+}
+
+
+.path-block {
+  font-family: "Roboto Mono", "Courier New", monospace;
+  background-color: #4dabf76c;    /* dark background */
+  color: #272726;             /* light text */
+  display: inline;
+}
+
+.redir-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 13px;
+  table-layout: fixed;
+}
+
+.redir-table th,
+.redir-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #ddd;
+  vertical-align: top;
+}
+
+/* make first column narrower */
+.redir-table th:first-child,
+.redir-table td:first-child {
+  width: 10%;   /* adjust as needed */
+  white-space: nowrap; /* prevent breaking operators */
+  text-align: left;
+}
+
+/* second column takes the rest */
+.redir-table th:last-child,
+.redir-table td:last-child {
+  width: 90%;
+}
+/* small responsive tweak */
+@media (max-width: 640px) {
+  .redir-table thead { display:none; }
+  .redir-table, .redir-table tbody, .redir-table tr, .redir-table td { display:block; width:100%; }
+  .redir-table tr { margin-bottom: 0.75rem; border: 1px solid #eee; padding: 0.5rem; border-radius:6px; }
+  .redir-table td { display:flex; justify-content:space-between; padding:0.5rem; }
+  .redir-table td::before { content: attr(data-label); font-weight:600; margin-right:0.5rem; color:#333; }
+}
+
+/* Style <details> and <summary> in the FUNCTION column */
+.redir-table details {
+  margin: 0; /* remove extra spacing */
+}
+
+.redir-table summary {
+  cursor: pointer;
+  font-weight: bold;
+  list-style: none; /* remove default marker */
+  position: relative;
+  padding-left: 1.2em; /* space for custom arrow */
+}
+
+/* Custom dropdown arrow */
+.redir-table summary::before {
+  content: "▶"; /* right-pointing arrow */
+  position: absolute;
+  left: 0;
+  transition: transform 0.2s ease;
+}
+
+/* Rotate arrow when open */
+.redir-table details[open] summary::before {
+  transform: rotate(90deg); /* arrow points down */
+}
+
+/* Substep list inside details */
+.redir-table details ul {
+  margin: 0.5em 0 0 1.5em;
+  padding: 0;
+  font-weight: normal;
+  font-size: 0.7rem;
+  color: #333;
+  list-style-type: none;
+}
+
+.takeaways {
+  padding-left: 1.2em;
+  background-color: #1a92a154;
+  color: #0d6b77;           /* light text */
+  padding: 0.75em 1em;        /* space inside */
+  border-radius: 6px;         /* rounded corners */
+  margin: 1em 0;              /* spacing above/below */
+  display: block;             /* full-width element */
+  width: 100%;                /* stretch across container */
+  box-sizing: border-box;     /* include padding inside width */
+}
+.takeaways ul {
+  padding-left: 2em;
+  list-style-type: none; /* or none if you want no bullets */
+}
