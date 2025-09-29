@@ -2,942 +2,975 @@
 <link rel="stylesheet" href="bin/scheme.css">
 <html lang="en">
 
-<h1>Stepping-Stone Bioinformatics - Hands-on</h1>
-
-
-<ol class="toc-list" role="list">
-  <li>
-    <a href="#introduction">
-      <span class="title">1. Introduction<span class="leaders" aria-hidden="true"></span></span>
-    </a>
-    <a href="#repository">
-      <span class="title">2. Repository<span class="leaders" aria-hidden="true"></span></span>
-    </a>
-    <ol>
-      <a href="#setup">
-        <span class="title">2.1. Set up your repository<span class="leaders" aria-hidden="true"></span></span>
-      </a>
-      <a href="#content">
-        <span class="title">2.2. Inspect contents of repository<span class="leaders" aria-hidden="true"></span></span>
-      </a>
+<div class="layout">
+  <aside class="toc">
+    <ol class="toc-list">
+      <li><a href="#introduction">Introduction</a></li>
+      <li>
+        <a href="#repository">Repository</a>
+        <ol class="toc-list">
+          <li>
+            <a href="#setup">Set up your repository</a>
+          </li>
+          <li><a href="#content">Inspect contents of repository</a></li>
+        </ol>
+      </li>
+      <li><a href="#compression-of-files">Compressing files</a></li>
+      <li><a href="#wildcards">Wildcards</a></li>
+      <li><a href="#md5sum">MD5 checksum</a></li>
+      <li>
+        <a href="#git-pipe">Pipeline development with version control</a>
+        <ol class="toc-list">
+          <li><a href="#git-basic">Basic commands with Git</a></li>
+          <li><a href="#variables">Defining variables in our code</a></li>
+          <li><a href="#pipe-code">Developing our code</a></li>
+          <li><a href="#git-commit">Tracking our work with Git</a></li>
+        </ol>
+      </li>
     </ol>
-    <a href="#compression-of-files">
-      <span class="title">3. Compressing files<span class="leaders" aria-hidden="true"></span></span>
-    </a>
-    <a href="#wildcards">
-      <span class="title">4. Wildcards<span class="leaders" aria-hidden="true"></span></span>
-    </a>
-    <a href="#md5sum">
-      <span class="title">5. MD5 checksum<span class="leaders" aria-hidden="true"></span></span>
-    </a>
-    <a href="#git-pipe">
-      <span class="title">6. Pipeline development with version control<span class="leaders" aria-hidden="true"></span></span>
-    </a>
-    <ol>
-      <a href="#git-basic">
-        <span class="title">6.1. Basic commands with <i>Git</i><span class="leaders" aria-hidden="true"></span></span>
-      </a>
-      <a href="#variables">
-        <span class="title">6.2. Defining variables in our code<span class="leaders" aria-hidden="true"></span></span>
-      </a>
-      <a href="#pipe-code">
-        <span class="title">6.3. Developing our code<span class="leaders" aria-hidden="true"></span></span>
-      </a>
-      <a href="#git-commit">
-        <span class="title">6.4. Tracking our work with <i>git</i><span class="leaders" aria-hidden="true"></span></span>
-      </a>
-    </ol>
-  </li>
-</ol>
-
-<div class="spacer"></div>
-<h2 id="introduction">1. Introduction</h2>
-In this exercise you will practice some of the essential tools for bioinformatics.
-
-<p class="highlight-block">
-  <strong>Basic requirements</strong><br>
-  1. Basic knowledge of the unix terminal<br>
-  2. [Recommended] Visual Studio Code installed in your computer
-</p>
-
-<p class="highlight-block2">
-  <strong>Objectives</strong><br>
-  <strong>1.  Working with files:</strong> Modify compressed biological sequencing files<br>
-  <strong>2. Navigating with Linux terminal:</strong> file transfer processes<br>
-  <strong>3. MD5 checksums:</strong> Verify data integrity<br>
-  <strong>4. Git, GitLab:</strong> Track your work with git<br>
-</p>
-
-<div class="spacer"></div>
-<h2 id="repository">2. Repository</h2>
-RCP manages its code and resources from <a href="https://gitlab.com/frcb_idibaps">IDIBAPS GitLab</a>.
-To follow this hands-on you will need to get a copy of this Stepping Stone's repository to your computer.
-You can access the repository here:
-<br><br>
-<center><a href="https://gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on">IDIBAPS GitLab/Stepping-stone-hands-on</a></center>
-<br>
-
-<h3 id="setup">2.1. Set up your repository</h3>
-
-To copy the repository to your computer you have two options:
-<table>
-  <thead>
-    <tr>
-      <th>[ OPTION A ] <div></div> Cloning from GitLab</th>
-      <th>[ OPTION B ] <div></div>Downloading a zipped version</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <strong>(1)</strong> Click in button <button class="blue-button">Code &#8964;</button> to display dropdown menu<br><br>
-        <strong>(2)</strong> Copy URL from <strong>Clone with SSH</strong> <br><br>
-        <strong>(3)</strong> Open a Terminal window in a known location (preferably in Visual Studio Code)<br><br>
-        <strong>(4)</strong> Type the following command to clone the repository:
-        <pre>git clone [URL-link] </pre>
-      </td>
-      <td>
-        <strong>(1)</strong> Click in button <button class="blue-button">Code &#8964;</button> to display dropdown menu<br><br>
-        <strong>(2)</strong> Select <strong>download source code</strong> from <button>zip</button><br><br>
-        <strong>(3)</strong> Move it to a known location and extract it<br><br>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-Both options will create a new folder in your working directory named:
-<center><p class="folder blue"><span class="icon" aria-hidden="false"></span><span class="folder-name">stepping-stone-hands-on/</span></p></center>
-<strong>(5)</strong> Change working directory to new folder 
-<pre>cd stepping-stone-hands-on/</pre>
-<strong>(6)</strong> Configure Git credentials:<br>
-<pre>
-git config user.name [YOUR-USERNAME]
-config user.email [YOUR-INSTITUTION-EMAIL]
-</pre>
-<strong>(7)</strong> Check the status of your repository by typing:<br>
-<pre>
-git status
-</pre>
-Expected output:
-<pre>
-On branch main
-Your branch is up to date with 'origin/main'.
-</pre>
-This means you are in the main branch and your local copy is up to date with the remote repository in GitLab.<br><br>
-Currently, the repository contains two branches:
-<ul>
-  <li><strong>main</strong>: default branch, with original version</li>
-  <li><strong>hands-on</strong>: your branch where you will store your analysis</li>
-</ul><br>
-<strong>(8)</strong> Move to the branch devised for this hands-on:<br>
-<pre>
-git checkout hands-on
-</pre>
-Expected output:
-<pre>
-Switched to branch 'hands-on'
-Your branch is up to date with 'origin/hands-on'.
-</pre>
-
-
-Now, everything is set up to start the hands-on!
-
-<br><br>
-
-<h3 id="content">2.2. Inspecting the contents of the repository</h3>
-Here we will walk through some of the most basic commands to navigate our working directory
-
-<p class="highlight-block2">
-  <strong>BIG REMINDER</strong><br>
-  If at any point you lose track of where you are in the file system, simply run 
-  <code>pwd</code> and it will print your current working directory
-</p>
-
-<br>
-<p class="highlight-block">
-  ls
-</p>
-<strong>We can use this command to list all files and folders in the current directory</strong><br><br>
-
-See help with:
-<pre>ls --help</pre>
-Output (only with some options):
-<pre class="outblock">
-  Usage: ls [OPTION]... [FILE]...
-  List information about the FILEs (the current directory by default).
-  Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
-
-  Mandatory arguments to long options are mandatory for short options too.
-    -l                         use a long listing format
-    -h, --human-readable       with -l and -s, print sizes like 1K 234M 2G etc.
-    -L, --dereference          when showing file information for a symbolic
-                               link, show information for the file the link
-                               references rather than for the link itself
-</pre>
-
-Examples:
-<pre>
-ls -l
-ls -lh</pre>
-
-<p class="highlight-block3">
-  Quick test:<br>
-  What is the difference between these two commands?
-</p>
-
-<details class="answer-block">
-  <summary>Answer</summary>
-  <p>
-    The first command lists all files and folders in the current directory with
-    detailed information (permissions, owner, size in bytes, modification date, etc.).  
-    The second command does the same but displays file sizes in a human-readable format
-    (e.g., KB, MB, GB) instead of bytes.
-  </p>
-</details>
-
-
-<br><br><br>
-<p class="highlight-block">
-  tree
-</p>
-<strong>We can use this command to display the structure of our current working directory</strong>
-<br><br>
-See help with:
-<pre>
-  tree --help
-</pre>
-Output:
-<pre class="outblock">
-  usage: tree [-L level [-R]] [...]
-  ------- Listing options -------
-  -a            All files are listed.
-  -d            List directories only.
-  -L level      Descend only level directories deep.
-
-</pre>
-
-<p class="highlight-block3">
-  Quick test:<br>
-  Which parameters do I need to flag after calling tree command to view ONLY directories with depth=2?
-</p>
-<details class="answer-block">
-  <summary>Answer</summary>
-  <pre>tree -d -L 2</pre>
-</details>
-
-<br><br><br>
-<p class="highlight-block">
-  code
-</p>
-<strong>If you have Visual Studio Code installed, with this commando you can open the code editor from your current working directory.</strong>
-<br><br>
-Open it with:
-<pre>code .</pre>
-
-<p class="highlight-block3">
-  Quick test:<br>
-  Do you know what the dot (.) stands for in this command?
-</p>
-<details class="answer-block">
-  <summary>Answer</summary>
-  <p>
-    It tells VSCode which directory you want it to launch from. The dot represents the current directory.
-  </p>
-</details>
-
-<br>
-<p class="highlight-block2">
-  <strong>Recommended</strong><br>
-  From now on you can now follow the Stepping-Stone from the integrated terminal in Visual Studio Code.
-</p>
-
-<br><br><br>
-<p class="highlight-block">
-  mkdir
-</p>
-<strong>With this command we can create new directories. We will use it to create the destination folder of our file operation</strong>
-<br><br>
-Since we want our directory to be named:
-
-<center><p class="folder blue"><span class="icon" aria-hidden="false"></span><span class="folder-name">compressed/</span></p></center>
-
-Our command needs to be:
-<pre>
-  mkdir compressed
-</pre>
-
-<br><br><br>
-<p class="highlight-block">
-  cd
-</p>
-<strong>With this command we can navigate directories.</strong>
-<br><br>
-We can use it to access the directory that contains our FASTQ files in the following way:
-<pre>
-  cd raw/
-</pre>
-<p class="highlight-block3">
-  Quick test:<br>
-  Once we have moved to data folder. How can we check which files are contained within this directory and their sizes?
-</p>
-<details class="answer-block">
-  <summary>Answer</summary>
-  <pre>ls -lh</pre>
-</details>
-
-<br><br><br>
-<p class="highlight-block">
-  head
-</p>
-<strong>With this command we print the first <code>n</code> (default=10) lines of each FILE to standard output</strong>
-<br><br>
-Let's try an example with file <p class="path-block">01.fastq</p>
-<pre>
-  head -n 16 01.fastq
-</pre>
-
-<p class="highlight-block4">
-  Harder test:<br>
-  Knowing <code>pwd</code> command outputs: [YOUR-OWN-PATH]/BiodataSeries/stepping-stone-hands-on/data <br><br>
-  1. What's the absolute and relative path of <strong>01.fastq</strong> file?<br>
-  2. What's the relative path of this guide .HTML guide? 
-</p>
-<details class="answer-block">
-  <summary>Answer</summary>
-  <p>
-    1A - absolute path:        [YOUR-OWN-PATH]/BiodataSeries/stepping-stone-hands-on/raw/01.fastq<br>
-    1B - relative path:        ./01.fastq<br>
-    2  - relative path:        ../stepping_stone_bioinformatics.html<br>
-  </p>
-</details>
-
-<div class="spacer"></div>
-<h2 id="compression-of-files">3. Compressing files</h2>
-In this section we will compress FASTQ files to reduce file transfer times while preserving file integrity.
-For that we will be working with:
-
-<br>
-<p class="highlight-block">
-  gzip
-</p>
-
-From our data directory (where we should be still), let's compress one of the FASTQ files:
-<pre>
-  gzip 01.fastq
-</pre>
-
-Observe the newly generated file. As you brilliantly observed, the uncompressed file has been deleted.
-<p class="highlight-block3">
-  Quick test:<br>
-  Picture a scenario in which both files are necessary.<br>
-  How can we compress a FASTQ while preserving the original uncompressed file?<br><br>
-  Hint: check <code>--help</code> menu from the command
-</p>
-<details class="answer-block">
-  <summary>Answer</summary>
-  <pre>gzip -k 01.fastq</pre>
-</details>
-
-<br><br>
-Now, to decompress our file and retrieve the original, we can use:
-<p class="highlight-block">
-  gunzip
-</p><br>
-
-Let's warm up our coding skills with a simple exercise:
-<p class="highlight-block6">
-  Exercise 1:<br>
-  1. Decompress 01.fastq.gz<br>
-  2. Compress again the same FASTQ file, only this time preserving the original uncompressed format.<br>
-  3. Can you think of a way to compress all files in our working directory within a simple line of code?
-  We'd like to preserve all original files<br>
-</p>
-
-<details class="answer-block">
-  <summary>Answer</summary>
-  <pre>gunzip 01.fastq.gz</pre>
-  <pre>gzip -k 01.fastq</pre>
-  <pre>gzip -k *</pre>
-</details>
-
-<p class="highlight-block3">
-  Quick test:<br>
-  After running the <code>gzip</code> command for Exercise 1.3, some of you may have received the following message in the terminal:
-  <br><br>
-  <code>gzip: 01.fastq.gz already exists; do you wish to overwrite (y or n)?</code>
-  <br>
-  Can you guess why?
-</p>
-<details class="answer-block">
-  <summary>Answer</summary>
-  <pre>Because compressed 01.fastq.gz already exists</pre>
-</details>
-
-<br><br>
-We have successfully compressed all the files in our directory. Now, let's take a look at how much these files have reduced in size after compression.
-<p class="highlight-block6">
-  Exercise 2:<br>
-  1. How can we check the sizes of the compressed and uncompressed files?<br>
-  2. Currently, the file size of the compressed files is six times smaller. Is it possible to make them even smaller, and if so, how?<br>
-</p>
-<details class="answer-block">
-  <summary>Answer</summary>
-  <p>Exercise 1.1.</p>
-  <pre>ls -lh</pre>
-  <p>Exercise 1.2. <code>gzip</code> command allows to specify compression level. See <code>gzip --help</code> for more information.</p>
-  <pre>gzip --help
-
-    Usage: gzip [OPTION]... [FILE]...
-    Compress or uncompress FILEs (by default, compress FILES in-place).
-
-    Mandatory arguments to long options are mandatory for short options too.
-    -1, --fast        compress faster
-    -9, --best        compress better</pre>
-<pre>gzip -k9 *</pre>
-</details>
-
-
-<div class="spacer"></div>
-<h2 id="wildcards">4. Wildcards</h2>
-<p class="highlight-block5">
-  Standard wildcards (globbing patterns)
-</p>
-The answer to Excercise 1.3 implied the use of a wildcard character (en español, comodín) that match multiple files.
-Commands can use standard wildcards (also known as globbing patterns) to perform actions on more than one file at a time, or to find part of a phrase in a text file.<br><br>
-
-For more information on basic wildcards, we can consult page 7 of <i>Linux Programmer's Manual - GLOB section</i>.<br>
-To do this, we can type:
-<pre>
-man 7 glob
-</pre>
-Output:
-<pre class="outblock">
-Wildcard matching
-      A  string  is  a  wildcard pattern if it contains one of the characters
-      '?', '*' or '['.  Globbing is the operation  that  expands  a  wildcard
-      pattern  into  the list of pathnames matching the pattern.  Matching is
-      defined by:
-
-      A '?' (not between brackets) matches any single character.
-
-      A '*' (not between brackets) matches any string,  including  the  empty
-      string.
-      [...]
-</pre>
-
-<p class="highlight-block6">
-  Exercise 3:<br>
-  1. Using '*' wildcard, print the first line of all fast files in our working directory<br>
-  2. Do the same exercise, only this time with '?' wildcard instead.<br>
-  3. In our case, our data folder is populated only by FASTQ files. How should we use '*' wildcard if we had multiple files of different extensions?<br>
-</p>
-
-<details class="answer-block">
-  <summary>Answer</summary>
-  <pre>head -n 1 *</pre>
-  <pre>head -n 1 0?.fastq</pre>
-  <pre>head -n 1 *.fastq</pre>
-</details>
-
-<div class="spacer"></div>
-<h2 id="md5sum">5. MD5 checksum</h2>
-As mentioned at the beginning, our primary objective 🎯 is to copy the compressed files to our input directory:<br>
-<center><p class="folder blue"><span class="icon" aria-hidden="false"></span><span class="folder-name">compressed/</span></p></center>
-Transferring large files between directories or machines is a common task in bioinformatics. Some biological datasets can be <strong>very large</strong>,
-reaching several GB or even TB, and problems may arise due to <strong class="bad">connection failures</strong>. Fortunately, there is a tool that
-<strong class="good">compares file integrity</strong> before and after the transfer has taken place.
-
-<br><br>
-<p class="highlight-block">
-  md5sum
-</p>
-This is the command we will use to calculate and verify file integrity, essentially by <strong>hashing input files</strong> (I.e. assigning alphanumeric string).
-These unique strings will act as a <strong>digital fingerprint</strong> of our FASTQ files to ensure data integrity after transfer.
-
-First, to hash our compressed FASTQ files, let's run
-<pre>
-md5sum *.gz > checksums.md5
-</pre>
-
-<p class="highlight-block4">
-  Harder test:<br>
-  Is the chunk of code <code>> checksums.md5</code> one of the standard inputs <i>md5sum</i> command expects?<br>
-  Do you know what output redirection consists of?<br>
-</p>
-<details class="answer-block">
-  <summary>Answer</summary>
-  <pre>
-  No, these are not standard inputs to <i>md5sum</i>.
-  By default, commands print their results (called standard output - stdout) to the terminal screen.
-  Alternatively, the redirection operator (>) takes that sdtout and dumps it into a file instead of the screen.</pre>
-</details>
-
-<br>
-<p class="highlight-block2">
-  <strong>Output redirection</strong><br>
-  As detailed in the previous exercise, output redirection dumps the content that a command would normally print in your terminal screen into a file <br>
-  There are multiple redirection operators, here we show you a cheat sheet of the most common ones:
-</p>
-
-<section aria-labelledby="redir-title">
-  <table class="redir-table" role="table" aria-describedby="redir-desc">
-    <thead>
-      <tr>
-        <th scope="col">Operator</th>
-        <th scope="col">Purpose</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>></td>
-        <td><strong>Redirects</strong> stdout to a file. If the file exists, it will overwrite.</td>
-      </tr>
-
-      <tr>
-        <td>>></td>
-        <td><strong>Appends</strong> stdout to a file. Will never overwrite.</td>
-      </tr>
-
-      <tr>
-        <td>2></td>
-        <td><strong>Redirects</strong> stderr to a file. If the file exists, it will overwrite.</td>
-      </tr>
-
-      <tr>
-        <td>2>></td>
-        <td><strong>Appends</strong> stderr to a file. Will never overwrite.</td>
-      </tr>
-
-      <tr>
-        <td>&></td>
-        <td><strong>Redirects</strong> both stdout and stderr to a file. If the file exists, it will overwrite.</td>
-      </tr>
-
-      <tr>
-        <td>&>></td>
-        <td><strong>Appends</strong> both stdout and stderr to a file. Will never overwrite.</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<br><br>
-Now, to quickly check the content of that file, we will use:
-<p class="highlight-block">
-  cat
-</p>
-Explanation:
-<pre class="outblock">
-  Usage: cat [OPTION]... [FILE]...
-  Concatenate FILE(s) to standard output.
-</pre>
-<br>
-This command allows to print the content of the input file in our terminal.
-<pre>cat checksums.md5</pre>
-Output (may differ based on the level of compression you used with <code>gzip</code>):
-<pre class="outblock">
-5177a1a1998c3c88e49560c577288e51  01.fastq.gz
-e4c0d5caca9d6a3ab41a6853d4468fcc  02.fastq.gz
-acb717129a738472446e47632ad12c02  03.fastq.gz
-4e17ac1a592281cacfacb63ecce33c5f  04.fastq.gz
-</pre>
-It contains what we called the <i>digital fingerprints</i> (unique 32-character alphanumeric string) of each of the compressed FASTQ file. 
-
-<br><br>
-Now, let's start the file transfer process. For that, we will use:
-<p class="highlight-block">
-  cp
-</p>
-See help manual:
-<pre class="outblock">
-  Usage: cp [OPTION]... [-T] SOURCE DEST
-  or:  cp [OPTION]... SOURCE... DIRECTORY
-  or:  cp [OPTION]... -t DIRECTORY SOURCE...
-  Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.
-</pre>
-For this command, usage says we need:
-<pre>cp [OPTION-ARGUMENTS] [path-to-source-file/s] [path-to-output-dir]</pre><br>
-
-<p class="highlight-block6">
-  Exercise 4:<br>
-  Following the previous use case, how should we:<br>
-  1. Define [path-to-source-file/s]<br>
-  2. Define [path-to-output-dir] from our working directory?
-  <br><br>
-  Can you please construct the complete line of code to perform the file transfer?<br>
-</p>
-<details class="answer-block">
-  <summary>Answer</summary>
-  <pre>*.gz</pre>
-  <pre>../compressed</pre>
-  <pre>cp *.gz ../compressed</pre>
-</details>
-
-<br><br>
-From our newly populated folder, let's check if file integrity has been preserved during transfer.
-<p class="highlight-block3">
-  Quick test:<br>
-  How can we navigate to our file <code>compressed/</code> from where we are?
-</p>
-<details class="answer-block">
-  <summary>Answer</summary>
-  <pre>cd ../compressed</pre>
-</details>
-
-Now, to run the integrity check, we will type:
-<pre>md5sum -c ../raw/checksums.md5</pre>
-Output:
-<pre class="outblock">
-  01.fastq.gz: OK
-  02.fastq.gz: OK
-  03.fastq.gz: OK
-  04.fastq.gz: OK
-</pre>
-
-<p class="highlight-block3">
-  Quick test:<br>
-  It seems that md5sum has different usages. Before, it hashed our FASTQ files.<br>
-  Now, it verified file integrity of our new FASTQ files.<br><br>
-  Which argument/s made md5sum perform differently now?
-</p>
-<details class="answer-block">
-  <summary>Answer</summary>
-  <pre>  -c, --check          read MD5 sums from the FILEs and check them</pre>
-</details>
-
-<br><br>
-<p class="highlight-block1">
-  <strong>GENTLE REMINDER OF WORK CONDUCTED</strong> <br>
-  Here's a brief rundown of what we did: <br>
-    1. Compress FASTQ files <br>
-    2. Hash our compressed (.gz) FASTQ files [digital fingerprints] <br>
-    3. Perform file transfer with <code>mv</code> command <br> 
-    4. Check file integrity in destination with md5sum <br>
-</p>
-
-<div class="spacer"></div>
-<h2 id="git-pipe">6. Pipeline development with version control</h2>
-In the final section of the Stepping-Stone, we will combine all the steps we have practised so far into a single script that
-can automate the file transfer process for any given input. Once our script is complete, we will commit it to our repository
-using Git and therefore have a record of our first version of the workflow.
-
-<br><br>
-<h3 id="git-basic">6.1. Basic commands with <i>git<i></h3>
-Let's move back to the repository folder. In order to do so, please check first your working directory.
-
-<p class="highlight-block3">
-  Quick test:<br>
-  Please move to folder <code>stepping-stone-hands-on</code>.
-</p>
-<details class="answer-block">
-  <summary>Answer</summary>
-  <p>Option 1: Using absolute path</p>
-  <pre>cd [YOUR-OWN-PATH]/BiodataSeries/stepping-stone-hands-on/</pre>
-  <p>
-  Option 2: Navigating the repo<br>
-  Use the <code>pwd</code> command to print the current working directory.
-  Then, based on that path, decide how many levels to descend. Examples:
-  </p>
-  <pre>
-  cd .. #descend 1 level
-  cd ../.. #descend 2 levels</pre>
-</details>
-
-<p class="highlight-git">
-  git
-</p>
-Git is a <strong>version control system</strong> that enables you to track changes to files and
-manage different versions of the same project when working with teammates.<br>
-<strong class="relevant">It works like a 'time machine', enabling you to take snapshots of the code
-and move back and forth between older and newer versions.</strong>
-<br><br>
-
-We can take a look at its usage:
-<pre>git --help</pre>
-We are only displaying Git commands relevant to this course:
-<pre class="outblock">
-start a working area (see also: git help tutorial)
-    <strong class="good">clone</strong>     Clone a repository into a new directory
-
-work on the current change (see also: git help everyday)
-    <strong>add</strong>       Add file contents to the index
-    <strong>restore</strong>   Restore working tree files
-examine the history and state (see also: git help revisions)
-    <strong>log</strong>       Show commit logs
-    <strong class="relevant">status</strong>    Show the working tree status
-
-grow, mark and tweak your common history
-    <strong>commit</strong>    Record changes to the repository
-    <strong>switch</strong>    Switch branches (git checkout)
-
-collaborate (see also: git help workflows)
-    <strong>pull</strong>      Fetch from and integrate with another repository or a local branch
-    <strong>push</strong>      Update remote refs along with associated objects
-
-<strong class="good">git-config</strong>   - Get and set repository or global options
-</pre>
-
-<br>
-Now, to check for changes in our repository, we will run:
-<p class="highlight-block">
-  git status
-</p>
-<pre class="outblock">
-Untracked files:
-(use "git add <file>..." to include in what will be committed)
-  <strong class="bad">
-  compressed/
-  raw/checksums.md5
-  </strong>
-</pre>
-
-<br>
-<p class="highlight-block">
-  git restore
-</p>
-Here we can see all the files that were not present in the original tree, i.e. those that we created during the workshop.
-As our goal is to automate the entire file management process, <strong class="relevant">we will delete these files and start again</strong>.
-To do so, we will run:
-<pre>
-git restore *
-git status</pre>
-Output:
-<pre class="outblock">
-On branch main
-Your branch is up to date with 'origin/main'.
-</pre>
-
-<br><br>
-<h3 id="variables">6.2. Defining variables in our code</h3>
-
-Before we start with the exercise, let's quickly introduce how to define a variable in our Linux terminal: <br>
-<strong>1.</strong> In the defintion of the variable there <strong class="relevant">cannot be any spaces around '=' character</strong>. <br>
-<strong>2.</strong> To use an existing variable, <strong class="relevant">add the prefix '$' to call it</strong>.
-
-<h4>Example 1: Variable containing a string (str)</h4>
-<pre>
-<strong class="relevant">our_first_variable</strong>="Hello World"
-print <strong class="relevant">$our_first_variable</strong>
-</pre>
-Output:
-<pre class="outblock">
-"Hello World"
-</pre>
-
-<h4>Example 2: Variable containing an integer (int)</h4>
-<pre>
-<strong class="relevant">our_int_variable</strong>=2
-expr <strong class="relevant">$our_int_variable</strong> + 1
-</pre>
-Output:
-<pre class="outblock">
-3
-</pre>
-
-<br><br>
-<h3 id="pipe-code">6.3.Developing our code</h3>
-
-Let's make things a little more difficult by combining everything we have done so far.<br>
-
-<p class="highlight-block6">
-<strong>Main exercise: </strong>
-Inside folder <code>src/</code> we will find a file called <strong>template.sh</strong> with the skeleton of our pipeline. This template is divided into modules, each of which corresponds to one of the steps detailed in our rundown.
-
-Our next exercise will be to fill in the blanks in the incomplete lines of code with the correct argument/s.
-Each module has subtasks, and these tasks all have guidelines explaining what is expected by the commmands.
-</p>
-
-<p class="highlight-block2">
-  <strong>Strongly recommended</strong><br>
-  For a much better coding experience, please work from Visual Studio Code.
-</p>
-
-<br><br>
-<p class="highlight-block">
-  template.sh
-</p>
-Our template script is divided into 5 tasks with their corresponding subtasks, like detailed in the following table:
-<section aria-labelledby="redir-title">
-  <table class="redir-table" role="table" aria-describedby="redir-desc">
-    <thead>
-      <tr>
-        <th scope="col">STEP</th>
-        <th scope="col">TASK (subtasks)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>0</td>
-        <td>
-          <details>
-            <summary><strong>Navigate</strong> to starting directory</summary>
-            <ul>
-              <li>0.1. Define workshop directory</li>
-            </ul>
-          </details>
-        </td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>
-          <details>
-            <summary><strong>Compress</strong> FASTQ file/s</summary>
-            <ul>
-              <li>1.1. Navigate to directory with raw FASTQ files</li>
-              <li>1.2. Compress FASTQ files</li>
-            </ul>
-          </details>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>
-          <details>
-            <summary><strong>Hash</strong> FASTQ (.gz) file/s</summary>
-            <ul>
-              <li>2.1. Hash FASTQ files and redirect output to .md5 file</li>
-              <li>2.2. Save to <code>checksums.md5</code></li>
-            </ul>
-          </details>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>
-          <details>
-            <summary><strong>Transfer</strong> FASTQ file/s</summary>
-            <ul>
-              <li>3.1. Navigate to initial directory</li>
-              <li>3.2. Create <code>compressed/</code> directory</li>
-              <li>3.3. Move compressed FASTQ files to <code>compressed/</code> directory</li>
-            </ul>
-          </details>
-        </td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>
-          <details>
-            <summary><strong>Check</strong> MD5 integrity</summary>
-            <ul>
-              <li>4.1. Navigate to directory with compressed FASTQ files</li>
-              <li>4.2. Perform MD5 check</li>
-            </ul>
-          </details>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-Please complete the lines of code in each section by adding parameters to the commands for each task. <br>
-The coding lines look like this:
-<pre><strong class="relevant">command</strong>   # [INSERT-CODE-HERE]</pre>
-
-<br><br>
-<p class="highlight-block">
-  .solutions.sh
-</p>
-Once you have completed the building blocks of our workflow, you can compare them with the solutions we proposed. <br>
-<i class="relevant">Remember: there is no single solution — different approaches may lead to the same result</i>
-
-<br><br>
-A quick way to compare them is to use command <code>diff</code> (finds differences between two files). <br>
-<i class="good">If there is no output to this code it means both files are identical</i>
-<pre>
-  diff src/template.sh src/.solutions.sh
-</pre>
-Output example:
-<pre class="outblock">
-54c54
-&lt; cd     # [INSERT-CODE-HERE]
----
-&gt; cd $PATH_to_raw_fastq_files
-</pre>
-This output shows that <code>diff</code> command found differences between both files at line 54 (hence 54c54). <br>
-<i>(&lt;) Shows line 54 in file 1 (template.sh)</i> <br>
-<i>(&gt;) Shows line 54 in file 2 (.solutions.sh)</i> <br>
-
-<br><br>
-<h3 id="git-commit">6.4.Tracking our work with <i>git</i></h3>
-Now, we will log our completed pipeline in our repository.
-
-<br><br>
-<p class="highlight-block4">
-  Untracked changes
-</p>
-First, let's check which files have been modified since we started the Stepping Stone process.
-<p class="highlight-block3">
-  Quick test:<br>
-  Do you know how to check for changes in our repository?
-</p>
-
-<details class="answer-block">
-  <summary>Answer</summary>
-  <pre>git status</pre>
-</details>
-
-<br>
-Output:
-<pre class="outblock">
-  Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-        <strong class="bad">modified:   src/template.sh</strong>
-</pre>
-This means <i>Git</i> has detected the changes in the file <code>template.sh</code> that we have been working on.
-We will tell <i>Git</i> that these changes are OK and instruct it to save the file as it is now:
-<pre>git add src/template.sh</pre>
-
-<br><br>
-<p class="highlight-block2">
-  Tracked changes
-</p>
-Let's check again for changes in our repository with:
-<pre>git status</pre>
-Output:
-<pre class="outblock">
-  On branch OPT2
-Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-        <strong class="good">modified:   src/template.sh</strong>
-</pre>
-This means <i>Git</i> has saved all the modifications we did on our pipeline.
-However, these changes are only visible to us and they have not yet been associated with a branch in our repository.
-
-<br><br>
-<p class="highlight-block7">
-  Commit changes
-</p>
-By committing our changes, they will also appear in our working branch. <br>
-Our branch essentially records all the events in the history of our repository. Our history now needs to record your latest update.
-We will include a message to help us understand any modifications whenever we look back through our branch.
-<pre>git commit -m "Finalized pipeline for FASTQ file compression and transfer" </pre>
-
-Now, to see the history of our branch, we can run:
-<pre>git log --oneline</pre>
-Output:
-<pre class="outerminal">
-[-----] (<strong class="relevant">HEAD</strong> -> <strong class="good">hands-on</strong>, origin/main, origin/HEAD, main, OPT2) <i class="commit">Finalized pipeline for FASTQ file compression and transfer</i>
-732ba4f  <i class="commit">Final refinements saved.</i>
-</pre>
-As you can see, the last line corresponds to our latest modification. It has a unique hash and the description we added.
-<p class="highlight-block2">
-  <strong>Navigating with your 'time machine'</strong><br>
-  Not only you can navigate between branches, you can also navigate between commits, like in the 'time machine' concept we talked about. Example: <br>
-  <code>git checkout -b [YOUR-COMMIT-HASH]</code>
-</p>
-
-<br><br>
-We have now completed the full workflow ✅, both step by step and through automation 🤖. <br>
-<ol class="takeaways">
-  <strong>Key takeaways:</strong> <br>
-  <ul>1. We learnt the basic concepts of data transfer and software development, using FASTQ files as an example.</ul>
-  <ul>2. In terms of data transfer protocols, we used GZIP for compression and MD5 to verify integrity.
-    However, there are plenty of alternative approaches,<br> such as TAR, BZIP and single .MD5 files.</ul>
-  <ul>3. In terms of software development, we worked with <i>Git</i> to perform local commits and track progress,
-    but platforms like GitLab or GitHub add collaboration, issue tracking and much more.</ul>
-  <ul>4. There are often multiple correct ways to achieve the same task in bioinformatics. </ul>
-</ol>
+  </aside>
+  <main class="content">
+    <h1>Environment configuration: hands-on</h1>
+    <h3>Research computing platform</h3>
+     <section id="introduction">
+      <div class="spacer"></div>
+      <h2 id="introduction">1. Introduction</h2>
+      In this exercise you will practice some of the essential tools for bioinformatics.
+  
+      <p class="highlight-block">
+        <strong>Basic requirements</strong><br>
+        1. Basic knowledge of the unix terminal<br>
+        2. [Recommended] Visual Studio Code installed in your computer
+      </p>
+  
+      <p class="highlight-block2">
+        <strong>Objectives</strong><br>
+        <strong>1.  Working with files:</strong> Modify compressed biological sequencing files<br>
+        <strong>2. Navigating with Linux terminal:</strong> file transfer processes<br>
+        <strong>3. MD5 checksums:</strong> Verify data integrity<br>
+        <strong>4. Git, GitLab:</strong> Track your work with git<br>
+      </p>
+  
+      
+     </section>
+    <section id="repository">
+      <div class="spacer"></div>
+      <h2 id="repository">2. Repository</h2>
+      RCP manages its code and resources from <a href="https://gitlab.com/frcb_idibaps">IDIBAPS GitLab</a>.
+      To follow this hands-on you will need to get a copy of this Stepping Stone's repository to your computer.
+      You can access the repository here:
+      <br><br>
+      <center><a href="https://gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on">IDIBAPS GitLab/Stepping-stone-hands-on</a></center>
+      <br>
+  
+      <h3 id="setup">2.1. Set up your repository</h3>
+  
+      To copy the repository to your computer you have two options:
+      <table>
+        <thead>
+          <tr>
+            <th>[ OPTION A ] <div></div> Cloning from GitLab</th>
+            <th>[ OPTION B ] <div></div>Downloading a zipped version</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>(1)</strong> Click in button <button class="blue-button">Code &#8964;</button> to display dropdown menu<br><br>
+              <strong>(2)</strong> Copy URL from <strong>Clone with SSH</strong> <br><br>
+              <strong>(3)</strong> Open a Terminal window in a known location (preferably in Visual Studio Code)<br><br>
+              <strong>(4)</strong> Type the following command to clone the repository:
+              <pre>git clone [URL-link] </pre>
+            </td>
+            <td>
+              <strong>(1)</strong> Click in button <button class="blue-button">Code &#8964;</button> to display dropdown menu<br><br>
+              <strong>(2)</strong> Select <strong>download source code</strong> from <button>zip</button><br><br>
+              <strong>(3)</strong> Move it to a known location and extract it<br><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      Both options will create a new folder in your working directory named:
+      <center><p class="folder blue"><span class="icon" aria-hidden="false"></span><span class="folder-name">stepping-stone-hands-on/</span></p></center>
+      <strong>(5)</strong> Change working directory to new folder 
+      <pre>cd stepping-stone-hands-on/</pre>
+      <strong>(6)</strong> Configure Git credentials:<br>
+      <pre>
+      git config user.name [YOUR-USERNAME]
+      config user.email [YOUR-INSTITUTION-EMAIL]</pre>
+      <strong>(7)</strong> Check the status of your repository by typing:<br>
+      <pre>git status</pre>
+      Expected output:
+      <pre>
+      On branch main
+      Your branch is up to date with 'origin/main'.</pre>
+      This means you are in the main branch and your local copy is up to date with the remote repository in GitLab.<br><br>
+      Currently, the repository contains two branches:
+      <ul>
+        <li><strong>main</strong>: default branch, with original version</li>
+        <li><strong>hands-on</strong>: your branch where you will store your analysis</li>
+      </ul><br>
+      <strong>(8)</strong> Move to the branch devised for this hands-on:<br>
+      <pre>git checkout hands-on</pre>
+      Expected output:
+      <pre>Switched to branch 'hands-on'
+      Your branch is up to date with 'origin/hands-on'.</pre>
+  
+  
+      Now, everything is set up to start the hands-on!
+  
+      <br><br>
+  
+      <h3 id="content">2.2. Inspecting the contents of the repository</h3>
+      Here we will walk through some of the most basic commands to navigate our working directory
+  
+      <p class="highlight-block2">
+        <strong>BIG REMINDER</strong><br>
+        If at any point you lose track of where you are in the file system, simply run 
+        <code>pwd</code> and it will print your current working directory
+      </p>
+  
+      <br>
+      <p class="highlight-block" id="ls">
+        ls
+      </p>
+      <strong>We can use this command to list all files and folders in the current directory</strong><br><br>
+  
+      See help with:
+      <pre>ls --help</pre>
+      Output (only with some options):
+      <pre class="outblock">
+        Usage: ls [OPTION]... [FILE]...
+        List information about the FILEs (the current directory by default).
+        Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
+  
+        Mandatory arguments to long options are mandatory for short options too.
+          -l                         use a long listing format
+          -h, --human-readable       with -l and -s, print sizes like 1K 234M 2G etc.
+          -L, --dereference          when showing file information for a symbolic
+                                    link, show information for the file the link
+                                    references rather than for the link itself
+      </pre>
+  
+      Examples:
+      <pre>
+      ls -l
+      ls -lh</pre>
+  
+      <p class="highlight-block3">
+        Quick test:<br>
+        What is the difference between these two commands?
+      </p>
+  
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <p>
+          The first command lists all files and folders in the current directory with
+          detailed information (permissions, owner, size in bytes, modification date, etc.).  
+          The second command does the same but displays file sizes in a human-readable format
+          (e.g., KB, MB, GB) instead of bytes.
+        </p>
+      </details>
+  
+  
+      <br><br><br>
+      <p class="highlight-block">
+        tree
+      </p>
+      <strong>We can use this command to display the structure of our current working directory</strong>
+      <br><br>
+      See help with:
+      <pre>
+        tree --help
+      </pre>
+      Output:
+      <pre class="outblock">
+        usage: tree [-L level [-R]] [...]
+        ------- Listing options -------
+        -a            All files are listed.
+        -d            List directories only.
+        -L level      Descend only level directories deep.
+  
+      </pre>
+  
+      <p class="highlight-block3">
+        Quick test:<br>
+        Which parameters do I need to flag after calling tree command to view ONLY directories with depth=2?
+      </p>
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <pre>tree -d -L 2</pre>
+      </details>
+  
+      <br><br><br>
+      <p class="highlight-block">
+        code
+      </p>
+      <strong>If you have Visual Studio Code installed, with this commando you can open the code editor from your current working directory.</strong>
+      <br><br>
+      Open it with:
+      <pre>code .</pre>
+  
+      <p class="highlight-block3">
+        Quick test:<br>
+        Do you know what the dot (.) stands for in this command?
+      </p>
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <p>
+          It tells VSCode which directory you want it to launch from. The dot represents the current directory.
+        </p>
+      </details>
+  
+      <br>
+      <p class="highlight-block2">
+        <strong>Recommended</strong><br>
+        From now on you can now follow the Stepping-Stone from the integrated terminal in Visual Studio Code.
+      </p>
+  
+      <br><br><br>
+      <p class="highlight-block">
+        mkdir
+      </p>
+      <strong>With this command we can create new directories. We will use it to create the destination folder of our file operation</strong>
+      <br><br>
+      Since we want our directory to be named:
+  
+      <center><p class="folder blue"><span class="icon" aria-hidden="false"></span><span class="folder-name">compressed/</span></p></center>
+  
+      Our command needs to be:
+      <pre>
+        mkdir compressed
+      </pre>
+  
+      <br><br><br>
+      <p class="highlight-block">
+        cd
+      </p>
+      <strong>With this command we can navigate directories.</strong>
+      <br><br>
+      We can use it to access the directory that contains our FASTQ files in the following way:
+      <pre>
+        cd raw/
+      </pre>
+      <p class="highlight-block3">
+        Quick test:<br>
+        Once we have moved to data folder. How can we check which files are contained within this directory and their sizes?
+      </p>
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <pre>ls -lh</pre>
+      </details>
+  
+      <br><br><br>
+      <p class="highlight-block">
+        head
+      </p>
+      <strong>With this command we print the first <code>n</code> (default=10) lines of each FILE to standard output</strong>
+      <br><br>
+      Let's try an example with file <p class="path-block">01.fastq</p>
+      <pre>
+        head -n 16 01.fastq
+      </pre>
+  
+      <p class="highlight-block4">
+        Harder test:<br>
+        Knowing <code>pwd</code> command outputs: [YOUR-OWN-PATH]/BiodataSeries/stepping-stone-hands-on/data <br><br>
+        1. What's the absolute and relative path of <strong>01.fastq</strong> file?<br>
+        2. What's the relative path of this guide .HTML guide? 
+      </p>
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <p>
+          1A - absolute path:        [YOUR-OWN-PATH]/BiodataSeries/stepping-stone-hands-on/raw/01.fastq<br>
+          1B - relative path:        ./01.fastq<br>
+          2  - relative path:        ../stepping_stone_bioinformatics.html<br>
+        </p>
+      </details>
+    </section>
+    <section id="compression-of-files">
+      <div class="spacer"></div>
+      <h2 id="compression-of-files">3. Compressing files</h2>
+      In this section we will compress FASTQ files to reduce file transfer times while preserving file integrity.
+      For that we will be working with:
+  
+      <br>
+      <p class="highlight-block">
+        gzip
+      </p>
+  
+      From our data directory (where we should be still), let's compress one of the FASTQ files:
+      <pre>
+        gzip 01.fastq
+      </pre>
+  
+      Observe the newly generated file. As you brilliantly observed, the uncompressed file has been deleted.
+      <p class="highlight-block3">
+        Quick test:<br>
+        Picture a scenario in which both files are necessary.<br>
+        How can we compress a FASTQ while preserving the original uncompressed file?<br><br>
+        Hint: check <code>--help</code> menu from the command
+      </p>
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <pre>gzip -k 01.fastq</pre>
+      </details>
+  
+      <br><br>
+      Now, to decompress our file and retrieve the original, we can use:
+      <p class="highlight-block">
+        gunzip
+      </p><br>
+  
+      Let's warm up our coding skills with a simple exercise:
+      <p class="highlight-block6">
+        Exercise 1:<br>
+        1. Decompress 01.fastq.gz<br>
+        2. Compress again the same FASTQ file, only this time preserving the original uncompressed format.<br>
+        3. Can you think of a way to compress all files in our working directory within a simple line of code?
+        We'd like to preserve all original files<br>
+      </p>
+  
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <pre>gunzip 01.fastq.gz</pre>
+        <pre>gzip -k 01.fastq</pre>
+        <pre>gzip -k *</pre>
+      </details>
+  
+      <p class="highlight-block3">
+        Quick test:<br>
+        After running the <code>gzip</code> command for Exercise 1.3, some of you may have received the following message in the terminal:
+        <br><br>
+        <code>gzip: 01.fastq.gz already exists; do you wish to overwrite (y or n)?</code>
+        <br>
+        Can you guess why?
+      </p>
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <pre>Because compressed 01.fastq.gz already exists</pre>
+      </details>
+  
+      <br><br>
+      We have successfully compressed all the files in our directory. Now, let's take a look at how much these files have reduced in size after compression.
+      <p class="highlight-block6">
+        Exercise 2:<br>
+        1. How can we check the sizes of the compressed and uncompressed files?<br>
+        2. Currently, the file size of the compressed files is six times smaller. Is it possible to make them even smaller, and if so, how?<br>
+      </p>
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <p>Exercise 1.1.</p>
+        <pre>ls -lh</pre>
+        <p>Exercise 1.2. <code>gzip</code> command allows to specify compression level. See <code>gzip --help</code> for more information.</p>
+        <pre>gzip --help
+  
+          Usage: gzip [OPTION]... [FILE]...
+          Compress or uncompress FILEs (by default, compress FILES in-place).
+  
+          Mandatory arguments to long options are mandatory for short options too.
+          -1, --fast        compress faster
+          -9, --best        compress better</pre>
+      <pre>gzip -k9 *</pre>
+      </details>
+    </section>
+    <section id="wildcards">
+      <div class="spacer"></div>
+      <h2 id="wildcards">4. Wildcards</h2>
+      <p class="highlight-block5">
+        Standard wildcards (globbing patterns)
+      </p>
+      The answer to Excercise 1.3 implied the use of a wildcard character (en español, comodín) that match multiple files.
+      Commands can use standard wildcards (also known as globbing patterns) to perform actions on more than one file at a time, or to find part of a phrase in a text file.<br><br>
+  
+      For more information on basic wildcards, we can consult page 7 of <i>Linux Programmer's Manual - GLOB section</i>.<br>
+      To do this, we can type:
+      <pre>
+      man 7 glob
+      </pre>
+      Output:
+      <pre class="outblock">
+      Wildcard matching
+            A  string  is  a  wildcard pattern if it contains one of the characters
+            '?', '*' or '['.  Globbing is the operation  that  expands  a  wildcard
+            pattern  into  the list of pathnames matching the pattern.  Matching is
+            defined by:
+  
+            A '?' (not between brackets) matches any single character.
+  
+            A '*' (not between brackets) matches any string,  including  the  empty
+            string.
+            [...]
+      </pre>
+  
+      <p class="highlight-block6">
+        Exercise 3:<br>
+        1. Using '*' wildcard, print the first line of all fast files in our working directory<br>
+        2. Do the same exercise, only this time with '?' wildcard instead.<br>
+        3. In our case, our data folder is populated only by FASTQ files. How should we use '*' wildcard if we had multiple files of different extensions?<br>
+      </p>
+  
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <pre>head -n 1 *</pre>
+        <pre>head -n 1 0?.fastq</pre>
+        <pre>head -n 1 *.fastq</pre>
+      </details>
+    </section>
+    <section id="md5sum">
+      <div class="spacer"></div>
+      <h2 id="md5sum">5. MD5 checksum</h2>
+      As mentioned at the beginning, our primary objective 🎯 is to copy the compressed files to our input directory:<br>
+      <center><p class="folder blue"><span class="icon" aria-hidden="false"></span><span class="folder-name">compressed/</span></p></center>
+      Transferring large files between directories or machines is a common task in bioinformatics. Some biological datasets can be <strong>very large</strong>,
+      reaching several GB or even TB, and problems may arise due to <strong class="bad">connection failures</strong>. Fortunately, there is a tool that
+      <strong class="good">compares file integrity</strong> before and after the transfer has taken place.
+  
+      <br><br>
+      <p class="highlight-block">
+        md5sum
+      </p>
+      This is the command we will use to calculate and verify file integrity, essentially by <strong>hashing input files</strong> (I.e. assigning alphanumeric string).
+      These unique strings will act as a <strong>digital fingerprint</strong> of our FASTQ files to ensure data integrity after transfer.
+  
+      First, to hash our compressed FASTQ files, let's run
+      <pre>
+      md5sum *.gz > checksums.md5
+      </pre>
+  
+      <p class="highlight-block4">
+        Harder test:<br>
+        Is the chunk of code <code>> checksums.md5</code> one of the standard inputs <i>md5sum</i> command expects?<br>
+        Do you know what output redirection consists of?<br>
+      </p>
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <pre>
+        No, these are not standard inputs to <i>md5sum</i>.
+        By default, commands print their results (called standard output - stdout) to the terminal screen.
+        Alternatively, the redirection operator (>) takes that sdtout and dumps it into a file instead of the screen.</pre>
+      </details>
+  
+      <br>
+      <p class="highlight-block2">
+        <strong>Output redirection</strong><br>
+        As detailed in the previous exercise, output redirection dumps the content that a command would normally print in your terminal screen into a file <br>
+        There are multiple redirection operators, here we show you a cheat sheet of the most common ones:
+      </p>
+  
+      <section aria-labelledby="redir-title">
+        <table class="redir-table" role="table" aria-describedby="redir-desc">
+          <thead>
+            <tr>
+              <th scope="col">Operator</th>
+              <th scope="col">Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>></td>
+              <td><strong>Redirects</strong> stdout to a file. If the file exists, it will overwrite.</td>
+            </tr>
+  
+            <tr>
+              <td>>></td>
+              <td><strong>Appends</strong> stdout to a file. Will never overwrite.</td>
+            </tr>
+  
+            <tr>
+              <td>2></td>
+              <td><strong>Redirects</strong> stderr to a file. If the file exists, it will overwrite.</td>
+            </tr>
+  
+            <tr>
+              <td>2>></td>
+              <td><strong>Appends</strong> stderr to a file. Will never overwrite.</td>
+            </tr>
+  
+            <tr>
+              <td>&></td>
+              <td><strong>Redirects</strong> both stdout and stderr to a file. If the file exists, it will overwrite.</td>
+            </tr>
+  
+            <tr>
+              <td>&>></td>
+              <td><strong>Appends</strong> both stdout and stderr to a file. Will never overwrite.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+  
+      <br><br>
+      Now, to quickly check the content of that file, we will use:
+      <p class="highlight-block">
+        cat
+      </p>
+      Explanation:
+      <pre class="outblock">
+        Usage: cat [OPTION]... [FILE]...
+        Concatenate FILE(s) to standard output.
+      </pre>
+      <br>
+      This command allows to print the content of the input file in our terminal.
+      <pre>cat checksums.md5</pre>
+      Output (may differ based on the level of compression you used with <code>gzip</code>):
+      <pre class="outblock">
+      5177a1a1998c3c88e49560c577288e51  01.fastq.gz
+      e4c0d5caca9d6a3ab41a6853d4468fcc  02.fastq.gz
+      acb717129a738472446e47632ad12c02  03.fastq.gz
+      4e17ac1a592281cacfacb63ecce33c5f  04.fastq.gz
+      </pre>
+      It contains what we called the <i>digital fingerprints</i> (unique 32-character alphanumeric string) of each of the compressed FASTQ file. 
+  
+      <br><br>
+      Now, let's start the file transfer process. For that, we will use:
+      <p class="highlight-block">
+        cp
+      </p>
+      See help manual:
+      <pre class="outblock">
+        Usage: cp [OPTION]... [-T] SOURCE DEST
+        or:  cp [OPTION]... SOURCE... DIRECTORY
+        or:  cp [OPTION]... -t DIRECTORY SOURCE...
+        Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.
+      </pre>
+      For this command, usage says we need:
+      <pre>cp [OPTION-ARGUMENTS] [path-to-source-file/s] [path-to-output-dir]</pre><br>
+  
+      <p class="highlight-block6">
+        Exercise 4:<br>
+        Following the previous use case, how should we:<br>
+        1. Define [path-to-source-file/s]<br>
+        2. Define [path-to-output-dir] from our working directory?
+        <br><br>
+        Can you please construct the complete line of code to perform the file transfer?<br>
+      </p>
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <pre>*.gz</pre>
+        <pre>../compressed</pre>
+        <pre>cp *.gz ../compressed</pre>
+      </details>
+  
+      <br><br>
+      From our newly populated folder, let's check if file integrity has been preserved during transfer.
+      <p class="highlight-block3">
+        Quick test:<br>
+        How can we navigate to our file <code>compressed/</code> from where we are?
+      </p>
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <pre>cd ../compressed</pre>
+      </details>
+  
+      Now, to run the integrity check, we will type:
+      <pre>md5sum -c ../raw/checksums.md5</pre>
+      Output:
+      <pre class="outblock">
+        01.fastq.gz: OK
+        02.fastq.gz: OK
+        03.fastq.gz: OK
+        04.fastq.gz: OK
+      </pre>
+  
+      <p class="highlight-block3">
+        Quick test:<br>
+        It seems that md5sum has different usages. Before, it hashed our FASTQ files.<br>
+        Now, it verified file integrity of our new FASTQ files.<br><br>
+        Which argument/s made md5sum perform differently now?
+      </p>
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <pre>  -c, --check          read MD5 sums from the FILEs and check them</pre>
+      </details>
+  
+      <br><br>
+      <p class="highlight-block1">
+        <strong>GENTLE REMINDER OF WORK CONDUCTED</strong> <br>
+        Here's a brief rundown of what we did: <br>
+          1. Compress FASTQ files <br>
+          2. Hash our compressed (.gz) FASTQ files [digital fingerprints] <br>
+          3. Perform file transfer with <code>mv</code> command <br> 
+          4. Check file integrity in destination with md5sum <br>
+      </p>
+    </section>
+    <section id="git-pipe">
+      <div class="spacer"></div>
+      <h2 id="git-pipe">6. Pipeline development with version control</h2>
+      In the final section of the Stepping-Stone, we will combine all the steps we have practised so far into a single script that
+      can automate the file transfer process for any given input. Once our script is complete, we will commit it to our repository
+      using Git and therefore have a record of our first version of the workflow.
+  
+      <br><br>
+      <h3 id="git-basic">6.1. Basic commands with <i>git<i></h3>
+      Let's move back to the repository folder. In order to do so, please check first your working directory.
+  
+      <p class="highlight-block3">
+        Quick test:<br>
+        Please move to folder <code>stepping-stone-hands-on</code>.
+      </p>
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <p>Option 1: Using absolute path</p>
+        <pre>cd [YOUR-OWN-PATH]/BiodataSeries/stepping-stone-hands-on/</pre>
+        <p>
+        Option 2: Navigating the repo<br>
+        Use the <code>pwd</code> command to print the current working directory.
+        Then, based on that path, decide how many levels to descend. Examples:
+        </p>
+        <pre>
+        cd .. #descend 1 level
+        cd ../.. #descend 2 levels</pre>
+      </details>
+  
+      <p class="highlight-git">
+        git
+      </p>
+      Git is a <strong>version control system</strong> that enables you to track changes to files and
+      manage different versions of the same project when working with teammates.<br>
+      <strong class="relevant">It works like a 'time machine', enabling you to take snapshots of the code
+      and move back and forth between older and newer versions.</strong>
+      <br><br>
+  
+      We can take a look at its usage:
+      <pre>git --help</pre>
+      We are only displaying Git commands relevant to this course:
+      <pre class="outblock">
+      start a working area (see also: git help tutorial)
+          <strong class="good">clone</strong>     Clone a repository into a new directory
+  
+      work on the current change (see also: git help everyday)
+          <strong>add</strong>       Add file contents to the index
+          <strong>restore</strong>   Restore working tree files
+      examine the history and state (see also: git help revisions)
+          <strong>log</strong>       Show commit logs
+          <strong class="relevant">status</strong>    Show the working tree status
+  
+      grow, mark and tweak your common history
+          <strong>commit</strong>    Record changes to the repository
+          <strong>switch</strong>    Switch branches (git checkout)
+  
+      collaborate (see also: git help workflows)
+          <strong>pull</strong>      Fetch from and integrate with another repository or a local branch
+          <strong>push</strong>      Update remote refs along with associated objects
+  
+      <strong class="good">git-config</strong>   - Get and set repository or global options
+      </pre>
+  
+      <br>
+      Now, to check for changes in our repository, we will run:
+      <p class="highlight-block">
+        git status
+      </p>
+      <pre class="outblock">
+      Untracked files:
+      (use "git add <file>..." to include in what will be committed)
+        <strong class="bad">
+        compressed/
+        raw/checksums.md5
+        </strong>
+      </pre>
+  
+      <br>
+      <p class="highlight-block">
+        git restore
+      </p>
+      Here we can see all the files that were not present in the original tree, i.e. those that we created during the workshop.
+      As our goal is to automate the entire file management process, <strong class="relevant">we will delete these files and start again</strong>.
+      To do so, we will run:
+      <pre>
+      git restore *
+      git status</pre>
+      Output:
+      <pre class="outblock">
+      On branch main
+      Your branch is up to date with 'origin/main'.
+      </pre>
+  
+      <br><br>
+      <h3 id="variables">6.2. Defining variables in our code</h3>
+  
+      Before we start with the exercise, let's quickly introduce how to define a variable in our Linux terminal: <br>
+      <strong>1.</strong> In the defintion of the variable there <strong class="relevant">cannot be any spaces around '=' character</strong>. <br>
+      <strong>2.</strong> To use an existing variable, <strong class="relevant">add the prefix '$' to call it</strong>.
+  
+      <h4>Example 1: Variable containing a string (str)</h4>
+      <pre>
+      <strong class="relevant">our_first_variable</strong>="Hello World"
+      print <strong class="relevant">$our_first_variable</strong>
+      </pre>
+      Output:
+      <pre class="outblock">
+      "Hello World"
+      </pre>
+  
+      <h4>Example 2: Variable containing an integer (int)</h4>
+      <pre>
+      <strong class="relevant">our_int_variable</strong>=2
+      expr <strong class="relevant">$our_int_variable</strong> + 1
+      </pre>
+      Output:
+      <pre class="outblock">
+      3
+      </pre>
+  
+      <br><br>
+      <h3 id="pipe-code">6.3.Developing our code</h3>
+  
+      Let's make things a little more difficult by combining everything we have done so far.<br>
+  
+      <p class="highlight-block6">
+      <strong>Main exercise: </strong>
+      Inside folder <code>src/</code> we will find a file called <strong>template.sh</strong> with the skeleton of our pipeline. This template is divided into modules, each of which corresponds to one of the steps detailed in our rundown.
+  
+      Our next exercise will be to fill in the blanks in the incomplete lines of code with the correct argument/s.
+      Each module has subtasks, and these tasks all have guidelines explaining what is expected by the commmands.
+      </p>
+  
+      <p class="highlight-block2">
+        <strong>Strongly recommended</strong><br>
+        For a much better coding experience, please work from Visual Studio Code.
+      </p>
+  
+      <br><br>
+      <p class="highlight-block">
+        template.sh
+      </p>
+      Our template script is divided into 5 tasks with their corresponding subtasks, like detailed in the following table:
+      <section aria-labelledby="redir-title">
+        <table class="redir-table" role="table" aria-describedby="redir-desc">
+          <thead>
+            <tr>
+              <th scope="col">STEP</th>
+              <th scope="col">TASK (subtasks)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td>
+              <td>
+                <details>
+                  <summary><strong>Navigate</strong> to starting directory</summary>
+                  <ul>
+                    <li>0.1. Define workshop directory</li>
+                  </ul>
+                </details>
+              </td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>
+                <details>
+                  <summary><strong>Compress</strong> FASTQ file/s</summary>
+                  <ul>
+                    <li>1.1. Navigate to directory with raw FASTQ files</li>
+                    <li>1.2. Compress FASTQ files</li>
+                  </ul>
+                </details>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                <details>
+                  <summary><strong>Hash</strong> FASTQ (.gz) file/s</summary>
+                  <ul>
+                    <li>2.1. Hash FASTQ files and redirect output to .md5 file</li>
+                    <li>2.2. Save to <code>checksums.md5</code></li>
+                  </ul>
+                </details>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                <details>
+                  <summary><strong>Transfer</strong> FASTQ file/s</summary>
+                  <ul>
+                    <li>3.1. Navigate to initial directory</li>
+                    <li>3.2. Create <code>compressed/</code> directory</li>
+                    <li>3.3. Move compressed FASTQ files to <code>compressed/</code> directory</li>
+                  </ul>
+                </details>
+              </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                <details>
+                  <summary><strong>Check</strong> MD5 integrity</summary>
+                  <ul>
+                    <li>4.1. Navigate to directory with compressed FASTQ files</li>
+                    <li>4.2. Perform MD5 check</li>
+                  </ul>
+                </details>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+  
+      Please complete the lines of code in each section by adding parameters to the commands for each task. <br>
+      The coding lines look like this:
+      <pre><strong class="relevant">command</strong>   # [INSERT-CODE-HERE]</pre>
+  
+      <br><br>
+      <p class="highlight-block">
+        .solutions.sh
+      </p>
+      Once you have completed the building blocks of our workflow, you can compare them with the solutions we proposed. <br>
+      <i class="relevant">Remember: there is no single solution — different approaches may lead to the same result</i>
+  
+      <br><br>
+      A quick way to compare them is to use command <code>diff</code> (finds differences between two files). <br>
+      <i class="good">If there is no output to this code it means both files are identical</i>
+      <pre>
+        diff src/template.sh src/.solutions.sh
+      </pre>
+      Output example:
+      <pre class="outblock">
+      54c54
+      &lt; cd     # [INSERT-CODE-HERE]
+      ---
+      &gt; cd $PATH_to_raw_fastq_files
+      </pre>
+      This output shows that <code>diff</code> command found differences between both files at line 54 (hence 54c54). <br>
+      <i>(&lt;) Shows line 54 in file 1 (template.sh)</i> <br>
+      <i>(&gt;) Shows line 54 in file 2 (.solutions.sh)</i> <br>
+  
+      <br><br>
+      <h3 id="git-commit">6.4.Tracking our work with <i>git</i></h3>
+      Now, we will log our completed pipeline in our repository.
+  
+      <br><br>
+      <p class="highlight-block4">
+        Untracked changes
+      </p>
+      First, let's check which files have been modified since we started the Stepping Stone process.
+      <p class="highlight-block3">
+        Quick test:<br>
+        Do you know how to check for changes in our repository?
+      </p>
+  
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <pre>git status</pre>
+      </details>
+  
+      <br>
+      Output:
+      <pre class="outblock">
+        Changes not staged for commit:
+        (use "git add <file>..." to update what will be committed)
+        (use "git restore <file>..." to discard changes in working directory)
+              <strong class="bad">modified:   src/template.sh</strong>
+      </pre>
+      This means <i>Git</i> has detected the changes in the file <code>template.sh</code> that we have been working on.
+      We will tell <i>Git</i> that these changes are OK and instruct it to save the file as it is now:
+      <pre>git add src/template.sh</pre>
+  
+      <br><br>
+      <p class="highlight-block2">
+        Tracked changes
+      </p>
+      Let's check again for changes in our repository with:
+      <pre>git status</pre>
+      Output:
+      <pre class="outblock">
+        On branch OPT2
+      Changes to be committed:
+        (use "git restore --staged <file>..." to unstage)
+              <strong class="good">modified:   src/template.sh</strong>
+      </pre>
+      This means <i>Git</i> has saved all the modifications we did on our pipeline.
+      However, these changes are only visible to us and they have not yet been associated with a branch in our repository.
+  
+      <br><br>
+      <p class="highlight-block7">
+        Commit changes
+      </p>
+      By committing our changes, they will also appear in our working branch. <br>
+      Our branch essentially records all the events in the history of our repository. Our history now needs to record your latest update.
+      We will include a message to help us understand any modifications whenever we look back through our branch.
+      <pre>git commit -m "Finalized pipeline for FASTQ file compression and transfer" </pre>
+  
+      Now, to see the history of our branch, we can run:
+      <pre>git log --oneline</pre>
+      Output:
+      <pre class="outerminal">
+      [-----] (<strong class="relevant">HEAD</strong> -> <strong class="good">hands-on</strong>, origin/main, origin/HEAD, main, OPT2) <i class="commit">Finalized pipeline for FASTQ file compression and transfer</i>
+      732ba4f  <i class="commit">Final refinements saved.</i>
+      </pre>
+      As you can see, the last line corresponds to our latest modification. It has a unique hash and the description we added.
+      <p class="highlight-block2">
+        <strong>Navigating with your 'time machine'</strong><br>
+        Not only you can navigate between branches, you can also navigate between commits, like in the 'time machine' concept we talked about. Example: <br>
+        <code>git checkout -b [YOUR-COMMIT-HASH]</code>
+      </p>
+  
+      <br><br>
+      We have now completed the full workflow ✅, both step by step and through automation 🤖. <br>
+      <ol class="takeaways">
+        <strong>Key takeaways:</strong> <br>
+        <ul>1. We learnt the basic concepts of data transfer and software development, using FASTQ files as an example.</ul>
+        <ul>2. In terms of data transfer protocols, we used GZIP for compression and MD5 to verify integrity.
+          However, there are plenty of alternative approaches,<br> such as TAR, BZIP and single .MD5 files.</ul>
+        <ul>3. In terms of software development, we worked with <i>Git</i> to perform local commits and track progress,
+          but platforms like GitLab or GitHub add collaboration, issue tracking and much more.</ul>
+        <ul>4. There are often multiple correct ways to achieve the same task in bioinformatics. </ul>
+      </ol>
+    </section>
+    <!-- etc. -->
+  </main>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tocLinks = document.querySelectorAll(".toc-list a");
+    const sections = Array.from(tocLinks)
+      .map(link => document.querySelector(link.getAttribute("href")))
+      .filter(section => section !== null);
+  
+    function onScroll() {
+      let currentSection = sections[0];
+  
+      for (const section of sections) {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 80) {
+          currentSection = section;
+        }
+      }
+  
+      tocLinks.forEach(link => link.classList.remove("active"));
+      const activeLink = document.querySelector(
+        `.toc-list a[href="#${currentSection.id}"]`
+      );
+      if (activeLink) activeLink.classList.add("active");
+    }
+  
+    window.addEventListener("scroll", onScroll);
+    onScroll(); // run once at load
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("pre").forEach(pre => {
+      const lines = pre.textContent.split("\n");
+
+      // Remove empty first/last lines
+      if (lines[0].trim() === "") lines.shift();
+      if (lines[lines.length - 1].trim() === "") lines.pop();
+
+      // Find minimum leading spaces in all non-empty lines
+      const minIndent = Math.min(
+        ...lines.filter(line => line.trim() !== "")
+              .map(line => line.match(/^ */)[0].length)
+      );
+
+      // Remove the common leading spaces
+      pre.textContent = lines.map(line => line.slice(minIndent)).join("\n");
+    });
+  });
+  </script>
 
 </html>
