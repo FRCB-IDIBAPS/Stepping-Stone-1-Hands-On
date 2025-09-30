@@ -67,6 +67,7 @@
           </li>
         </ol>
       </li>
+      <li><a href="#takeaways">Key takeaways</a></li>
     </ol>
   </aside>
   <main class="content">
@@ -362,7 +363,7 @@
   
       Let's warm up our coding skills with a simple exercise:
       <p class="highlight-block6">
-        Exercise 1:<br>
+        <strong>EXERCISE 1</strong><br>
         1. Decompress 01.fastq.gz<br>
         2. Compress again the same FASTQ file, only this time preserving the original uncompressed format.<br>
         3. Can you think of a way to compress all files in our working directory within a simple line of code?
@@ -392,7 +393,7 @@
       <br><br>
       We have successfully compressed all the files in our directory. Now, let's take a look at how much these files have reduced in size after compression.
       <p class="highlight-block6">
-        Exercise 2:<br>
+        <strong>EXERCISE 2</strong><br>
         1. How can we check the sizes of the compressed and uncompressed files?<br>
         2. Currently, the file size of the compressed files is six times smaller. Is it possible to make them even smaller, and if so, how?<br>
       </p>
@@ -442,7 +443,7 @@
       </pre>
   
       <p class="highlight-block6">
-        Exercise 3:<br>
+        <strong>EXERCISE 3</strong><br>
         1. Using '*' wildcard, print the first line of all fast files in our working directory<br>
         2. Do the same exercise, only this time with '?' wildcard instead.<br>
         3. In our case, our data folder is populated only by FASTQ files. How should we use '*' wildcard if we had multiple files of different extensions?<br>
@@ -576,7 +577,7 @@
       <pre>cp [OPTION-ARGUMENTS] [path-to-source-file/s] [path-to-output-dir]</pre><br>
   
       <p class="highlight-block6">
-        Exercise 4:<br>
+        <strong>EXERCISE 4</strong><br>
         Following the previous use case, how should we:<br>
         1. Define [path-to-source-file/s]<br>
         2. Define [path-to-output-dir] from our working directory?
@@ -758,15 +759,16 @@
       Let's make things a little more difficult by combining everything we have done so far.<br>
   
       <p class="highlight-block6">
-      <strong>Main exercise: </strong>
-      Inside folder <code>src/</code> we will find a file called <strong>template.sh</strong> with the skeleton of our pipeline. This template is divided into modules, each of which corresponds to one of the steps detailed in our rundown.
+      <strong>EXERCISE 5</strong> <br>
+      Inside <code>src/</code> folder we will find a file called <strong>template.sh</strong> with the skeleton of our pipeline. <br>
+      This template is divided into modules, each of which corresponds to one of the steps detailed in our rundown. <br><br>
   
-      Our next exercise will be to fill in the blanks in the incomplete lines of code with the correct argument/s.
+      Fill in the blanks in the incomplete lines of code with the correct argument/s. <br>
       Each module has subtasks, and these tasks all have guidelines explaining what is expected by the commmands.
       </p>
   
       <p class="highlight-block2">
-        <strong>Strongly RECOMMENDED</strong><br>
+        <strong>STRONGLY RECOMMENDED</strong><br>
         For a much better coding experience, please work from Visual Studio Code.
       </p>
   
@@ -940,15 +942,15 @@
       732ba4f  <i class="commit">Final refinements saved.</i>
       </pre>
       As you can see, the last line corresponds to our latest modification. It has a unique hash and the description we added.
-      <p class="highlight-block2">
+      <ol class="takeaways">
         <strong>Navigating with your 'time machine'</strong><br>
-        Not only you can navigate between branches, you can also navigate between commits, like in the 'time machine' concept we talked about. Example: <br>
-        <code>git checkout -b [YOUR-COMMIT-HASH]</code>
-      </p>
+        Not only you can navigate between branches, you can also navigate between commits, like in the 'time machine' concept we talked about.
+      </ol>
   
       We have now completed the full workflow ✅, both step by step and through automation 🤖.
       <div class="spacer"></div>
-      <ol class="takeaways">
+      <div class="spacer"></div>
+      <ol class="keys", id="takeaways">
         <strong>Key takeaways:</strong> <br>
         <ul>1. We learnt the basic concepts of data transfer and software development, using FASTQ files as an example.</ul>
         <ul>2. In terms of data transfer protocols, we used GZIP for compression and MD5 to verify integrity.

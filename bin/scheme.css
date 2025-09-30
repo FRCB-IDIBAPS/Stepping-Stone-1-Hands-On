@@ -1,17 +1,10 @@
-html, body {
-  height: 100%;
-  overflow-x: hidden;   /* optional: prevent horizontal scroll */
-  overflow-y: auto;     /* normal vertical scroll, prevents overscroll */
-  overscroll-behavior-y: contain; /* prevent "bounce" on mobile */
-}
-
 body {
     background-color: #ffffff;
     color: #3d2e2e;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
-    margin: 40px auto; 
-    max-width: 1600px;
+    margin: 35px auto; 
+    max-width: 1800px;
     font-size: 15px;
 }
 
@@ -23,12 +16,14 @@ body {
 .content {
   padding: 40px;
   flex: 1;
+  margin-left: 400px;
 }
 
 /* Table of Contents */
 /* Styling for the Table of Contents */
 .toc {
-  position: sticky;
+  position: fixed;
+  padding: 30px;
   font-size: 15px;
   font-family: "Roboto Mono", "Courier New", monospace;
   top: 0;
@@ -132,9 +127,10 @@ h3 {
 }
 
 .page-header img {
-  width: 1100px;       /* set a fixed width */
-  height: auto;      /* keep aspect ratio */
-  margin: 40px auto;
+  width: 1350px;       /* set a fixed width */
+  display: block;
+  margin-top: -40px;
+  margin-bottom: 60px; /* create space below the image */
 }
 
 .header-text h1 {
@@ -314,7 +310,7 @@ i.commit {
   display: block;             /* full-width element */
   width: 100%;                /* stretch across container */
   box-sizing: border-box;     /* include padding inside width */
-  font-weight: 700;
+  font-weight: 500;
 }
 .highlight-block {
   background-color: #e5f31a;
@@ -342,7 +338,9 @@ i.commit {
   font-family: "Inconsolata", "Courier New", monospace;
 }
 .highlight-block6 {
-  background-color: #0bebcd88;
+  background-color: #cb9bd488;
+  color: #474746;
+  font-size: 16px;
 }
 .highlight-block7 {
   background-color: #16bcee88;
@@ -517,5 +515,20 @@ i.commit {
 }
 .takeaways ul {
   padding-left: 2em;
+  list-style-type: none; /* or none if you want no bullets */
+}
+
+.keys {
+  font-size: 16px;
+  background-color: #1aa18454;
+  color: #0f6350;           /* light text */
+  padding: 0.75em 1em;        /* space inside */
+  border-radius: 6px;         /* rounded corners */
+  margin: 1em 0;              /* spacing above/below */
+  display: block;             /* full-width element */
+  width: 100%;                /* stretch across container */
+  box-sizing: border-box;     /* include padding inside width */
+}
+.takeaways ul {
   list-style-type: none; /* or none if you want no bullets */
 }
