@@ -9,60 +9,97 @@
       <li>
         <a href="#repository">Repository</a>
         <ol class="toc-list">
+          <li><a href="#setup">Set up your repository</a></li>
           <li>
-            <a href="#setup">Set up your repository</a>
+            <a href="#content">Inspect contents of repository</a>
+            <ol class="toc-list">
+              <li class="no-counter"><a href="#ls">ls</a></li>
+              <li class="no-counter"><a href="#tree">tree</a></li>
+              <li class="no-counter"><a href="#code">code</a></li>
+              <li class="no-counter"><a href="#mkdir">mkdir</a></li>
+              <li class="no-counter"><a href="#cd">cd</a></li>
+              <li class="no-counter"><a href="#head">head</a></li>
+            </ol>
           </li>
-          <li><a href="#content">Inspect contents of repository</a></li>
         </ol>
       </li>
-      <li><a href="#compression-of-files">Compressing files</a></li>
+      <li>
+        <a href="#compression-of-files">Compressing files</a>
+        <ol class="toc-list">
+          <li class="no-counter"><a href="#gzip">gzip</a></li>
+          <li class="no-counter"><a href="#gunzip">gunzip</a></li>
+        </ol>
+      </li>
       <li><a href="#wildcards">Wildcards</a></li>
-      <li><a href="#md5sum">MD5 checksum</a></li>
+      <li>
+        <a href="#md5sum">MD5 checksum</a>
+        <ol class="toc-list">
+          <li class="no-counter"><a href="#md5sum-command">md5sum</a></li>
+          <li class="no-counter"><a href="#cat">cat</a></li>
+          <li class="no-counter"><a href="#cp">cp</a></li>
+        </ol>
+      </li>
       <li>
         <a href="#git-pipe">Pipeline development with version control</a>
         <ol class="toc-list">
-          <li><a href="#git-basic">Basic commands with Git</a></li>
+          <li><a href="#git-basic">Basic commands with Git</a>
+            <ol>
+              <li class="no-counter"><a href="#git">basic commands</a></li>
+              <li class="no-counter"><a href="#git-status">git status</a></li>
+              <li class="no-counter"><a href="#git-restore">git restore</a></li>
+            </ol>
+          </li>
           <li><a href="#variables">Defining variables in our code</a></li>
-          <li><a href="#pipe-code">Developing our code</a></li>
-          <li><a href="#git-commit">Tracking our work with Git</a></li>
+          <li>
+            <a href="#pipe-code">Developing our code</a>
+            <ol>
+              <li class="no-counter"><a href="#template">template.sh</a></li>
+              <li class="no-counter"><a href="#solutions">solutions.sh</a></li>
+            </ol>
+          </li>
+          <li>
+            <a href="#git-commit">Tracking our work with Git</a>
+            <ol>
+              <li class="no-counter"><a href="#untracked">Untracked changes</a></li>
+              <li class="no-counter"><a href="#tracked">Tracked changes</a></li>
+              <li class="no-counter"><a href="#commit">Commit changes</a></li>
+            </ol>
+          </li>
         </ol>
       </li>
     </ol>
   </aside>
   <main class="content">
-    <h1>Environment configuration: hands-on</h1>
-    <h3>Research computing platform</h3>
+    <header class="page-header">
+      <div class="header-text">
+        <img src="bin/BioDataSeries1.png" alt="Logo">
      <section id="introduction">
       <div class="spacer"></div>
       <h2 id="introduction">1. Introduction</h2>
       In this exercise you will practice some of the essential tools for bioinformatics.
   
       <p class="highlight-block">
-        <strong>Basic requirements</strong><br>
-        1. Basic knowledge of the unix terminal<br>
-        2. [Recommended] Visual Studio Code installed in your computer
+        <strong>BASIC REQUIREMENTS</strong><br>
+        1. Super basic knowledge of the unix terminal<br>
+        2. [RECOMMENDED] Visual Studio Code installed in your computer
       </p>
   
       <p class="highlight-block2">
-        <strong>Objectives</strong><br>
+        <strong>OBJECTIVES</strong><br>
         <strong>1.  Working with files:</strong> Modify compressed biological sequencing files<br>
         <strong>2. Navigating with Linux terminal:</strong> file transfer processes<br>
         <strong>3. MD5 checksums:</strong> Verify data integrity<br>
         <strong>4. Git, GitLab:</strong> Track your work with git<br>
       </p>
   
-      
      </section>
     <section id="repository">
       <div class="spacer"></div>
       <h2 id="repository">2. Repository</h2>
-      RCP manages its code and resources from <a href="https://gitlab.com/frcb_idibaps">IDIBAPS GitLab</a>.
-      To follow this hands-on you will need to get a copy of this Stepping Stone's repository to your computer.
-      You can access the repository here:
-      <br><br>
+      To follow this hands-on you will need to get a copy of this Stepping Stone's repository to your computer. <br>
+      You can access the repository here: <br>
       <center><a href="https://gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on">IDIBAPS GitLab/Stepping-stone-hands-on</a></center>
-      <br>
-  
+      <div class="spacer"></div>
       <h3 id="setup">2.1. Set up your repository</h3>
   
       To copy the repository to your computer you have two options:
@@ -132,7 +169,7 @@
       </p>
   
       <br>
-      <p class="highlight-block" id="ls">
+      <p class="highlight-block", id="ls">
         ls
       </p>
       <strong>We can use this command to list all files and folders in the current directory</strong><br><br>
@@ -159,7 +196,7 @@
       ls -lh</pre>
   
       <p class="highlight-block3">
-        Quick test:<br>
+        QUICK TEST<br>
         What is the difference between these two commands?
       </p>
   
@@ -175,7 +212,7 @@
   
   
       <br><br><br>
-      <p class="highlight-block">
+      <p class="highlight-block", id="tree">
         tree
       </p>
       <strong>We can use this command to display the structure of our current working directory</strong>
@@ -195,7 +232,7 @@
       </pre>
   
       <p class="highlight-block3">
-        Quick test:<br>
+        QUICK TEST<br>
         Which parameters do I need to flag after calling tree command to view ONLY directories with depth=2?
       </p>
       <details class="answer-block">
@@ -204,7 +241,7 @@
       </details>
   
       <br><br><br>
-      <p class="highlight-block">
+      <p class="highlight-block", id="code">
         code
       </p>
       <strong>If you have Visual Studio Code installed, with this commando you can open the code editor from your current working directory.</strong>
@@ -213,7 +250,7 @@
       <pre>code .</pre>
   
       <p class="highlight-block3">
-        Quick test:<br>
+        QUICK TEST<br>
         Do you know what the dot (.) stands for in this command?
       </p>
       <details class="answer-block">
@@ -225,12 +262,12 @@
   
       <br>
       <p class="highlight-block2">
-        <strong>Recommended</strong><br>
+        <strong>RECOMMENDED</strong><br>
         From now on you can now follow the Stepping-Stone from the integrated terminal in Visual Studio Code.
       </p>
   
       <br><br><br>
-      <p class="highlight-block">
+      <p class="highlight-block", id="mkdir">
         mkdir
       </p>
       <strong>With this command we can create new directories. We will use it to create the destination folder of our file operation</strong>
@@ -245,7 +282,7 @@
       </pre>
   
       <br><br><br>
-      <p class="highlight-block">
+      <p class="highlight-block", id="cd">
         cd
       </p>
       <strong>With this command we can navigate directories.</strong>
@@ -255,7 +292,7 @@
         cd raw/
       </pre>
       <p class="highlight-block3">
-        Quick test:<br>
+        QUICK TEST<br>
         Once we have moved to data folder. How can we check which files are contained within this directory and their sizes?
       </p>
       <details class="answer-block">
@@ -264,7 +301,7 @@
       </details>
   
       <br><br><br>
-      <p class="highlight-block">
+      <p class="highlight-block", id="head">
         head
       </p>
       <strong>With this command we print the first <code>n</code> (default=10) lines of each FILE to standard output</strong>
@@ -275,7 +312,7 @@
       </pre>
   
       <p class="highlight-block4">
-        Harder test:<br>
+        HARD TEST<br>
         Knowing <code>pwd</code> command outputs: [YOUR-OWN-PATH]/BiodataSeries/stepping-stone-hands-on/data <br><br>
         1. What's the absolute and relative path of <strong>01.fastq</strong> file?<br>
         2. What's the relative path of this guide .HTML guide? 
@@ -296,7 +333,7 @@
       For that we will be working with:
   
       <br>
-      <p class="highlight-block">
+      <p class="highlight-block", id="gzip">
         gzip
       </p>
   
@@ -307,7 +344,7 @@
   
       Observe the newly generated file. As you brilliantly observed, the uncompressed file has been deleted.
       <p class="highlight-block3">
-        Quick test:<br>
+        QUICK TEST<br>
         Picture a scenario in which both files are necessary.<br>
         How can we compress a FASTQ while preserving the original uncompressed file?<br><br>
         Hint: check <code>--help</code> menu from the command
@@ -319,7 +356,7 @@
   
       <br><br>
       Now, to decompress our file and retrieve the original, we can use:
-      <p class="highlight-block">
+      <p class="highlight-block", id="gunzip">
         gunzip
       </p><br>
   
@@ -340,7 +377,7 @@
       </details>
   
       <p class="highlight-block3">
-        Quick test:<br>
+        QUICK TEST<br>
         After running the <code>gzip</code> command for Exercise 1.3, some of you may have received the following message in the terminal:
         <br><br>
         <code>gzip: 01.fastq.gz already exists; do you wish to overwrite (y or n)?</code>
@@ -428,7 +465,7 @@
       <strong class="good">compares file integrity</strong> before and after the transfer has taken place.
   
       <br><br>
-      <p class="highlight-block">
+      <p class="highlight-block", id="md5sum-command">
         md5sum
       </p>
       This is the command we will use to calculate and verify file integrity, essentially by <strong>hashing input files</strong> (I.e. assigning alphanumeric string).
@@ -440,7 +477,7 @@
       </pre>
   
       <p class="highlight-block4">
-        Harder test:<br>
+        HARD TEST<br>
         Is the chunk of code <code>> checksums.md5</code> one of the standard inputs <i>md5sum</i> command expects?<br>
         Do you know what output redirection consists of?<br>
       </p>
@@ -503,7 +540,7 @@
   
       <br><br>
       Now, to quickly check the content of that file, we will use:
-      <p class="highlight-block">
+      <p class="highlight-block", id="cat">
         cat
       </p>
       Explanation:
@@ -525,7 +562,7 @@
   
       <br><br>
       Now, let's start the file transfer process. For that, we will use:
-      <p class="highlight-block">
+      <p class="highlight-block", id="cp">
         cp
       </p>
       See help manual:
@@ -556,7 +593,7 @@
       <br><br>
       From our newly populated folder, let's check if file integrity has been preserved during transfer.
       <p class="highlight-block3">
-        Quick test:<br>
+        QUICK TEST<br>
         How can we navigate to our file <code>compressed/</code> from where we are?
       </p>
       <details class="answer-block">
@@ -575,7 +612,7 @@
       </pre>
   
       <p class="highlight-block3">
-        Quick test:<br>
+        QUICK TEST<br>
         It seems that md5sum has different usages. Before, it hashed our FASTQ files.<br>
         Now, it verified file integrity of our new FASTQ files.<br><br>
         Which argument/s made md5sum perform differently now?
@@ -607,7 +644,7 @@
       Let's move back to the repository folder. In order to do so, please check first your working directory.
   
       <p class="highlight-block3">
-        Quick test:<br>
+        QUICK TEST<br>
         Please move to folder <code>stepping-stone-hands-on</code>.
       </p>
       <details class="answer-block">
@@ -624,7 +661,7 @@
         cd ../.. #descend 2 levels</pre>
       </details>
   
-      <p class="highlight-git">
+      <p class="highlight-git", id="git">
         git
       </p>
       Git is a <strong>version control system</strong> that enables you to track changes to files and
@@ -660,7 +697,7 @@
   
       <br>
       Now, to check for changes in our repository, we will run:
-      <p class="highlight-block">
+      <p class="highlight-block", id="git-status">
         git status
       </p>
       <pre class="outblock">
@@ -673,7 +710,7 @@
       </pre>
   
       <br>
-      <p class="highlight-block">
+      <p class="highlight-block", id="git-restore">
         git restore
       </p>
       Here we can see all the files that were not present in the original tree, i.e. those that we created during the workshop.
@@ -729,12 +766,12 @@
       </p>
   
       <p class="highlight-block2">
-        <strong>Strongly recommended</strong><br>
+        <strong>Strongly RECOMMENDED</strong><br>
         For a much better coding experience, please work from Visual Studio Code.
       </p>
   
       <br><br>
-      <p class="highlight-block">
+      <p class="highlight-block", id="template">
         template.sh
       </p>
       Our template script is divided into 5 tasks with their corresponding subtasks, like detailed in the following table:
@@ -816,7 +853,7 @@
       <pre><strong class="relevant">command</strong>   # [INSERT-CODE-HERE]</pre>
   
       <br><br>
-      <p class="highlight-block">
+      <p class="highlight-block", id="solutions">
         .solutions.sh
       </p>
       Once you have completed the building blocks of our workflow, you can compare them with the solutions we proposed. <br>
@@ -844,12 +881,12 @@
       Now, we will log our completed pipeline in our repository.
   
       <br><br>
-      <p class="highlight-block4">
+      <p class="highlight-block4", id="untracked">
         Untracked changes
       </p>
       First, let's check which files have been modified since we started the Stepping Stone process.
       <p class="highlight-block3">
-        Quick test:<br>
+        QUICK TEST<br>
         Do you know how to check for changes in our repository?
       </p>
   
@@ -871,7 +908,7 @@
       <pre>git add src/template.sh</pre>
   
       <br><br>
-      <p class="highlight-block2">
+      <p class="highlight-block2", id="tracked">
         Tracked changes
       </p>
       Let's check again for changes in our repository with:
@@ -887,7 +924,7 @@
       However, these changes are only visible to us and they have not yet been associated with a branch in our repository.
   
       <br><br>
-      <p class="highlight-block7">
+      <p class="highlight-block7", id="commit">
         Commit changes
       </p>
       By committing our changes, they will also appear in our working branch. <br>
@@ -909,8 +946,8 @@
         <code>git checkout -b [YOUR-COMMIT-HASH]</code>
       </p>
   
-      <br><br>
-      We have now completed the full workflow ✅, both step by step and through automation 🤖. <br>
+      We have now completed the full workflow ✅, both step by step and through automation 🤖.
+      <div class="spacer"></div>
       <ol class="takeaways">
         <strong>Key takeaways:</strong> <br>
         <ul>1. We learnt the basic concepts of data transfer and software development, using FASTQ files as an example.</ul>
@@ -927,48 +964,51 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const tocLinks = document.querySelectorAll(".toc-list a");
-    const sections = Array.from(tocLinks)
-      .map(link => document.querySelector(link.getAttribute("href")))
-      .filter(section => section !== null);
-  
-    function onScroll() {
-      let currentSection = sections[0];
-  
-      for (const section of sections) {
-        const sectionTop = section.offsetTop;
-        if (window.scrollY >= sectionTop - 80) {
-          currentSection = section;
-        }
-      }
-  
-      tocLinks.forEach(link => link.classList.remove("active"));
-      const activeLink = document.querySelector(
-        `.toc-list a[href="#${currentSection.id}"]`
+    const links = document.querySelectorAll(".toc-list a");
+    const sections = Array.from(links).map(link => {
+      const id = link.getAttribute("href").slice(1);
+      return document.getElementById(id);
+    });
+
+    function activateSection() {
+      let index = sections.findIndex(
+        sec => sec && sec.getBoundingClientRect().top >= 0
       );
-      if (activeLink) activeLink.classList.add("active");
+      if (index === -1) index = sections.length - 1;
+
+      links.forEach(link => {
+        link.classList.remove("active");
+        link.parentElement.classList.remove("active-parent");
+      });
+
+      const activeLink = links[index];
+      activeLink.classList.add("active");
+
+      // walk up parents and mark them
+      let parent = activeLink.parentElement.parentElement.closest("li");
+      while (parent) {
+        parent.classList.add("active-parent");
+        parent = parent.parentElement.closest("li");
+      }
     }
-  
-    window.addEventListener("scroll", onScroll);
-    onScroll(); // run once at load
+
+    window.addEventListener("scroll", activateSection);
+    activateSection();
   });
 
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("pre").forEach(pre => {
-      const lines = pre.textContent.split("\n");
+      const lines = pre.innerHTML.split("\n"); // use innerHTML
 
-      // Remove empty first/last lines
       if (lines[0].trim() === "") lines.shift();
       if (lines[lines.length - 1].trim() === "") lines.pop();
 
-      // Find minimum leading spaces in all non-empty lines
       const minIndent = Math.min(
         ...lines.filter(line => line.trim() !== "")
-              .map(line => line.match(/^ */)[0].length)
+                .map(line => line.match(/^ */)[0].length)
       );
 
-      // Remove the common leading spaces
-      pre.textContent = lines.map(line => line.slice(minIndent)).join("\n");
+      pre.innerHTML = lines.map(line => line.slice(minIndent)).join("\n"); // write back HTML
     });
   });
   </script>

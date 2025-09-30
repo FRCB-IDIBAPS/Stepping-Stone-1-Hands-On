@@ -1,4 +1,10 @@
-/* 🌙 Dark mode theme for your bioinformatics tutorial */
+html, body {
+  height: 100%;
+  overflow-x: hidden;   /* optional: prevent horizontal scroll */
+  overflow-y: auto;     /* normal vertical scroll, prevents overscroll */
+  overscroll-behavior-y: contain; /* prevent "bounce" on mobile */
+}
+
 body {
     background-color: #ffffff;
     color: #3d2e2e;
@@ -67,8 +73,32 @@ body {
 
 /* Nested lists reset counter */
 .toc-list li > ol {
+  display: none;
   counter-reset: toc-counter;
   margin-left: 1rem; /* indentation for subsections */
+}
+
+/* List all descendants if any remain active */
+.toc-list li.active-parent > ol {
+  display: block;
+}
+
+/* Disable numbering for special cases */
+.toc-list li.no-counter > a::before {
+  content: none !important;
+}
+
+.toc-list li.no-counter > a {
+  color: #cd03ff !important;
+}
+
+/* Active special cases: black text, same highlight bg */
+.toc-list li.no-counter > a.active {
+  background: #fbff00;   /* same as normal active */
+  color: #000 !important;
+  font-weight: 700;
+  padding-left: 16px;
+  padding-right: 10px;
 }
 
 /* Active section - full width highlight */
@@ -80,6 +110,9 @@ body {
   padding-right: 10px;
 }
 
+.toc-list li > a.active + ol {
+  display: block;
+}
   /* Headings */
 h1 {
   font-size: 3em;
@@ -91,6 +124,28 @@ h3 {
   font-size: 2em;
 }
 
+.page-header {
+  display: flex;
+  align-items: center;  /* vertically center image + text */
+  gap: 1rem;            /* space between logo and text */
+  margin-bottom: 1.5rem;
+}
+
+.page-header img {
+  width: 1100px;       /* set a fixed width */
+  height: auto;      /* keep aspect ratio */
+  margin: 40px auto;
+}
+
+.header-text h1 {
+  margin: 0;
+}
+
+.header-text h3 {
+  margin: 0;
+  font-weight: normal;
+  color: #666;          /* tweak as needed */
+}
 
   /* Links */
 a {
@@ -129,9 +184,10 @@ pre {
   word-break: break-word;
 }
 code {
-  background-color: #000000be;
-  color:#7ccaff;
-  border-radius: 0px;
+  color: #fbff00;
+  background-color: #303031;
+  padding: 3px 3px;
+  border-radius: 1px;
 }
   
   /* Tables */
@@ -189,9 +245,9 @@ blockquote {
 }
 
 .outblock {
-  background-color: #a8a6a65b;
+  background-color: #000000;
   font-size: 13px;
-  color: #000000;
+  color: #ffffff;
   padding: 12px 16px;
   border-radius: 8px;
   overflow-x: auto;
@@ -258,20 +314,26 @@ i.commit {
   display: block;             /* full-width element */
   width: 100%;                /* stretch across container */
   box-sizing: border-box;     /* include padding inside width */
+  font-weight: 700;
 }
 .highlight-block {
-  background-color: #91abf1;
+  background-color: #e5f31a;
+  color: #000000;
+  font-weight: 700;
 }
 .highlight-block1 {
   background-color: #9d7fce;
 }
 .highlight-block2 {
+  color: #5ea105;
   background-color: #c7f191;
 }
 .highlight-block3 {
-  background-color: #eb9d0bd2;
+  color: #6b3102;   
+  background-color: #7e3a0380;
 }
 .highlight-block4 {
+  color: #770505;
   background-color: #eb0b0b88;
 }
 .highlight-block5 {
@@ -443,6 +505,7 @@ i.commit {
 
 .takeaways {
   padding-left: 1.2em;
+  font-size: 16px;
   background-color: #1a92a154;
   color: #0d6b77;           /* light text */
   padding: 0.75em 1em;        /* space inside */
