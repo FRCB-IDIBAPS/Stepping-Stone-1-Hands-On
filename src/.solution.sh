@@ -154,4 +154,4 @@ cd $PATH_to_compressed_fastq_files
 #       - Check file integrity with md5sum command
 #       - Variable with PATH to raw directory
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-md5sum -c $PATH_to_raw_fastq_files/$md5_checksum_file
+md5sum -c ../$PATH_to_raw_fastq_files/$md5_checksum_file
