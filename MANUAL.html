@@ -136,7 +136,7 @@
       <strong>(6)</strong> Configure Git credentials:<br>
       <pre>
       git config user.name [YOUR-USERNAME]
-      config user.email [YOUR-INSTITUTION-EMAIL]</pre>
+      git config user.email [YOUR-INSTITUTION-EMAIL]</pre>
       <strong>(7)</strong> Check the status of your repository by typing:<br>
       <pre>git status</pre>
       Expected output:
@@ -144,16 +144,15 @@
       On branch main
       Your branch is up to date with 'origin/main'.</pre>
       This means you are in the main branch and your local copy is up to date with the remote repository in GitLab.<br><br>
-      Currently, the repository contains two branches:
+      Currently, the repository contains one branch:
       <ul>
         <li><strong>main</strong>: default branch, with original version</li>
-        <li><strong>hands-on</strong>: your branch where you will store your analysis</li>
       </ul><br>
-      <strong>(8)</strong> Move to the branch devised for this hands-on:<br>
-      <pre>git checkout hands-on</pre>
+      <strong>(8)</strong> Create and switch to a new branch dedicated to this hands-on.:<br>
+      <pre>git checkout -b [YOUR-USERNAME]</pre>
       Expected output:
-      <pre>Switched to branch 'hands-on'
-      Your branch is up to date with 'origin/hands-on'.</pre>
+      <pre>Switched to branch 'YOUR-USERNAME'
+      Your branch is up to date with 'origin/[YOUR-USERNAME]'.</pre>
   
   
       Now, everything is set up to start the hands-on!
@@ -709,7 +708,25 @@
         raw/checksums.md5
         </strong>
       </pre>
-  
+      <br>
+      <p class="highlight-block", id="git-restore">
+        git add
+      </p>
+      Now we will add the file containing the checksums to the staging area by running:
+      <pre>
+      git add raw/checksums.md5
+      git status</pre>
+      Output:
+      <pre class="outblock">
+      Untracked files:
+      (use "git add <file>..." to include in what will be committed)
+        <strong class="bad">
+        compressed/
+        </strong>
+      Changes to be committed:
+      (use "git restore --staged <file>..." to unstage)
+        <strong class="good">modified:   raw/checksums.md5</strong>
+      </pre>
       <br>
       <p class="highlight-block", id="git-restore">
         git restore
