@@ -79,7 +79,7 @@ md5_checksum_file=checksum.md5
 #   2.1: Hash FASTQ files and redirect output to .md5 file 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #   Must include:
-#       - Wildcard that matches ALL FASTQ files
+#       - Wildcard that matches ALL COMPRESSED FASTQ files
 #         in directory
 #       - Output redirection: dump stdout to our .md5 file
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -115,16 +115,16 @@ cd $PATH_to_stepping_stone_hands_on
 mkdir -p $PATH_to_compressed_fastq_files
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#   3.3: Move compressed FASTQ files to compressed/
+#   3.3: Copy compressed FASTQ files to compressed/
 #        directory 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #   Must include:
 #       - Variable with PATH to raw directory
-#       - Wildcard that matches ALL FASTQ files
+#       - Wildcard that matches ALL COMPRESSED FASTQ files
 #         in raw directory
 #       - Variable with PATH to compressed directory
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-mv $PATH_to_raw_fastq_files/*.gz $PATH_to_compressed_fastq_files
+cp $PATH_to_raw_fastq_files/*.gz $PATH_to_compressed_fastq_files
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -294,7 +294,7 @@
       </pre>
       <p class="highlight-block3">
         QUICK TEST<br>
-        Once we have moved to data folder. How can we check which files are contained within this directory and their sizes?
+        Once we have moved to raw folder. How can we check which files are contained within this directory and their sizes?
       </p>
       <details class="answer-block">
         <summary>Answer</summary>
@@ -314,7 +314,7 @@
   
       <p class="highlight-block4">
         HARD TEST<br>
-        Knowing <code>pwd</code> command outputs: [YOUR-OWN-PATH]/BiodataSeries/stepping-stone-hands-on/data <br><br>
+        Knowing <code>pwd</code> command outputs: [YOUR-OWN-PATH]/BiodataSeries/stepping-stone-hands-on/raw <br><br>
         1. What's the absolute and relative path of <strong>01.fastq</strong> file?<br>
         2. What's the relative path of this guide .HTML guide? 
       </p>
@@ -338,7 +338,7 @@
         gzip
       </p>
   
-      From our data directory (where we should be still), let's compress one of the FASTQ files:
+      From our raw directory (where we should be still), let's compress one of the FASTQ files:
       <pre>
         gzip 01.fastq
       </pre>
@@ -446,7 +446,7 @@
         <strong>EXERCISE 3</strong><br>
         1. Using '*' wildcard, print the first line of all fast files in our working directory<br>
         2. Do the same exercise, only this time with '?' wildcard instead.<br>
-        3. In our case, our data folder is populated only by FASTQ files. How should we use '*' wildcard if we had multiple files of different extensions?<br>
+        3. In our case, our raw folder is populated only by FASTQ files. How should we use '*' wildcard if we had multiple files of different extensions?<br>
       </p>
   
       <details class="answer-block">
@@ -629,7 +629,7 @@
         Here's a brief rundown of what we did: <br>
           1. Compress FASTQ files <br>
           2. Hash our compressed (.gz) FASTQ files [digital fingerprints] <br>
-          3. Perform file transfer with <code>mv</code> command <br> 
+          3. Perform file transfer with <code>cp</code> command <br> 
           4. Check file integrity in destination with md5sum <br>
       </p>
     </section>
@@ -829,7 +829,7 @@
                   <ul>
                     <li>3.1. Navigate to initial directory</li>
                     <li>3.2. Create <code>compressed/</code> directory</li>
-                    <li>3.3. Move compressed FASTQ files to <code>compressed/</code> directory</li>
+                    <li>3.3. Copy compressed FASTQ files to <code>compressed/</code> directory</li>
                   </ul>
                 </details>
               </td>
