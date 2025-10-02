@@ -5,11 +5,11 @@
 # Core Facility: Research Computing Platform
 # Date:          2025-10
 #
-# Script Name:   template.sh
-# Purpose:       Performs FASTQ compression, file transfer
+# Script Name:   .solution_2.sh
+# Purpose:       Performs FASTQ compression and file transfer using loops,
 #                and file integrity check afterwards
 #
-# Usage:         sh template.sh
+# Usage:         sh .solution_2.sh
 #
 #
 # Dependencies:
@@ -32,7 +32,7 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #   0.1: Define workshop directory
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-PATH_to_stepping_stone_hands_on="/home/user/Desktop/step/Stepping_Stone_1" #[INSERT-ABSOLUTE-PATH-TO-STEPPING-STONE-HANDS-ON]
+PATH_to_stepping_stone_hands_on= #[INSERT-ABSOLUTE-PATH-TO-STEPPING-STONE-HANDS-ON]
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 cd $PATH_to_stepping_stone_hands_on
 
