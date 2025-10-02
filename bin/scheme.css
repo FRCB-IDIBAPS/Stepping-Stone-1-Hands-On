@@ -532,3 +532,43 @@ i.commit {
 .takeaways ul {
   list-style-type: none; /* or none if you want no bullets */
 }
+.copy-block {
+  position: relative;
+  background-color: #e0dcdcfd;
+  font-size: 13px;
+  color: #000000;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: "Fira Code", Consolas, "Courier New", monospace;
+  word-break: break-word;
+  overflow-x: auto;
+}
+
+.copy-block pre {
+  margin: 0;             /* Prevents spacing that pushes button */
+  background: transparent; /* Inherit background from container */
+  padding: 0;
+}
+
+/* Copy button (GitHub style) */
+button.copybtn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: .3em;
+  right: .3em;
+  width: 1.7em;
+  height: 1.7em;
+  opacity: 0;
+  transition: opacity 0.3s, border .3s, background-color .3s;
+  border: #1b1f2426 1px solid;
+  border-radius: 0.4em;
+  background-color: #f6f8fa;
+  color: #57606a;
+  cursor: pointer;
+}
+
+.copy-block:hover .copybtn {
+  opacity: 1;
+}

@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="bin/scheme.css">
+
+<svg style="display:none;">
+  <symbol id="icon-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+  </symbol>
+</svg>
+
 <html lang="en">
 
 <div class="layout">
@@ -46,6 +55,7 @@
             <ol>
               <li class="no-counter"><a href="#git">basic commands</a></li>
               <li class="no-counter"><a href="#git-status">git status</a></li>
+              <li class="no-counter"><a href="#git-add">git status</a></li>
               <li class="no-counter"><a href="#git-restore">git restore</a></li>
             </ol>
           </li>
@@ -63,6 +73,7 @@
               <li class="no-counter"><a href="#untracked">Untracked changes</a></li>
               <li class="no-counter"><a href="#tracked">Tracked changes</a></li>
               <li class="no-counter"><a href="#commit">Commit changes</a></li>
+              <li class="no-counter"><a href="#push">Push changes</a></li>
             </ol>
           </li>
         </ol>
@@ -103,55 +114,79 @@
       <div class="spacer"></div>
       <h3 id="setup">2.1. Set up your repository</h3>
   
-      To copy the repository to your computer you have two options:
-      <table>
-        <thead>
-          <tr>
-            <th>[ OPTION A ] <div></div> Cloning from GitLab</th>
-            <th>[ OPTION B ] <div></div>Downloading a zipped version</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <strong>(1)</strong> Click in button <button class="blue-button">Code &#8964;</button> to display dropdown menu<br><br>
-              <strong>(2)</strong> Copy URL from <strong>Clone with SSH</strong> <br><br>
-              <strong>(3)</strong> Open a Terminal window in a known location (preferably in Visual Studio Code)<br><br>
-              <strong>(4)</strong> Type the following command to clone the repository:
-              <pre>git clone [URL-link] </pre>
-            </td>
-            <td>
-              <strong>(1)</strong> Click in button <button class="blue-button">Code &#8964;</button> to display dropdown menu<br><br>
-              <strong>(2)</strong> Select <strong>download source code</strong> from <button>zip</button><br><br>
-              <strong>(3)</strong> Move it to a known location and extract it<br><br>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-  
-      Both options will create a new folder in your working directory named:
+      Follow these steps to make a clone of our repository in GitLab for the Stepping-Stone Hands-on:
+      <br><br>
+      <strong>(1)</strong> Move to a directory in your laptop where you'd like to initialize the repository <br><br>
+      <strong>(2)</strong> Open a terminal in that directory <br><br>
+      <strong>(3)</strong> Check if <i>Git</i> is installed with <br>
+      <div class="copy-block">
+        <pre>git --help</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+      If not installed, run:
+      <div class="copy-block">
+        <pre>apt-get install git</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+      <strong>(4)</strong> Clone the repository with the following instruction: <br>
+
+      <div class="copy-block">
+        <pre>
+        git clone https://oauth2:glpat-_ye1QuJpcMCrvncUzp8Yc286MQp1OmlhNmpmCw.01.121kk8mqm@gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on.git        </pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+
+      This instruction will create a new folder in your working directory named:
       <center><p class="folder blue"><span class="icon" aria-hidden="false"></span><span class="folder-name">stepping-stone-hands-on/</span></p></center>
-      <strong>(5)</strong> Change working directory to new folder 
-      <pre>cd stepping-stone-hands-on/</pre>
+      <strong>(5)</strong> Change working directory to new folder
+      <div class="copy-block">
+        <pre>cd stepping-stone-hands-on/</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
       <strong>(6)</strong> Configure Git credentials:<br>
-      <pre>
-      git config user.name [YOUR-USERNAME]
-      git config user.email [YOUR-INSTITUTION-EMAIL]</pre>
+      <div class="copy-block">
+        <pre>git config user.name [YOUR-USERNAME]</pre>
+        <pre>git config user.email [YOUR-INSTITUTION-EMAIL]</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
       <strong>(7)</strong> Check the status of your repository by typing:<br>
-      <pre>git status</pre>
+      <div class="copy-block">
+        <pre>git status</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
       Expected output:
-      <pre>
+      <pre class="outblock">
       On branch main
       Your branch is up to date with 'origin/main'.</pre>
       This means you are in the main branch and your local copy is up to date with the remote repository in GitLab.<br><br>
       Currently, the repository contains one branch:
+      
       <ul>
         <li><strong>main</strong>: default branch, with original version</li>
       </ul><br>
       <strong>(8)</strong> Create and switch to a new branch dedicated to this hands-on.:<br>
-      <pre>git checkout -b [YOUR-USERNAME]</pre>
+      <div class="copy-block">
+        <pre>git checkout -b [YOUR-USERNAME]</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+      
       Expected output:
-      <pre>Switched to branch 'YOUR-USERNAME'
+      <pre class="outblock">
+      Switched to branch 'YOUR-USERNAME'
       Your branch is up to date with 'origin/[YOUR-USERNAME]'.</pre>
   
   
@@ -175,7 +210,13 @@
       <strong>We can use this command to list all files and folders in the current directory</strong><br><br>
   
       See help with:
-      <pre>ls --help</pre>
+      <div class="copy-block">
+        <pre>ls --help</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+
       Output (only with some options):
       <pre class="outblock">
         Usage: ls [OPTION]... [FILE]...
@@ -218,9 +259,13 @@
       <strong>We can use this command to display the structure of our current working directory</strong>
       <br><br>
       See help with:
-      <pre>
-        tree --help
-      </pre>
+      <div class="copy-block">
+        <pre>tree --help</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+
       Output:
       <pre class="outblock">
         usage: tree [-L level [-R]] [...]
@@ -237,7 +282,13 @@
       </p>
       <details class="answer-block">
         <summary>Answer</summary>
-        <pre>tree -d -L 2</pre>
+        <div class="copy-block">
+          <pre>tree -d -L 2</pre>
+          <button class="copybtn" title="Copy">
+            <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+          </button>
+        </div>
+
       </details>
   
       <br><br><br>
@@ -247,7 +298,13 @@
       <strong>If you have Visual Studio Code installed, with this commando you can open the code editor from your current working directory.</strong>
       <br><br>
       Open it with:
-      <pre>code .</pre>
+      <div class="copy-block">
+        <pre>code .</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+
   
       <p class="highlight-block3">
         QUICK TEST<br>
@@ -288,16 +345,25 @@
       <strong>With this command we can navigate directories.</strong>
       <br><br>
       We can use it to access the directory that contains our FASTQ files in the following way:
-      <pre>
-        cd raw/
-      </pre>
+      <div class="copy-block">
+        <pre>cd raw/</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+
       <p class="highlight-block3">
         QUICK TEST<br>
         Once we have moved to raw folder. How can we check which files are contained within this directory and their sizes?
       </p>
       <details class="answer-block">
         <summary>Answer</summary>
-        <pre>ls -lh</pre>
+        <div class="copy-block">
+          <pre>ls -lh</pre>
+          <button class="copybtn" title="Copy">
+            <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+          </button>
+        </div>
       </details>
   
       <br><br><br>
@@ -307,9 +373,12 @@
       <strong>With this command we print the first <code>n</code> (default=10) lines of each FILE to standard output</strong>
       <br><br>
       Let's try an example with file <p class="path-block">01.fastq</p>
-      <pre>
-        head -n 16 01.fastq
-      </pre>
+      <div class="copy-block">
+        <pre>head -n 16 01.fastq</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
   
       <p class="highlight-block4">
         HARD TEST<br>
@@ -351,7 +420,12 @@
       </p>
       <details class="answer-block">
         <summary>Answer</summary>
-        <pre>gzip -k 01.fastq</pre>
+        <div class="copy-block">
+          <pre>gzip -k 01.fastq</pre>
+          <button class="copybtn" title="Copy">
+            <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+          </button>
+        </div>
       </details>
   
       <br><br>
@@ -371,9 +445,24 @@
   
       <details class="answer-block">
         <summary>Answer</summary>
-        <pre>gunzip 01.fastq.gz</pre>
-        <pre>gzip -k 01.fastq</pre>
-        <pre>gzip -k *</pre>
+        <div class="copy-block">
+          <pre>gunzip 01.fastq.gz</pre>
+          <button class="copybtn" title="Copy">
+            <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+          </button>
+        </div>
+        <div class="copy-block">
+          <pre>gzip -k 01.fastq</pre>
+          <button class="copybtn" title="Copy">
+            <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+          </button>
+        </div>
+        <div class="copy-block">
+          <pre>gzip -k *</pre>
+          <button class="copybtn" title="Copy">
+            <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+          </button>
+        </div>
       </details>
   
       <p class="highlight-block3">
@@ -399,17 +488,32 @@
       <details class="answer-block">
         <summary>Answer</summary>
         <p>Exercise 1.1.</p>
-        <pre>ls -lh</pre>
+        <div class="copy-block">
+          <pre>ls -lh</pre>
+          <button class="copybtn" title="Copy">
+            <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+          </button>
+        </div>
         <p>Exercise 1.2. <code>gzip</code> command allows to specify compression level. See <code>gzip --help</code> for more information.</p>
-        <pre>gzip --help
-  
+        <div class="copy-block">
+          <pre>gzip --help</pre>
+          <button class="copybtn" title="Copy">
+            <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+          </button>
+        </div>
+        <pre class="outblock">
           Usage: gzip [OPTION]... [FILE]...
           Compress or uncompress FILEs (by default, compress FILES in-place).
   
           Mandatory arguments to long options are mandatory for short options too.
           -1, --fast        compress faster
           -9, --best        compress better</pre>
-      <pre>gzip -k9 *</pre>
+          <div class="copy-block">
+            <pre>gzip -k9 *</pre>
+            <button class="copybtn" title="Copy">
+              <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+            </button>
+          </div>
       </details>
     </section>
     <section id="wildcards">
@@ -423,9 +527,13 @@
   
       For more information on basic wildcards, we can consult page 7 of <i>Linux Programmer's Manual - GLOB section</i>.<br>
       To do this, we can type:
-      <pre>
-      man 7 glob
-      </pre>
+      <div class="copy-block">
+        <pre>man 7 glob</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+
       Output:
       <pre class="outblock">
       Wildcard matching
@@ -472,9 +580,12 @@
       These unique strings will act as a <strong>digital fingerprint</strong> of our FASTQ files to ensure data integrity after transfer.
   
       First, to hash our compressed FASTQ files, let's run
-      <pre>
-      md5sum *.gz > checksums.md5
-      </pre>
+      <div class="copy-block">
+        <pre>md5sum *.gz > checksums.md5</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
   
       <p class="highlight-block4">
         HARD TEST<br>
@@ -490,7 +601,7 @@
       </details>
   
       <br>
-      <p class="highlight-block2">
+      <p class="takeaways">
         <strong>Output redirection</strong><br>
         As detailed in the previous exercise, output redirection dumps the content that a command would normally print in your terminal screen into a file <br>
         There are multiple redirection operators, here we show you a cheat sheet of the most common ones:
@@ -550,7 +661,12 @@
       </pre>
       <br>
       This command allows to print the content of the input file in our terminal.
-      <pre>cat checksums.md5</pre>
+      <div class="copy-block">
+        <pre>cat checksums.md5</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
       Output (may differ based on the level of compression you used with <code>gzip</code>):
       <pre class="outblock">
       5177a1a1998c3c88e49560c577288e51  01.fastq.gz
@@ -602,7 +718,13 @@
       </details>
   
       Now, to run the integrity check, we will type:
-      <pre>md5sum -c ../raw/checksums.md5</pre>
+      <div class="copy-block">
+        <pre>md5sum -c ../raw/checksums.md5</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+
       Output:
       <pre class="outblock">
         01.fastq.gz: OK
@@ -671,7 +793,12 @@
       <br><br>
   
       We can take a look at its usage:
-      <pre>git --help</pre>
+      <div class="copy-block">
+        <pre>git --help</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
       We are only displaying Git commands relevant to this course:
       <pre class="outblock">
       start a working area (see also: git help tutorial)
@@ -708,14 +835,23 @@
         raw/checksums.md5
         </strong>
       </pre>
+
       <br>
-      <p class="highlight-block", id="git-restore">
+      <p class="highlight-block", id="git-add">
         git add
       </p>
       Now we will add the file containing the checksums to the staging area by running:
-      <pre>
-      git add raw/checksums.md5
-      git status</pre>
+
+      <div class="copy-block">
+        <pre>
+          git add raw/checksums.md5
+          git status
+        </pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+
       Output:
       <pre class="outblock">
       Untracked files:
@@ -727,6 +863,7 @@
       (use "git restore --staged <file>..." to unstage)
         <strong class="good">modified:   raw/checksums.md5</strong>
       </pre>
+
       <br>
       <p class="highlight-block", id="git-restore">
         git restore
@@ -734,9 +871,16 @@
       Here we can see all the files that were not present in the original tree, i.e. those that we created during the workshop.
       As our goal is to automate the entire file management process, <strong class="relevant">we will delete these files and start again</strong>.
       To do so, we will run:
-      <pre>
-      git restore *
-      git status</pre>
+      <div class="copy-block">
+        <pre>
+          git restore *
+          git status
+        </pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+
       Output:
       <pre class="outblock">
       On branch main
@@ -881,9 +1025,15 @@
       <br><br>
       A quick way to compare them is to use command <code>diff</code> (finds differences between two files). <br>
       <i class="good">If there is no output to this code it means both files are identical</i>
-      <pre>
-        diff src/template.sh src/.solutions.sh
-      </pre>
+      <div class="copy-block">
+        <pre>
+          diff src/template.sh src/.solutions.sh
+        </pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+
       Output example:
       <pre class="outblock">
       54c54
@@ -900,7 +1050,7 @@
       Now, we will log our completed pipeline in our repository.
   
       <br><br>
-      <p class="highlight-block4", id="untracked">
+      <p class="highlight-block", id="untracked">
         Untracked changes
       </p>
       First, let's check which files have been modified since we started the Stepping Stone process.
@@ -927,7 +1077,7 @@
       <pre>git add src/template.sh</pre>
   
       <br><br>
-      <p class="highlight-block2", id="tracked">
+      <p class="highlight-block", id="tracked">
         Tracked changes
       </p>
       Let's check again for changes in our repository with:
@@ -943,30 +1093,64 @@
       However, these changes are only visible to us and they have not yet been associated with a branch in our repository.
   
       <br><br>
-      <p class="highlight-block7", id="commit">
+      <p class="highlight-block", id="commit">
         Commit changes
       </p>
       By committing our changes, they will also appear in our working branch. <br>
       Our branch essentially records all the events in the history of our repository. Our history now needs to record your latest update.
       We will include a message to help us understand any modifications whenever we look back through our branch.
-      <pre>git commit -m "Finalized pipeline for FASTQ file compression and transfer" </pre>
-  
+      <div class="copy-block">
+        <pre>git commit -m "Finalized pipeline for FASTQ file compression and transfer" </pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+      <br>
       Now, to see the history of our branch, we can run:
-      <pre>git log --oneline</pre>
+      <div class="copy-block">
+        <pre>git log --oneline</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+
       Output:
       <pre class="outerminal">
       [-----] (<strong class="relevant">HEAD</strong> -> <strong class="good">hands-on</strong>, origin/main, origin/HEAD, main, OPT2) <i class="commit">Finalized pipeline for FASTQ file compression and transfer</i>
       732ba4f  <i class="commit">Final refinements saved.</i>
       </pre>
       As you can see, the last line corresponds to our latest modification. It has a unique hash and the description we added.
+
+      <br><br>
+      <p class="highlight-block", id="push">
+        Push changes
+      </p>
+      So far, we have successfully registered our changes in our local repository.
+      But these changes have not been forwarded to our repository in Gitlab, which means our collaborators will not be able to see our work. In order to do that we need to run:
+      <div class="copy-block">
+        <pre>git push</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+      <br>
+      Output (orientative):
+      <pre class="outblock">
+      Enumerating objects: 5, done.
+      Counting objects: 100% (5/5), done.
+      Delta compression using up to 12 threads
+      Compressing objects: 100% (3/3), done.
+      Writing objects: 100% (3/3), 365 bytes | 365.00 KiB/s, done.
+      Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+      </pre>
+      <br>
+      We have now completed the full workflow ✅, both step by step and through automation 🤖.
+      <div class="spacer"></div>
       <ol class="takeaways">
         <strong>Navigating with your 'time machine'</strong><br>
         Not only you can navigate between branches, you can also navigate between commits, like in the 'time machine' concept we talked about.
       </ol>
-  
-      We have now completed the full workflow ✅, both step by step and through automation 🤖.
-      <div class="spacer"></div>
-      <div class="spacer"></div>
+      <br>
       <ol class="keys", id="takeaways">
         <strong>Key takeaways:</strong> <br>
         <ul>1. We learnt the basic concepts of data transfer and software development, using FASTQ files as an example.</ul>
@@ -977,7 +1161,6 @@
         <ul>4. There are often multiple correct ways to achieve the same task in bioinformatics. </ul>
       </ol>
     </section>
-    <!-- etc. -->
   </main>
 </div>
 
@@ -1028,6 +1211,18 @@
       );
 
       pre.innerHTML = lines.map(line => line.slice(minIndent)).join("\n"); // write back HTML
+    });
+  });
+  document.querySelectorAll('.copybtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pre = btn.previousElementSibling;
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = "✅";
+        setTimeout(() => {
+          btn.innerHTML = `<svg width="14" height="14"><use href="#icon-clipboard"></use></svg>`;
+        }, 2000);
+      });
     });
   });
   </script>
