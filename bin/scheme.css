@@ -1,0 +1,574 @@
+body {
+    background-color: #ffffff;
+    color: #3d2e2e;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    margin: 35px auto; 
+    max-width: 1800px;
+    font-size: 15px;
+}
+
+.layout {
+  display: flex; /* put TOC and content side by side */
+  align-items: flex-start; /* make them align at the top */
+}
+
+.content {
+  padding: 40px;
+  flex: 1;
+  margin-left: 400px;
+}
+
+/* Table of Contents */
+/* Styling for the Table of Contents */
+.toc {
+  position: fixed;
+  padding: 30px;
+  font-size: 15px;
+  font-family: "Roboto Mono", "Courier New", monospace;
+  top: 0;
+  width: 400px;       /* width of the TOC */
+  height: 100vh;      /* full viewport height */
+  background: #303031;
+  box-sizing: border-box;
+}
+
+/* TOC counters */
+.toc-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  counter-reset: toc-counter;
+}
+
+.toc-list li {
+  counter-increment: toc-counter;
+  margin: 0.25rem 0;
+  width: 100%;         /* full width of TOC */
+  background: transparent;  /* background on li not needed */
+}
+
+/* Links fill the li */
+.toc-list li > a {
+  display: block;      /* block so it fills li width */
+  padding: 6px 10px;   /* spacing inside link */
+  text-decoration: none;
+  color: #d7ff24;
+  border-radius: 0;    /* remove rounding so full width looks clean */
+  box-sizing: border-box;
+}
+
+/* Hierarchical numbering */
+.toc-list li > a::before {
+  content: counters(toc-counter, ".") ". ";
+  margin-right: 0.4rem;
+  color: #cd03ff;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Nested lists reset counter */
+.toc-list li > ol {
+  display: none;
+  counter-reset: toc-counter;
+  margin-left: 1rem; /* indentation for subsections */
+}
+
+/* List all descendants if any remain active */
+.toc-list li.active-parent > ol {
+  display: block;
+}
+
+/* Disable numbering for special cases */
+.toc-list li.no-counter > a::before {
+  content: none !important;
+}
+
+.toc-list li.no-counter > a {
+  color: #cd03ff !important;
+}
+
+/* Active special cases: black text, same highlight bg */
+.toc-list li.no-counter > a.active {
+  background: #fbff00;   /* same as normal active */
+  color: #000 !important;
+  font-weight: 700;
+  padding-left: 16px;
+  padding-right: 10px;
+}
+
+/* Active section - full width highlight */
+.toc-list li > a.active {
+  background: #fbff00;   /* full width highlight */
+  color: #303031;
+  font-weight: 700;
+  padding-left: 16px;    /* maintain space for numbering + indent */
+  padding-right: 10px;
+}
+
+.toc-list li > a.active + ol {
+  display: block;
+}
+  /* Headings */
+h1 {
+  font-size: 3em;
+}
+h2 {
+  font-size: 2.4em;
+}
+h3 {
+  font-size: 2em;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;  /* vertically center image + text */
+  gap: 1rem;            /* space between logo and text */
+  margin-bottom: 1.5rem;
+}
+
+.page-header img {
+  width: 1350px;       /* set a fixed width */
+  display: block;
+  margin-top: -40px;
+  margin-bottom: 60px; /* create space below the image */
+}
+
+.header-text h1 {
+  margin: 0;
+}
+
+.header-text h3 {
+  margin: 0;
+  font-weight: normal;
+  color: #666;          /* tweak as needed */
+}
+
+  /* Links */
+a {
+  color: #0023bd;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+  
+/* Paragraphs */
+p {
+  color: #3d2e2e;
+  font-size: 13px;
+  font-style: oblique;
+}
+
+  /* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px solid #0f0f0f;
+  margin: 2em 0;
+}
+  
+  /* Code blocks */
+
+pre {
+  display: block;
+  background-color: #75757577;
+  font-size: 13px;
+  color: #000000;
+  padding: 12px 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "Fira Code", Consolas, "Courier New", monospace;
+  word-break: break-word;
+}
+code {
+  color: #fbff00;
+  background-color: #303031;
+  padding: 3px 3px;
+  border-radius: 1px;
+}
+  
+  /* Tables */
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: none;
+  border-top: none;
+  width: 100%;
+  margin: 20px 0;
+  font-size: 13px;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  border: none;
+  border-top: none;
+  background-color: #75757577;
+  color: #3d2e2e;
+  font-size: 13px;
+  font-weight: 600;
+}
+td {
+  background-color: #eee9e985;
+}
+
+/* Lists */
+ul, ol {
+  margin-left: 1.5em;
+}
+li {
+  margin-bottom: 0.5em;
+}
+.spacer {
+  height: 50px; /* space height */
+}
+
+/* Blockquote (if used) */
+blockquote {
+  border-left: 4px solid #ca0a0a;
+  padding-left: 1em;
+  color: #cccccc;
+  margin: 1em 0;
+}
+
+#lbreak {
+  white-space: pre-line;
+}
+.tab {
+  display: inline-block;
+  margin-left: 4em;
+}
+
+.outblock {
+  background-color: #000000;
+  font-size: 13px;
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "Fira Code", Consolas, "Courier New", monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.outerminal {
+  background-color: #181717f6;
+  font-size: 13px;
+  color: #e5f31a;
+  padding: 12px 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "Fira Code", Consolas, "Courier New", monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.blue-button {
+  background-color: #0260c5; /* bright blue */
+  color: white;              /* text color */
+  border: none;              /* remove default border */
+  padding: 8px 10px;         /* spacing inside button */
+  border-radius: 4px;        /* rounded corners */
+  cursor: pointer;           /* pointer on hover */
+  font-size: 12px;
+}
+
+.blue-button:hover {
+  background-color: #0056b3; /* darker blue on hover */
+}
+
+.folder {
+  font-family: monospace;
+  color: #4dabf7; /* blue folder */
+}
+
+strong.bad {
+  color: red;
+}
+strong.good {
+  color: rgb(100, 202, 69);
+}
+i.good {
+  color: rgb(100, 202, 69);
+}
+strong.relevant {
+  color: rgb(69, 78, 202);
+}
+i.relevant {
+  color: rgb(69, 78, 202);
+}
+i.commit {
+  color: rgb(240, 240, 240);
+}
+.highlight-block, .highlight-block1,.highlight-block2, .highlight-block3,
+.highlight-block4, .highlight-block5, .highlight-block6,.highlight-block7, .highlight-git{
+  color: #000000;             /* light text */
+  font-family: "Courier New", Courier, monospace; /* coding-like font */
+  padding: 0.75em 1em;        /* space inside */
+  border-radius: 6px;         /* rounded corners */
+  margin: 1em 0;              /* spacing above/below */
+  display: block;             /* full-width element */
+  width: 100%;                /* stretch across container */
+  box-sizing: border-box;     /* include padding inside width */
+  font-weight: 500;
+}
+.highlight-block {
+  background-color: #e5f31a;
+  color: #000000;
+  font-weight: 700;
+}
+.highlight-block1 {
+  background-color: #9d7fce;
+}
+.highlight-block2 {
+  color: #5ea105;
+  background-color: #c7f191;
+}
+.highlight-block3 {
+  color: #6b3102;   
+  background-color: #7e3a0380;
+}
+.highlight-block4 {
+  color: #770505;
+  background-color: #eb0b0b88;
+}
+.highlight-block5 {
+  background-color: #6e6e6e;
+  color: #ffffff;
+  font-family: "Inconsolata", "Courier New", monospace;
+}
+.highlight-block6 {
+  background-color: #cb9bd488;
+  color: #474746;
+  font-size: 16px;
+}
+.highlight-block7 {
+  background-color: #16bcee88;
+}
+.highlight-git {
+  background-color: #d80beb88;
+}
+.folder {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "Roboto Mono", "Courier New", monospace;
+}
+.folder .icon {
+  width: 1.1em;
+  height: 0.75em;
+  position: relative;
+  display: inline-block;
+}
+/* folder body */
+.folder .icon::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background: currentColor;
+}
+/* small tab */
+.folder .icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -0.25em;
+  width: 0.45em;
+  height: 0.45em;
+  border-radius: 2px;
+  background: currentColor;
+}
+.folder.blue { color: #4dabf7; }
+.folder.green { color: #2ecc71; }
+.folder.orange { color: #e67e22; }
+
+.folder-name { color: var(--text, #5f5f5f); }
+
+.answer-block summary {
+  cursor: pointer;
+  background-color: #8ac2fd; /* blue button */
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  font-weight: bold;
+  display: inline-block;
+  list-style: none; /* removes the default triangle */
+}
+
+.answer-block summary::marker {
+  display: none; /* also removes marker in some browsers */
+}
+
+.answer-block summary:hover {
+  background-color: #0056b3;
+}
+
+.answer-block[open] summary {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.answer-block p {
+  margin: 0;
+  padding: 0.5em 1em;
+  background-color: #f8f9fa;
+  border: 1px solid #007bff;
+  border-top: none;
+  font-family: "Courier New", Courier, monospace;
+}
+
+
+.path-block {
+  font-family: "Roboto Mono", "Courier New", monospace;
+  background-color: #4dabf76c;    /* dark background */
+  color: #272726;             /* light text */
+  display: inline;
+}
+
+.redir-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 13px;
+  table-layout: fixed;
+}
+
+.redir-table th,
+.redir-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #ddd;
+  vertical-align: top;
+}
+
+/* make first column narrower */
+.redir-table th:first-child,
+.redir-table td:first-child {
+  width: 10%;   /* adjust as needed */
+  white-space: nowrap; /* prevent breaking operators */
+  text-align: left;
+}
+
+/* second column takes the rest */
+.redir-table th:last-child,
+.redir-table td:last-child {
+  width: 90%;
+}
+/* small responsive tweak */
+@media (max-width: 640px) {
+  .redir-table thead { display:none; }
+  .redir-table, .redir-table tbody, .redir-table tr, .redir-table td { display:block; width:100%; }
+  .redir-table tr { margin-bottom: 0.75rem; border: 1px solid #eee; padding: 0.5rem; border-radius:6px; }
+  .redir-table td { display:flex; justify-content:space-between; padding:0.5rem; }
+  .redir-table td::before { content: attr(data-label); font-weight:600; margin-right:0.5rem; color:#333; }
+}
+
+/* Style <details> and <summary> in the FUNCTION column */
+.redir-table details {
+  margin: 0; /* remove extra spacing */
+}
+
+.redir-table summary {
+  cursor: pointer;
+  font-weight: bold;
+  list-style: none; /* remove default marker */
+  position: relative;
+  padding-left: 1.2em; /* space for custom arrow */
+}
+
+/* Custom dropdown arrow */
+.redir-table summary::before {
+  content: "▶"; /* right-pointing arrow */
+  position: absolute;
+  left: 0;
+  transition: transform 0.2s ease;
+}
+
+/* Rotate arrow when open */
+.redir-table details[open] summary::before {
+  transform: rotate(90deg); /* arrow points down */
+}
+
+/* Substep list inside details */
+.redir-table details ul {
+  margin: 0.5em 0 0 1.5em;
+  padding: 0;
+  font-weight: normal;
+  font-size: 0.7rem;
+  color: #333;
+  list-style-type: none;
+}
+
+.takeaways {
+  padding-left: 1.2em;
+  font-size: 16px;
+  background-color: #1a92a154;
+  color: #0d6b77;           /* light text */
+  padding: 0.75em 1em;        /* space inside */
+  border-radius: 6px;         /* rounded corners */
+  margin: 1em 0;              /* spacing above/below */
+  display: block;             /* full-width element */
+  width: 100%;                /* stretch across container */
+  box-sizing: border-box;     /* include padding inside width */
+}
+.takeaways ul {
+  padding-left: 2em;
+  list-style-type: none; /* or none if you want no bullets */
+}
+
+.keys {
+  font-size: 16px;
+  background-color: #1aa18454;
+  color: #0f6350;           /* light text */
+  padding: 0.75em 1em;        /* space inside */
+  border-radius: 6px;         /* rounded corners */
+  margin: 1em 0;              /* spacing above/below */
+  display: block;             /* full-width element */
+  width: 100%;                /* stretch across container */
+  box-sizing: border-box;     /* include padding inside width */
+}
+.takeaways ul {
+  list-style-type: none; /* or none if you want no bullets */
+}
+.copy-block {
+  position: relative;
+  background-color: #e0dcdcfd;
+  font-size: 13px;
+  color: #000000;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: "Fira Code", Consolas, "Courier New", monospace;
+  word-break: break-word;
+  overflow-x: auto;
+}
+
+.copy-block pre {
+  margin: 0;             /* Prevents spacing that pushes button */
+  background: transparent; /* Inherit background from container */
+  padding: 0;
+}
+
+/* Copy button (GitHub style) */
+button.copybtn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: .3em;
+  right: .3em;
+  width: 1.7em;
+  height: 1.7em;
+  opacity: 0;
+  transition: opacity 0.3s, border .3s, background-color .3s;
+  border: #1b1f2426 1px solid;
+  border-radius: 0.4em;
+  background-color: #f6f8fa;
+  color: #57606a;
+  cursor: pointer;
+}
+
+.copy-block:hover .copybtn {
+  opacity: 1;
+}
