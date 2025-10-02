@@ -55,16 +55,23 @@
             <ol>
               <li class="no-counter"><a href="#git">basic commands</a></li>
               <li class="no-counter"><a href="#git-status">git status</a></li>
-              <li class="no-counter"><a href="#git-add">git status</a></li>
+              <li class="no-counter"><a href="#git-add">git add</a></li>
               <li class="no-counter"><a href="#git-restore">git restore</a></li>
             </ol>
           </li>
-          <li><a href="#variables">Defining variables in our code</a></li>
+          <li>
+            <a href="#variables">Defining variables in our code</a>
+            <ol>
+              <li class="no-counter"><a href="#echo">echo</a></li>
+
+            </ol>
+          </li>
           <li>
             <a href="#pipe-code">Developing our code</a>
             <ol>
               <li class="no-counter"><a href="#template">template.sh</a></li>
-              <li class="no-counter"><a href="#solutions">solutions.sh</a></li>
+              <li class="no-counter"><a href="#solution1">solution.sh</a></li>
+              <li class="no-counter"><a href="#solution2">solution_2.sh</a></li>
             </ol>
           </li>
           <li>
@@ -98,8 +105,8 @@
   
       <p class="highlight-block2">
         <strong>OBJECTIVES</strong><br>
-        <strong>1.  Working with files:</strong> Modify compressed biological sequencing files<br>
-        <strong>2. Navigating with Linux terminal:</strong> file transfer processes<br>
+        <strong>1. Managing large files:</strong> Modify compressed biological sequencing files<br>
+        <strong>2. Safely transfer files:</strong> file transfer processes<br>
         <strong>3. MD5 checksums:</strong> Verify data integrity<br>
         <strong>4. Git, GitLab:</strong> Track your work with git<br>
       </p>
@@ -109,8 +116,6 @@
       <div class="spacer"></div>
       <h2 id="repository">2. Repository</h2>
       To follow this hands-on you will need to get a copy of this Stepping Stone's repository to your computer. <br>
-      You can access the repository here: <br>
-      <center><a href="https://gitlab.com/frcb_idibaps/rcp/resources/stepping-stone-hands-on">IDIBAPS GitLab/Stepping-stone-hands-on</a></center>
       <div class="spacer"></div>
       <h3 id="setup">2.1. Set up your repository</h3>
   
@@ -125,6 +130,7 @@
           <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
         </button>
       </div>
+      <br>
       If not installed, run:
       <div class="copy-block">
         <pre>apt-get install git</pre>
@@ -132,6 +138,7 @@
           <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
         </button>
       </div>
+      <br>
       <strong>(4)</strong> Clone the repository with the following instruction: <br>
 
       <div class="copy-block">
@@ -144,13 +151,14 @@
 
       This instruction will create a new folder in your working directory named:
       <center><p class="folder blue"><span class="icon" aria-hidden="false"></span><span class="folder-name">stepping-stone-hands-on/</span></p></center>
-      <strong>(5)</strong> Change working directory to new folder
+      <strong>(5)</strong> Change working directory to new folder <br>
       <div class="copy-block">
         <pre>cd stepping-stone-hands-on/</pre>
         <button class="copybtn" title="Copy">
           <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
         </button>
       </div>
+      <br>
       <strong>(6)</strong> Configure Git credentials:<br>
       <div class="copy-block">
         <pre>git config user.name [YOUR-USERNAME]</pre>
@@ -159,6 +167,7 @@
           <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
         </button>
       </div>
+      <br>
       <strong>(7)</strong> Check the status of your repository by typing:<br>
       <div class="copy-block">
         <pre>git status</pre>
@@ -166,6 +175,7 @@
           <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
         </button>
       </div>
+      <br>
       Expected output:
       <pre class="outblock">
       On branch main
@@ -188,9 +198,17 @@
       <pre class="outblock">
       Switched to branch 'YOUR-USERNAME'
       Your branch is up to date with 'origin/[YOUR-USERNAME]'.</pre>
-  
-  
-      Now, everything is set up to start the hands-on!
+        
+      Quickly check which branch you are on with:
+      <div class="copy-block">
+        <pre>git status</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+      <br>
+
+      Now everything is set up to start the hands-on!
   
       <br><br>
   
@@ -256,8 +274,16 @@
       <p class="highlight-block", id="tree">
         tree
       </p>
-      <strong>We can use this command to display the structure of our current working directory</strong>
-      <br><br>
+      <strong>We can use this command to display the structure of our current working directory</strong> <br><br>
+
+      If not installed, run:
+      <div class="copy-block">
+        <pre>sudo apt install tree</pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+      <br>
       See help with:
       <div class="copy-block">
         <pre>tree --help</pre>
@@ -382,14 +408,14 @@
   
       <p class="highlight-block4">
         HARD TEST<br>
-        Knowing <code>pwd</code> command outputs: [YOUR-OWN-PATH]/BiodataSeries/stepping-stone-hands-on/raw <br><br>
+        Knowing <code>pwd</code> command outputs: [YOUR-OWN-PATH]/stepping-stone-hands-on/raw <br><br>
         1. What's the absolute and relative path of <strong>01.fastq</strong> file?<br>
         2. What's the relative path of this guide .HTML guide? 
       </p>
       <details class="answer-block">
         <summary>Answer</summary>
         <p>
-          1A - absolute path:        [YOUR-OWN-PATH]/BiodataSeries/stepping-stone-hands-on/raw/01.fastq<br>
+          1A - absolute path:        [YOUR-OWN-PATH]/stepping-stone-hands-on/raw/01.fastq<br>
           1B - relative path:        ./01.fastq<br>
           2  - relative path:        ../stepping_stone_bioinformatics.html<br>
         </p>
@@ -551,7 +577,7 @@
   
       <p class="highlight-block6">
         <strong>EXERCISE 3</strong><br>
-        1. Using '*' wildcard, print the first line of all fast files in our working directory<br>
+        1. Using '*' wildcard, print the first line of all FASTQ files in our working directory<br>
         2. Do the same exercise, only this time with '?' wildcard instead.<br>
         3. In our case, our raw folder is populated only by FASTQ files. How should we use '*' wildcard if we had multiple files of different extensions?<br>
       </p>
@@ -689,13 +715,13 @@
         Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.
       </pre>
       For this command, usage says we need:
-      <pre>cp [OPTION-ARGUMENTS] [path-to-source-file/s] [path-to-output-dir]</pre><br>
+      <pre>cp [OPTION-ARGUMENTS] [path-to-source-file/s] [path-to-destination-dir]</pre><br>
   
       <p class="highlight-block6">
         <strong>EXERCISE 4</strong><br>
         Following the previous use case, how should we:<br>
         1. Define [path-to-source-file/s]<br>
-        2. Define [path-to-output-dir] from our working directory?
+        2. Define [path-to-destination-dir] from our working directory?
         <br><br>
         Can you please construct the complete line of code to perform the file transfer?<br>
       </p>
@@ -895,9 +921,13 @@
       <strong>2.</strong> To use an existing variable, <strong class="relevant">add the prefix '$' to call it</strong>.
   
       <h4>Example 1: Variable containing a string (str)</h4>
+      To print content of variable, we will use command:
+      <p class="highlight-block", id="echo">
+        echo
+      </p>
       <pre>
       <strong class="relevant">our_first_variable</strong>="Hello World"
-      print <strong class="relevant">$our_first_variable</strong>
+      echo <strong class="relevant">$our_first_variable</strong>
       </pre>
       Output:
       <pre class="outblock">
@@ -1016,8 +1046,8 @@
       <pre><strong class="relevant">command</strong>   # [INSERT-CODE-HERE]</pre>
   
       <br><br>
-      <p class="highlight-block", id="solutions">
-        .solutions.sh
+      <p class="highlight-block", id="solution1">
+        .solution.sh
       </p>
       Once you have completed the building blocks of our workflow, you can compare them with the solutions we proposed. <br>
       <i class="relevant">Remember: there is no single solution — different approaches may lead to the same result</i>
@@ -1045,7 +1075,47 @@
       <i>(&lt;) Shows line 54 in file 1 (template.sh)</i> <br>
       <i>(&gt;) Shows line 54 in file 2 (.solutions.sh)</i> <br>
   
+      <br>
+      <p class="highlight-block", id="solution2">
+        .solution_2.sh
+      </p>
+      Try and compare your pipeline with an alternative approach of the workflow
+      <div class="copy-block">
+        <pre>
+          diff src/template.sh src/.solutions.sh
+        </pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+      Can you understand the differences between your approach and this new one?
+
       <br><br>
+      <p class="highlight-block", id="untracked">
+        Executing our pipeline
+      </p>
+      Let's make our pipeline executable. To do so, run:
+      <div class="copy-block">
+        <pre>
+          chmod a+x src/template.sh
+        </pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+      <br>
+      Following this modification of file usage, let's execute the pipeline:
+      <div class="copy-block">
+        <pre>
+          bash src/template.sh
+        </pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+      How did it go? Have you encountered any errors? 
+
+      <div class="spacer"></div>
       <h3 id="git-commit">6.4.Tracking our work with <i>git</i></h3>
       Now, we will log our completed pipeline in our repository.
   
@@ -1082,7 +1152,7 @@
       </p>
       Let's check again for changes in our repository with:
       <pre>git status</pre>
-      Output:
+      Output (orientative):
       <pre class="outblock">
         On branch OPT2
       Changes to be committed:
@@ -1116,19 +1186,19 @@
 
       Output:
       <pre class="outerminal">
-      [-----] (<strong class="relevant">HEAD</strong> -> <strong class="good">hands-on</strong>, origin/main, origin/HEAD, main, OPT2) <i class="commit">Finalized pipeline for FASTQ file compression and transfer</i>
+      [YOUR-HASH] (<strong class="relevant">HEAD</strong> -> <strong class="good">hands-on</strong>, origin/main, origin/HEAD, main, OPT2) <i class="commit">Finalized pipeline for FASTQ file compression and transfer</i>
       732ba4f  <i class="commit">Final refinements saved.</i>
       </pre>
-      As you can see, the last line corresponds to our latest modification. It has a unique hash and the description we added.
+      As you can see, the first line corresponds to our latest modification. It has a unique hash and the description we added.
 
       <br><br>
       <p class="highlight-block", id="push">
         Push changes
       </p>
-      So far, we have successfully registered our changes in our local repository.
+      So far, we have successfully registered our changes in your local repository within the branch you created.
       But these changes have not been forwarded to our repository in Gitlab, which means our collaborators will not be able to see our work. In order to do that we need to run:
       <div class="copy-block">
-        <pre>git push</pre>
+        <pre>git push --set-upstream origin [YOUR-USERNAME]</pre>
         <button class="copybtn" title="Copy">
           <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
         </button>
