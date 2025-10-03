@@ -9,7 +9,7 @@
 # Purpose:       Performs FASTQ compression, file transfer
 #                and file integrity check afterwards
 #
-# Usage:         sh template.sh
+# Usage:         bash template.sh
 #
 #
 # Dependencies:

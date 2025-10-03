@@ -9,7 +9,7 @@
 # Purpose:       Performs FASTQ compression, file transfer
 #                and file integrity check afterwards with echoing steps
 #
-# Usage:         sh .solution_3.sh
+# Usage:         bash .solution_3.sh or sh .soltuion_3.sh
 #
 # Dependencies:
 #   - bash (>=4.0)
