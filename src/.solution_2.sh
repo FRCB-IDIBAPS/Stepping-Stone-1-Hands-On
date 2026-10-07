@@ -15,10 +15,10 @@
 #
 #
 # Dependencies:
-#   - bash (>=4.0)
+#   - bash (>=3.2)
 #   - coreutils (ls, cp, mv, rm, cat, head, tail)
 #   - gzip / gunzip
-#   - md5sum
+#   - md5sum (on macOS: gmd5sum or md5)
 #
 # Notes:
 #   - Use provided variables with input/output files 

@@ -246,6 +246,58 @@ check_workshop_directory() {
 # below. Each of them calls the real command with the arguments
 # YOU wrote ("command gzip" means "the real gzip")
 
+# _real COMMAND ARGUMENTS...: run the real command, not our function
+_real() {
+    local name=$1
+    shift
+    if [ "$name" = md5sum ]; then _md5sum "$@"; else command "$name" "$@"; fi
+}
+
+# _md5sum: the real md5sum. macOS does not include it: there we use
+# gmd5sum (installed with "brew install coreutils") or, if it is missing
+# too, the md5 command of macOS, printing the same output as md5sum
+_md5sum() {
+    local check=no files=() argument line hash name failed=0
+    if [ "$_md5_tool" != md5 ]; then
+        command "$_md5_tool" "$@"
+        return
+    fi
+    for argument in "$@"; do
+        case $argument in
+            --check|-c|-[!-]*c*) check=yes ;;
+            -*) ;;
+            *)  files+=("$argument") ;;
+        esac
+    done
+    for argument in ${files[@]+"${files[@]}"}; do
+        if [ ! -r "$argument" ]; then
+            echo "md5sum: $argument: No such file or directory" >&2
+            return 1
+        fi
+        if [ "$check" = no ]; then
+            # Same format as md5sum: HASH, two spaces, FILE
+            hash=$(command md5 -q "$argument") || return 1
+            printf '%s  %s\n' "$hash" "$argument"
+            continue
+        fi
+        # Check: hash again every file listed in the .md5 file and compare
+        while IFS= read -r line || [ -n "$line" ]; do
+            [ -n "$line" ] || continue
+            hash=${line%% *}; name=${line#* }; name=${name# }; name=${name#\*}
+            if [ -r "$name" ] && [ "$(command md5 -q "$name")" = "$hash" ]; then
+                echo "$name: OK"
+            else
+                echo "$name: FAILED"
+                failed=$(( failed + 1 ))
+            fi
+        done < "$argument"
+    done
+    if [ "$failed" -gt 0 ]; then
+        echo "md5sum: WARNING: $failed computed checksum did NOT match" >&2
+        return 1
+    fi
+}
+
 # _each_file COMMAND N ARGUMENTS...: run COMMAND once per file,
 # drawing the progress bar. N=1 when the last argument is not an
 # input file but the destination (cp)
@@ -287,7 +339,7 @@ _each_file() {
         # Run the real command. Its error messages are kept in $output, to
         # print them on a clean line; its normal output goes where you sent it.
         # (the odd ${x[@]+"${x[@]}"} is "all the items of x, if there are any")
-        if ! { output=$(command "$name" ${options[@]+"${options[@]}"} "$argument" ${destination[@]+"${destination[@]}"} 2>&1 1>&4); } 4>&1; then
+        if ! { output=$(_real "$name" ${options[@]+"${options[@]}"} "$argument" ${destination[@]+"${destination[@]}"} 2>&1 1>&4); } 4>&1; then
             _end_bar
             printf '%s\n' "$output" >&2
             return 1
@@ -326,7 +378,7 @@ md5sum() {
     for argument in "$@"; do
         case $argument in
             --check|-c|-[!-]*c*)
-                if ! command md5sum "$@" | sed 's/^/          /'; then
+                if ! _md5sum "$@" | sed 's/^/          /'; then
                     echo "md5sum: the check did not pass, every file must be reported as OK." >&2
                     echo "        FAILED = the file is not identical to the one that was hashed." >&2
                     echo "        No such file = the PATH to the .md5 file (or to a file listed in it) is wrong." >&2
@@ -341,13 +393,24 @@ md5sum() {
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #   8: Check dependencies and say hello
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-for _tool in gzip md5sum cp mkdir grep sed tail; do
+for _tool in gzip cp mkdir grep sed tail; do
     if ! type -P "$_tool" > /dev/null; then
         _reported=yes
         echo "ERROR: the command '$_tool' is not installed on this computer." >&2
         exit 1
     fi
 done
+
+# Which command computes MD5 hashes on this computer? (see _md5sum above)
+_md5_tool=""
+for _tool in md5sum gmd5sum md5; do
+    if type -P "$_tool" > /dev/null; then _md5_tool=$_tool; break; fi
+done
+if [ -z "$_md5_tool" ]; then
+    _reported=yes
+    echo "ERROR: no command to compute MD5 hashes (md5sum, gmd5sum or md5) is installed on this computer." >&2
+    exit 1
+fi
 
 echo "-----------------------------------------------------" >&3
 echo " STEPPING-STONE: BIODATASERIES 1"                       >&3
