@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Course Prerequisites</title>
+<style>
+  :root {
+    --accent: #4B0082;
+    --accent-soft: #f1ebf7;
+    --text: #1f2328;
+    --muted: #59636e;
+    --border: #d8dee4;
+    --bg: #ffffff;
+    --code-bg: #f6f8fa;
+    --note-bg: #fff8e6;
+    --note-border: #e6b800;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #b48ce0;
+      --accent-soft: #2a1f36;
+      --text: #e6edf3;
+      --muted: #9198a1;
+      --border: #3d444d;
+      --bg: #0d1117;
+      --code-bg: #161b22;
+      --note-bg: #2b2412;
+      --note-border: #9e7c00;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  main { max-width: 820px; margin: 0 auto; padding: 32px 16px 64px; }
+  header { border-bottom: 3px solid var(--accent); padding-bottom: 16px; margin-bottom: 24px; }
+  h1 { margin: 0 0 8px; font-size: 1.9rem; color: var(--accent); }
+  h2 {
+    margin-top: 40px; padding-bottom: 6px; font-size: 1.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h2 .num {
+    display: inline-block; width: 1.6em; height: 1.6em; line-height: 1.6em;
+    text-align: center; border-radius: 50%; margin-right: 8px;
+    background: var(--accent); color: #fff; font-size: 0.85em;
+  }
+  h3 { margin-top: 28px; font-size: 1.1rem; }
+  a { color: var(--accent); }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--code-bg); padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em;
+  }
+  pre {
+    position: relative; background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px; overflow-x: auto;
+  }
+  pre code { background: none; padding: 0; font-size: 0.88rem; }
+  .copy {
+    position: absolute; top: 8px; right: 8px; font-size: 0.75rem; cursor: pointer;
+    border: 1px solid var(--border); background: var(--bg); color: var(--muted);
+    border-radius: 6px; padding: 2px 8px;
+  }
+  .copy:hover { color: var(--accent); border-color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.95rem; }
+  th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--accent-soft); }
+  .table-wrap { overflow-x: auto; }
+  .note {
+    background: var(--note-bg); border-left: 4px solid var(--note-border);
+    border-radius: 6px; padding: 10px 14px; margin: 16px 0;
+  }
+  .tip {
+    background: var(--accent-soft); border-left: 4px solid var(--accent);
+    border-radius: 6px; padding: 10px 14px; margin: 16px 0;
+  }
+  .os { font-weight: 600; }
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Course prerequisites: Programming &amp; HPC systems</h1>
+  <p>Please complete these steps <strong>before</strong> the course begins, to save time on installations. The process takes about 20–30 minutes.</p>
+</header>
+
+<p>You will need:</p>
+<ol>
+  <li><strong>VS Code</strong> (code editor)</li>
+  <li><strong>Git</strong> (version control)</li>
+  <li>A <strong>terminal</strong> with basic commands: <code>ls</code>, <code>md5sum</code>, <code>cp</code>, <code>mv</code>, <code>cat</code></li>
+</ol>
+<p>Instructions are given for <strong>Windows</strong>, <strong>macOS</strong> and <strong>Linux</strong>. Follow only the section for your operating system.</p>
+
+<!-- 1. VS Code -->
+<h2><span class="num">1</span>VS Code</h2>
+<p>Download it from <a href="https://code.visualstudio.com/download" target="_blank">https://code.visualstudio.com/download</a></p>
+
+<div class="table-wrap">
+<table>
+  <tr><th>OS</th><th>What to download</th><th>How to install</th></tr>
+  <tr>
+    <td class="os">Windows</td>
+    <td><em>Windows</em> (User Installer)</td>
+    <td>Run the <code>.exe</code> and accept the defaults. Tick <strong>"Add to PATH"</strong> if asked.</td>
+  </tr>
+  <tr>
+    <td class="os">macOS</td>
+    <td><em>Mac Universal</em> (<code>.dmg</code>)</td>
+    <td>Open the file and drag <strong>Visual Studio Code</strong> into <strong>Applications</strong>.</td>
+  </tr>
+  <tr>
+    <td class="os">Linux</td>
+    <td><em>.deb</em> (Ubuntu/Debian) or <em>.rpm</em> (Fedora/RHEL)</td>
+    <td><code>sudo apt install ./code_*.deb</code> or <code>sudo dnf install ./code-*.rpm</code></td>
+  </tr>
+</table>
+</div>
+
+<div class="tip">
+  <strong>Recommended extension:</strong> open VS Code, go to the Extensions panel (<code>Ctrl+Shift+X</code>, or <code>Cmd+Shift+X</code> on Mac), search for <strong>Remote - SSH</strong> (by Microsoft) and install it. We will use it to connect to the HPC cluster.
+</div>
+
+<!-- 2. Git -->
+<h2><span class="num">2</span>Git</h2>
+<p>Full guide: <a href="https://github.com/git-guides/install-git" target="_blank">https://github.com/git-guides/install-git</a></p>
+<p>Follow the installation guide's instructions to check whether Git is already installed. Open a terminal (see Section 3) and run the following command:</p>
+<pre><code>git version</code></pre>
+<p>If you see a version number (e.g. <code>git version 2.43.0</code>), you're done. Otherwise, install it as follows:</p>
+
+<h3>Windows</h3>
+<ol>
+  <li>Download <strong>Git for Windows</strong> from <a href="https://git-scm.com/download/win" target="_blank">https://git-scm.com/download/win</a></li>
+  <li>Run the installer and keep the default options.</li>
+  <li>This also installs <strong>Git Bash</strong>, the terminal we will use during the course (see section 3).</li>
+</ol>
+
+<h3>macOS</h3>
+<p>Run <code>git version</code> in the <strong>Terminal</strong> app. If Git is missing, macOS will offer to install the <strong>Command Line Developer Tools</strong>. Click <strong>Install</strong> and wait for it to finish.</p>
+<p>Alternatively, if you use Homebrew: <code>brew install git</code></p>
+
+<h3>Linux</h3>
+<ul>
+  <li>Ubuntu/Debian: <code>sudo apt update &amp;&amp; sudo apt install git</code></li>
+  <li>Fedora: <code>sudo dnf install git</code></li>
+</ul>
+
+<!-- 3. Terminal -->
+<h2><span class="num">3</span>Terminal and basic commands</h2>
+<p>During the course we will use these commands:</p>
+
+<div class="table-wrap">
+<table>
+  <tr><th>Command</th><th>What it does</th></tr>
+  <tr><td><code>ls</code></td><td>List files in a directory</td></tr>
+  <tr><td><code>cp</code></td><td>Copy files</td></tr>
+  <tr><td><code>mv</code></td><td>Move or rename files</td></tr>
+  <tr><td><code>cat</code></td><td>Print a file's contents</td></tr>
+  <tr><td><code>md5sum</code></td><td>Compute a file's checksum (to verify file integrity)</td></tr>
+</table>
+</div>
+
+<h3>Opening the terminal in VS Code</h3>
+<p>Everyone will work in the same place, whatever their OS: a <strong>bash terminal inside VS Code</strong>.</p>
+<ol>
+  <li>Open VS Code.</li>
+  <li>Go to <strong>Terminal → New Terminal</strong> (or press <code>Ctrl+`</code>). A terminal panel opens at the bottom of the window.</li>
+  <li>Make sure it is a <strong>bash</strong> terminal. Click the arrow next to the <code>+</code> button in the terminal panel and choose:
+    <ul>
+      <li><strong>Windows:</strong> <strong>Git Bash</strong> (installed with Git in section 2). Don't use <em>PowerShell</em> or <em>Command Prompt</em>: they don't include these commands.</li>
+      <li><strong>macOS:</strong> <strong>bash</strong> (the default is <em>zsh</em>).</li>
+      <li><strong>Linux:</strong> <strong>bash</strong> (usually the default already).</li>
+    </ul>
+  </li>
+  <li>To make bash open by default, use the same dropdown, choose <strong>Select Default Profile</strong>, and pick the option above.</li>
+</ol>
+
+<h3>Checking the commands are available</h3>
+<p>In the VS Code bash terminal, run:</p>
+<pre><code>type ls cp mv cat md5sum git</code></pre>
+<p>Each command should print a line like <code>ls is /usr/bin/ls</code>. If any line says <code>not found</code>, that command is missing.</p>
+
+<div class="note">
+  <strong>macOS note on <code>md5sum</code></strong><br>
+  macOS may not include <code>md5sum</code>. Check with:
+  <pre><code>md5sum --version</code></pre>
+  If it says <code>command not found</code>, use the built-in equivalent instead, which gives the same output format:
+  <pre><code>md5 -r myfile.txt</code></pre>
+  Alternatively, if you use Homebrew, <code>brew install coreutils</code> provides it as <code>gmd5sum</code>.
+</div>
+
+<!-- 4. Final check -->
+<h2><span class="num">4</span>Final check</h2>
+<p>Open the bash terminal in VS Code (see section 3) and run these commands one by one. Each one should run <strong>without</strong> <code>command not found</code>:</p>
+<pre><code>git version
+code --version
+ssh -V
+echo "hello" &gt; test.txt
+cat test.txt
+cp test.txt test_copy.txt
+mv test_copy.txt test_renamed.txt
+ls
+md5sum test.txt        # macOS: md5 -r test.txt</code></pre>
+<p>If everything works, you're ready for the course. You can delete the test files afterwards (<code>rm test.txt test_renamed.txt</code>).</p>
+
+<div class="note">
+  <strong>macOS:</strong> if <code>code --version</code> fails, open VS Code, press <code>Cmd+Shift+P</code>, type <strong>"Shell Command: Install 'code' command in PATH"</strong> and press Enter.
+</div>
+
+<footer>
+  If you have any problem, please contact us <strong>before</strong> the course and include a screenshot of the error.
+</footer>
+
+</main>
+
+<script>
+  document.querySelectorAll('pre').forEach(function (pre) {
+    var btn = document.createElement('button');
+    btn.className = 'copy';
+    btn.textContent = 'Copy';
+    btn.addEventListener('click', function () {
+      var text = pre.querySelector('code').innerText;
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'Copied!';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+      });
+    });
+    pre.appendChild(btn);
+  });
+</script>
+</body>
+</html>
