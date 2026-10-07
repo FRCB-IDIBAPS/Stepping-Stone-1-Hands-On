@@ -1,5 +1,12 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="bin/scheme.css">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stepping Stone Hands-On</title>
+  <link rel="stylesheet" href="bin/scheme.css">
+</head>
+<body>
 
 <svg style="display:none;">
   <symbol id="icon-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -8,8 +15,6 @@
     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
   </symbol>
 </svg>
-
-<html lang="en">
 
 <div class="layout">
   <aside class="toc">
@@ -70,8 +75,9 @@
             <a href="#pipe-code">Developing our code</a>
             <ol>
               <li class="no-counter"><a href="#template">template.sh</a></li>
-              <li class="no-counter"><a href="#solution1">solution.sh</a></li>
-              <li class="no-counter"><a href="#solution2">solution_2.sh</a></li>
+              <li class="no-counter"><a href="#run-pipeline">running our pipeline</a></li>
+              <li class="no-counter"><a href="#solution1">.solution.sh</a></li>
+              <li class="no-counter"><a href="#solution2">.solution_2.sh</a></li>
             </ol>
           </li>
           <li>
@@ -92,6 +98,8 @@
     <header class="page-header">
       <div class="header-text">
         <img src="bin/BioDataSeries1.png" alt="Logo">
+      </div>
+    </header>
      <section id="introduction">
       <div class="spacer"></div>
       <h2 id="introduction">1. Introduction</h2>
@@ -788,7 +796,7 @@
       using Git and therefore have a record of our first version of the workflow.
   
       <br><br>
-      <h3 id="git-basic">6.1. Basic commands with <i>git<i></h3>
+      <h3 id="git-basic">6.1. Basic commands with <i>git</i></h3>
       Let's move back to the repository folder. In order to do so, please check first your working directory.
   
       <p class="highlight-block3">
@@ -855,7 +863,7 @@
       </p>
       <pre class="outblock">
       Untracked files:
-      (use "git add <file>..." to include in what will be committed)
+      (use "git add &lt;file&gt;..." to include in what will be committed)
         <strong class="bad">
         compressed/
         raw/checksums.md5
@@ -881,12 +889,12 @@
       Output:
       <pre class="outblock">
       Untracked files:
-      (use "git add <file>..." to include in what will be committed)
+      (use "git add &lt;file&gt;..." to include in what will be committed)
         <strong class="bad">
         compressed/
         </strong>
       Changes to be committed:
-      (use "git restore --staged <file>..." to unstage)
+      (use "git restore --staged &lt;file&gt;..." to unstage)
         <strong class="good">modified:   raw/checksums.md5</strong>
       </pre>
 
@@ -955,7 +963,10 @@
       This template is divided into modules, each of which corresponds to one of the steps detailed in our rundown. <br><br>
   
       Fill in the blanks in the incomplete lines of code with the correct argument/s. <br>
-      Each module has subtasks, and these tasks all have guidelines explaining what is expected by the commmands.
+      Each module has subtasks, and these tasks all have guidelines explaining what is expected by the commmands. <br><br>
+
+      You can run the pipeline as many times as you like while you work on it: it stops at the first line that is not finished
+      (or not correct) and tells you which one it is.
       </p>
   
       <p class="highlight-block2">
@@ -967,7 +978,7 @@
       <p class="highlight-block", id="template">
         template.sh
       </p>
-      Our template script is divided into 5 tasks with their corresponding subtasks, like detailed in the following table:
+      Our template script is divided into 5 steps (numbered 0 to 4) with their corresponding subtasks, like detailed in the following table:
       <section aria-labelledby="redir-title">
         <table class="redir-table" role="table" aria-describedby="redir-desc">
           <thead>
@@ -1006,8 +1017,7 @@
                 <details>
                   <summary><strong>Hash</strong> FASTQ (.gz) file/s</summary>
                   <ul>
-                    <li>2.1. Hash FASTQ files and redirect output to .md5 file</li>
-                    <li>2.2. Save to <code>checksums.md5</code></li>
+                    <li>2.1. Hash FASTQ files and redirect output to .md5 file (<code>checksum.md5</code>)</li>
                   </ul>
                 </details>
               </td>
@@ -1044,6 +1054,124 @@
       Please complete the lines of code in each section by adding parameters to the commands for each task. <br>
       The coding lines look like this:
       <pre><strong class="relevant">command</strong>   # [INSERT-CODE-HERE]</pre>
+      There are 7 of them. Replace the comment <code># [INSERT-CODE-HERE]</code> with the missing argument/s, exactly as you would type them in the terminal. <br>
+      In Step 0 you also have to write, right after the <code>=</code>, the absolute PATH to your <code>stepping-stone-hands-on</code> directory
+      (run <code>pwd</code> in that directory to find it): <br>
+      <pre><strong class="relevant">PATH_to_stepping_stone_hands_on=</strong> #[INSERT-ABSOLUTE-PATH-TO-STEPPING-STONE-HANDS-ON]</pre>
+
+      The rest of the lines are already complete and must not be changed. Some of them are new to you:
+      <pre>
+      . "$(dirname "$0")/helpers.sh" || exit 1
+      step 1 "Compress FASTQ file/s"
+      task 1.1 "Navigate to raw/ directory"
+      finish
+      </pre>
+      The first one loads <code>src/helpers.sh</code>, a second script with the tools that take care of <strong class="relevant">error handling</strong>
+      and <strong class="relevant">progress messages</strong>. <code>step</code>, <code>task</code> and <code>finish</code> come from that file:
+      they only print which part of the pipeline is running. <br>
+      <i class="relevant">You do not need to open or understand helpers.sh to complete the exercise.</i>
+
+      <br><br>
+      <p class="highlight-block", id="run-pipeline">
+        Running our pipeline
+      </p>
+      Let's make our pipeline executable. To do so, run:
+      <div class="copy-block">
+        <pre>
+          chmod a+x src/template.sh
+        </pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+      <br>
+      Following this modification of file usage, from the <code>stepping-stone-hands-on</code> directory, let's execute the pipeline with <code>bash</code>:
+      <div class="copy-block">
+        <pre>
+          bash src/template.sh
+        </pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
+      Try it <strong class="relevant">before</strong> completing anything. Output:
+      <pre class="outblock">
+       [STEP 0] Navigate to starting directory
+          [0.1] Define workshop directory          <strong class="bad">[FAILED]</strong>
+
+       ERROR in task 0.1, line 52 of template.sh:
+
+           PATH_to_stepping_stone_hands_on= #[INSERT-ABSOLUTE-PATH-TO-STEPPING-STONE-HANDS-ON]
+
+       The variable PATH_to_stepping_stone_hands_on is empty.
+       Write the absolute PATH to your stepping-stone-hands-on directory right
+       after the '=' (no spaces around '='). To find it, open a terminal in that
+       directory, run  pwd  and copy the output.
+
+       [PIPELINE EXECUTION]: <strong class="bad">FAILED</strong>
+      </pre>
+      <strong>Error handling.</strong> A plain script keeps going after a command fails, and the following commands then work on the wrong files or in the wrong directory.
+      Our pipeline does the opposite: <strong class="relevant">it stops at the first problem</strong> and reports the task, the line number and the line of code where it happened.
+      Any message printed by the command itself (<code>gzip</code>, <code>cp</code>, <code>md5sum</code>...) appears just above. <br>
+      Fix that line, save the file and run the script again. Repeating is safe: nothing is deleted, and the results of a previous run are simply written again. <br><br>
+
+      <strong>Progress.</strong> Each task is reported as <strong class="good">[COMPLETED]</strong> once it is done.
+      Tasks that work on several files show a progress bar that fills up as each file is processed.
+      When every blank is completed correctly, the output is:
+      <pre class="outblock">
+       [STEP 0] Navigate to starting directory
+          [0.1] Define workshop directory          <strong class="good">[COMPLETED]</strong>
+
+       [STEP 1] Compress FASTQ file/s
+          [1.1] Navigate to raw/ directory         <strong class="good">[COMPLETED]</strong>
+          [1.2] Compress FASTQ files               <strong class="good">[COMPLETED]</strong>  [##########] 4/4
+
+       [STEP 2] Hash FASTQ (.gz) file/s
+          [2.1] Hash .gz files into .md5 file      <strong class="good">[COMPLETED]</strong>  [##########] 4/4
+
+       [STEP 3] Transfer FASTQ file/s
+          [3.1] Navigate to workshop directory     <strong class="good">[COMPLETED]</strong>
+          [3.2] Create compressed/ directory       <strong class="good">[COMPLETED]</strong>
+          [3.3] Copy .gz files to compressed/      <strong class="good">[COMPLETED]</strong>  [##########] 4/4
+
+       [STEP 4] Check MD5 integrity
+          [4.1] Navigate to compressed/ directory  <strong class="good">[COMPLETED]</strong>
+                01.fastq.gz: OK
+                02.fastq.gz: OK
+                03.fastq.gz: OK
+                04.fastq.gz: OK
+          [4.2] Check MD5 integrity                <strong class="good">[COMPLETED]</strong>
+
+       [PIPELINE EXECUTION]: <strong class="good">SUCCESSFUL</strong>
+      </pre>
+      While a task is running, its line looks like this:
+      <pre class="outblock">
+          [1.2] Compress FASTQ files               [RUNNING]    [#####-----] 2/4  03.fastq
+      </pre>
+
+      <p class="highlight-block3">
+        QUICK TEST<br>
+        In section 3, <code>gzip</code> asked <i>"already exists; do you wish to overwrite (y or n)?"</i> when the compressed file was already there.
+        Why does our pipeline not ask, even though <code>raw/</code> already contains <code>.gz</code> files?
+      </p>
+
+      <details class="answer-block">
+        <summary>Answer</summary>
+        <p>A script should run from start to end without waiting for us to answer questions. Inside the pipeline,
+        <code>helpers.sh</code> runs <code>gzip</code> with one extra option, <code>-f</code> (force), which overwrites the existing <code>.gz</code> files.
+        It also runs <code>gzip</code>, <code>md5sum</code> and <code>cp</code> one file at a time, which is how the progress bar knows how far we are.</p>
+      </details>
+
+      <br>
+      The messages of the pipeline can also be saved to a file, in which case the progress bar is replaced by one plain line per file:
+      <div class="copy-block">
+        <pre>
+          bash src/template.sh > pipeline.log
+        </pre>
+        <button class="copybtn" title="Copy">
+          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
+        </button>
+      </div>
   
       <br><br>
       <p class="highlight-block", id="solution1">
@@ -1057,63 +1185,38 @@
       <i class="good">If there is no output to this code it means both files are identical</i>
       <div class="copy-block">
         <pre>
-          diff src/template.sh src/.solutions.sh
+          diff src/template.sh src/.solution.sh
         </pre>
         <button class="copybtn" title="Copy">
           <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
         </button>
       </div>
-
       Output example:
       <pre class="outblock">
-      54c54
+      75c75
       &lt; cd     # [INSERT-CODE-HERE]
       ---
       &gt; cd $PATH_to_raw_fastq_files
       </pre>
-      This output shows that <code>diff</code> command found differences between both files at line 54 (hence 54c54). <br>
-      <i>(&lt;) Shows line 54 in file 1 (template.sh)</i> <br>
-      <i>(&gt;) Shows line 54 in file 2 (.solutions.sh)</i> <br>
-  
+      This output shows that <code>diff</code> command found differences between both files at line 75 (hence 75c75). <br>
+      <i>(&lt;) Shows line 75 in file 1 (template.sh)</i> <br>
+      <i>(&gt;) Shows line 75 in file 2 (.solution.sh)</i> <br>
+      <i class="relevant">Line 52 (52c52) will always be reported: it holds the PATH to your own directory, which the solution cannot know.</i> <br>
+
       <br>
       <p class="highlight-block", id="solution2">
         .solution_2.sh
       </p>
-      Try and compare your pipeline with an alternative approach of the workflow
+      Try and compare your pipeline with an alternative approach of the workflow, which processes the files one at a time with <code>for</code> loops:
       <div class="copy-block">
         <pre>
-          diff src/template.sh src/.solutions.sh
+          diff src/template.sh src/.solution_2.sh
         </pre>
         <button class="copybtn" title="Copy">
           <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
         </button>
       </div>
       Can you understand the differences between your approach and this new one?
-
-      <br><br>
-      <p class="highlight-block", id="untracked">
-        Executing our pipeline
-      </p>
-      Let's make our pipeline executable. To do so, run:
-      <div class="copy-block">
-        <pre>
-          chmod a+x src/template.sh
-        </pre>
-        <button class="copybtn" title="Copy">
-          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
-        </button>
-      </div>
-      <br>
-      Following this modification of file usage, let's execute the pipeline:
-      <div class="copy-block">
-        <pre>
-          bash src/template.sh
-        </pre>
-        <button class="copybtn" title="Copy">
-          <svg width="14" height="14"><use href="#icon-clipboard"></use></svg>
-        </button>
-      </div>
-      How did it go? Have you encountered any errors? 
 
       <div class="spacer"></div>
       <h3 id="git-commit">6.4.Tracking our work with <i>git</i></h3>
@@ -1138,8 +1241,8 @@
       Output:
       <pre class="outblock">
         Changes not staged for commit:
-        (use "git add <file>..." to update what will be committed)
-        (use "git restore <file>..." to discard changes in working directory)
+        (use "git add &lt;file&gt;..." to update what will be committed)
+        (use "git restore &lt;file&gt;..." to discard changes in working directory)
               <strong class="bad">modified:   src/template.sh</strong>
       </pre>
       This means <i>Git</i> has detected the changes in the file <code>template.sh</code> that we have been working on.
@@ -1156,7 +1259,7 @@
       <pre class="outblock">
         On branch OPT2
       Changes to be committed:
-        (use "git restore --staged <file>..." to unstage)
+        (use "git restore --staged &lt;file&gt;..." to unstage)
               <strong class="good">modified:   src/template.sh</strong>
       </pre>
       This means <i>Git</i> has saved all the modifications we did on our pipeline.
@@ -1296,5 +1399,5 @@
     });
   });
   </script>
-
+</body>
 </html>

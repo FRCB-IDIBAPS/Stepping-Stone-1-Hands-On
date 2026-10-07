@@ -1,136 +1,257 @@
-body {
-    background-color: #ffffff;
-    color: #3d2e2e;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    line-height: 1.6;
-    margin: 35px auto; 
-    max-width: 1800px;
-    font-size: 15px;
+/* ==========================================================================
+   Stepping Stone Hands-On - manual stylesheet
+
+   Palette: neutrals + one accent (the purple of the Stepping Stone logo),
+   plus three quiet semantic tints (green = tip / good, amber = quick test,
+   red = hard test / bad). Fonts are system stacks only, so the manual
+   works offline.
+   ========================================================================== */
+
+:root {
+  /* Neutrals */
+  --bg: #ffffff;
+  --surface: #f6f6f9;        /* cards, command blocks, table headers */
+  --surface-2: #eeeef3;      /* hover on neutral surfaces, inline code */
+  --line: #e2e3ea;           /* hairlines */
+  --line-strong: #b4b7c4;    /* neutral callout stripe */
+  --text: #23262f;
+  --heading: #14161c;
+  --muted: #5b6070;
+
+  /* Accent (logo purple) */
+  --accent: #6a2c91;
+  --accent-ink: #561f78;     /* accent used as text */
+  --accent-soft: #f4eef9;    /* accent tint background */
+  --accent-line: #d9c6e8;
+
+  /* Semantic tints */
+  --tip: #2f8f5f;
+  --tip-ink: #1d6b45;
+  --tip-soft: #eef7f2;
+  --test: #c98a1b;
+  --test-ink: #865600;
+  --test-soft: #fdf6e6;
+  --hard: #cc5444;
+  --hard-ink: #a43324;
+  --hard-soft: #fdf1ef;
+
+  /* Output / terminal blocks */
+  --term-bg: #1f2130;
+  --term-text: #e6e8f0;
+
+  --font-sans: Inter, system-ui, -apple-system, "Segoe UI Variable Text", "Segoe UI",
+               Roboto, "Helvetica Neue", "Noto Sans", Ubuntu, Cantarell, Arial, sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", "Cascadia Code", "SF Mono", Menlo, Consolas,
+               "DejaVu Sans Mono", "Liberation Mono", "Ubuntu Mono", monospace;
+
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 1px 2px rgba(20, 22, 28, 0.05), 0 2px 8px rgba(20, 22, 28, 0.04);
+  --ease: 160ms ease;
+
+  --toc-w: 300px;
+  --measure: 880px;          /* max width of the reading column */
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* NOTE: no height/overflow rules on html or body: the TOC is position: fixed
+   and the page scrolls natively (this is what avoids the rubber-band effect). */
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent-line);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- Layout ---------- */
+
 .layout {
-  display: flex; /* put TOC and content side by side */
-  align-items: flex-start; /* make them align at the top */
+  display: block;
 }
 
 .content {
-  padding: 40px;
-  flex: 1;
-  margin-left: 400px;
+  margin-left: var(--toc-w);
+  /* keeps a comfortable line length and centres the column on wide screens */
+  padding: 40px max(40px, calc((100vw - var(--toc-w) - var(--measure)) / 2)) 96px;
+  min-width: 0;
 }
 
-/* Table of Contents */
-/* Styling for the Table of Contents */
+/* ---------- Table of contents (fixed sidebar) ---------- */
+
 .toc {
   position: fixed;
-  padding: 30px;
-  font-size: 15px;
-  font-family: "Roboto Mono", "Courier New", monospace;
   top: 0;
-  width: 400px;       /* width of the TOC */
-  height: 100vh;      /* full viewport height */
-  background: #303031;
-  box-sizing: border-box;
+  left: 0;
+  width: var(--toc-w);
+  height: 100vh;
+  padding: 28px 16px 28px 20px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.toc ol {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
 }
 
 /* TOC counters */
 .toc-list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
   counter-reset: toc-counter;
 }
 
 .toc-list li {
   counter-increment: toc-counter;
-  margin: 0.25rem 0;
-  width: 100%;         /* full width of TOC */
-  background: transparent;  /* background on li not needed */
+  margin: 2px 0;
 }
 
 /* Links fill the li */
 .toc-list li > a {
-  display: block;      /* block so it fills li width */
-  padding: 6px 10px;   /* spacing inside link */
+  display: block;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--muted);
   text-decoration: none;
-  color: #d7ff24;
-  border-radius: 0;    /* remove rounding so full width looks clean */
-  box-sizing: border-box;
+  transition: background-color var(--ease), color var(--ease);
+}
+
+.toc-list li > a:hover {
+  background: var(--surface-2);
+  color: var(--heading);
+  text-decoration: none;
 }
 
 /* Hierarchical numbering */
 .toc-list li > a::before {
   content: counters(toc-counter, ".") ". ";
-  margin-right: 0.4rem;
-  color: #cd03ff;
+  margin-right: 0.35rem;
+  color: var(--line-strong);
   font-variant-numeric: tabular-nums;
+  transition: color var(--ease);
 }
 
-/* Nested lists reset counter */
+/* Nested lists: collapsed unless the section is active; counter restarts */
 .toc-list li > ol {
   display: none;
   counter-reset: toc-counter;
-  margin-left: 1rem; /* indentation for subsections */
+  margin: 2px 0 4px 0.8rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid var(--line);
 }
 
-/* List all descendants if any remain active */
-.toc-list li.active-parent > ol {
+.toc-list li.active-parent > ol,
+.toc-list li > a.active + ol {
   display: block;
 }
 
-/* Disable numbering for special cases */
+.toc-list li.active-parent > a {
+  color: var(--heading);
+  font-weight: 600;
+}
+
+/* Un-numbered entries (commands, files): no counter, monospace */
 .toc-list li.no-counter > a::before {
   content: none !important;
 }
 
 .toc-list li.no-counter > a {
-  color: #cd03ff !important;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-/* Active special cases: black text, same highlight bg */
+/* Active section */
+.toc-list li > a.active,
 .toc-list li.no-counter > a.active {
-  background: #fbff00;   /* same as normal active */
-  color: #000 !important;
-  font-weight: 700;
-  padding-left: 16px;
-  padding-right: 10px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--accent-line);
 }
 
-/* Active section - full width highlight */
-.toc-list li > a.active {
-  background: #fbff00;   /* full width highlight */
-  color: #303031;
-  font-weight: 700;
-  padding-left: 16px;    /* maintain space for numbering + indent */
-  padding-right: 10px;
+.toc-list li > a.active::before {
+  color: var(--accent);
 }
 
-.toc-list li > a.active + ol {
-  display: block;
+/* ---------- Headings ---------- */
+
+h1, h2, h3, h4 {
+  color: var(--heading);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
-  /* Headings */
+
 h1 {
-  font-size: 3em;
+  font-size: 2.25rem;
+  font-weight: 750;
 }
+
 h2 {
-  font-size: 2.4em;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
 }
+
 h3 {
-  font-size: 2em;
+  font-size: 1.35rem;
+  font-weight: 650;
+  margin: 2rem 0 0.75rem;
+}
+
+h4 {
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: 0;
+  margin: 1.5rem 0 0.5rem;
+}
+
+h3 i, h4 i {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.92em;
 }
 
 .page-header {
-  display: flex;
-  align-items: center;  /* vertically center image + text */
-  gap: 1rem;            /* space between logo and text */
-  margin-bottom: 1.5rem;
+  display: block;
+  margin: 0;
 }
 
 .page-header img {
-  width: 1350px;       /* set a fixed width */
   display: block;
-  margin-top: -40px;
-  margin-bottom: 60px; /* create space below the image */
+  width: 100%;
+  height: auto;
+  margin: 0 0 8px;
 }
 
 .header-text h1 {
@@ -140,226 +261,574 @@ h3 {
 .header-text h3 {
   margin: 0;
   font-weight: normal;
-  color: #666;          /* tweak as needed */
+  color: var(--muted);
 }
 
-  /* Links */
+.spacer {
+  height: 44px;
+}
+
+/* ---------- Text ---------- */
+
 a {
-  color: #0023bd;
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-line);
+  text-underline-offset: 0.18em;
+  transition: color var(--ease), text-decoration-color var(--ease), background-color var(--ease);
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+/* The centred repository link reads as a soft button */
+center > a {
+  display: inline-block;
+  margin: 0.75rem 0;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--accent-line);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  font-weight: 600;
   text-decoration: none;
 }
-a:hover {
-  text-decoration: underline;
-}
-  
-/* Paragraphs */
-p {
-  color: #3d2e2e;
-  font-size: 13px;
-  font-style: oblique;
+
+center > a:hover {
+  background: #ecdff5;
+  border-color: var(--accent);
+  text-decoration: none;
 }
 
-  /* Horizontal rule */
+p {
+  margin: 1rem 0;
+  color: var(--text);
+}
+
 hr {
   border: none;
-  border-top: 1px solid #0f0f0f;
+  border-top: 1px solid var(--line);
   margin: 2em 0;
 }
-  
-  /* Code blocks */
 
-pre {
-  display: block;
-  background-color: #75757577;
-  font-size: 13px;
-  color: #000000;
-  padding: 12px 16px;
-  border-radius: 8px;
-  overflow-x: auto;
-  font-family: "Fira Code", Consolas, "Courier New", monospace;
-  word-break: break-word;
-}
-code {
-  color: #fbff00;
-  background-color: #303031;
-  padding: 3px 3px;
-  border-radius: 1px;
-}
-  
-  /* Tables */
-table {
-  border-collapse: collapse;
-  table-layout: fixed;
-  border: none;
-  border-top: none;
-  width: 100%;
-  margin: 20px 0;
-  font-size: 13px;
-}
-th, td {
-  padding: 15px;
-  text-align: left;
-  vertical-align: top;
-}
-th {
-  border: none;
-  border-top: none;
-  background-color: #75757577;
-  color: #3d2e2e;
-  font-size: 13px;
-  font-weight: 600;
-}
-td {
-  background-color: #eee9e985;
-}
-
-/* Lists */
 ul, ol {
-  margin-left: 1.5em;
-}
-li {
-  margin-bottom: 0.5em;
-}
-.spacer {
-  height: 50px; /* space height */
+  margin: 0.75rem 0;
+  padding-left: 1.5em;
 }
 
-/* Blockquote (if used) */
+li {
+  margin-bottom: 0.4em;
+}
+
 blockquote {
-  border-left: 4px solid #ca0a0a;
-  padding-left: 1em;
-  color: #cccccc;
   margin: 1em 0;
+  padding-left: 1em;
+  border-left: 3px solid var(--line-strong);
+  color: var(--muted);
 }
 
 #lbreak {
   white-space: pre-line;
 }
+
 .tab {
   display: inline-block;
   margin-left: 4em;
 }
 
-.outblock {
-  background-color: #000000;
-  font-size: 13px;
-  color: #ffffff;
-  padding: 12px 16px;
-  border-radius: 8px;
+/* Inline emphasis: one hue each, same weight as the surrounding role */
+strong.bad {
+  color: var(--hard-ink);
+}
+
+strong.good, i.good {
+  color: var(--tip-ink);
+}
+
+strong.relevant, i.relevant {
+  color: var(--accent-ink);
+}
+
+/* ---------- Code: commands, output, inline ---------- */
+
+pre, code, .outblock, .outerminal, .path-block {
+  font-family: var(--font-mono);
+}
+
+/* Command block (what you type) */
+pre {
+  display: block;
+  margin: 0.75rem 0 1.25rem;
+  padding: 0.8rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  color: var(--heading);
+  font-size: 0.875rem;
+  line-height: 1.6;
   overflow-x: auto;
-  font-family: "Fira Code", Consolas, "Courier New", monospace;
+  white-space: pre-wrap;      /* long commands wrap instead of hiding behind a scrollbar */
+  word-break: break-word;
+  tab-size: 4;
+}
+
+/* Output block (what the terminal answers) */
+.outblock, .outerminal {
+  border-color: transparent;
+  background-color: var(--term-bg);
+  color: var(--term-text);
+  box-shadow: var(--shadow);
   white-space: pre-wrap;
   word-break: break-word;
 }
-.outerminal {
-  background-color: #181717f6;
-  font-size: 13px;
-  color: #e5f31a;
-  padding: 12px 16px;
-  border-radius: 8px;
-  overflow-x: auto;
-  font-family: "Fira Code", Consolas, "Courier New", monospace;
-  white-space: pre-wrap;
-  word-break: break-word;
+
+/* Emphasis colours need lighter variants on the dark blocks */
+.outblock strong, .outerminal strong { color: #ffffff; }
+.outblock .good, .outerminal .good { color: #86dba9; }
+.outblock .bad, .outerminal .bad { color: #ff9f93; }
+.outblock .relevant, .outerminal .relevant { color: #d3b0ee; }
+i.commit { color: var(--term-text); }
+
+code, .path-block {
+  display: inline;
+  margin: 0;
+  padding: 0.12em 0.4em;
+  border-radius: 5px;
+  background-color: rgba(35, 38, 60, 0.08);
+  color: var(--heading);
+  font-size: 0.875em;
+  font-style: normal;
+}
+
+pre code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}
+
+/* ---------- Buttons (illustrations of the GitLab UI) ---------- */
+
+button {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font: 600 0.8rem/1.3 var(--font-sans);
+  cursor: pointer;
+  box-shadow: 0 1px 1px rgba(20, 22, 28, 0.05);
+  transition: background-color var(--ease), border-color var(--ease), box-shadow var(--ease), transform var(--ease);
+}
+
+button:hover {
+  background: var(--surface);
+  border-color: var(--muted);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: none;
 }
 
 .blue-button {
-  background-color: #0260c5; /* bright blue */
-  color: white;              /* text color */
-  border: none;              /* remove default border */
-  padding: 8px 10px;         /* spacing inside button */
-  border-radius: 4px;        /* rounded corners */
-  cursor: pointer;           /* pointer on hover */
-  font-size: 12px;
+  border-color: var(--accent);
+  background-color: var(--accent);
+  color: #ffffff;
 }
 
 .blue-button:hover {
-  background-color: #0056b3; /* darker blue on hover */
+  border-color: var(--accent-ink);
+  background-color: var(--accent-ink);
 }
 
-.folder {
-  font-family: monospace;
-  color: #4dabf7; /* blue folder */
+/* ---------- Tables ---------- */
+
+table {
+  width: 100%;
+  margin: 1.25rem 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow);
 }
 
-strong.bad {
-  color: red;
+th, td {
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
 }
-strong.good {
-  color: rgb(100, 202, 69);
+
+th {
+  background-color: var(--surface);
+  color: var(--heading);
+  font-size: 0.85rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
 }
-i.good {
-  color: rgb(100, 202, 69);
+
+td {
+  background-color: var(--bg);
 }
-strong.relevant {
-  color: rgb(69, 78, 202);
+
+th + th, td + td {
+  border-left: 1px solid var(--line);
 }
-i.relevant {
-  color: rgb(69, 78, 202);
+
+tbody tr:last-child td {
+  border-bottom: 0;
 }
-i.commit {
-  color: rgb(240, 240, 240);
+
+thead th:first-child { border-top-left-radius: calc(var(--radius) - 1px); }
+thead th:last-child { border-top-right-radius: calc(var(--radius) - 1px); }
+tbody tr:last-child td:first-child { border-bottom-left-radius: calc(var(--radius) - 1px); }
+tbody tr:last-child td:last-child { border-bottom-right-radius: calc(var(--radius) - 1px); }
+
+td pre {
+  margin-bottom: 0;
 }
-.highlight-block, .highlight-block1,.highlight-block2, .highlight-block3,
-.highlight-block4, .highlight-block5, .highlight-block6,.highlight-block7, .highlight-git{
-  color: #000000;             /* light text */
-  font-family: "Courier New", Courier, monospace; /* coding-like font */
-  padding: 0.75em 1em;        /* space inside */
-  border-radius: 6px;         /* rounded corners */
-  margin: 1em 0;              /* spacing above/below */
-  display: block;             /* full-width element */
-  width: 100%;                /* stretch across container */
-  box-sizing: border-box;     /* include padding inside width */
-  font-weight: 500;
+
+/* Operator / step tables */
+.redir-table th,
+.redir-table td {
+  padding: 0.6rem 1.1rem;
 }
-.highlight-block {
-  background-color: #e5f31a;
-  color: #000000;
+
+.redir-table tbody tr {
+  transition: background-color var(--ease);
+}
+
+.redir-table tbody tr:hover td {
+  background-color: #fbfbfd;
+}
+
+/* first column narrow: operators / step numbers */
+.redir-table th:first-child,
+.redir-table td:first-child {
+  width: 7.5rem;
+  white-space: nowrap;
+}
+
+.redir-table td:first-child {
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Disclosure rows inside a table */
+.redir-table details {
+  margin: 0;
+}
+
+.redir-table summary {
+  position: relative;
+  margin: -0.25rem -0.5rem;
+  padding: 0.25rem 0.5rem 0.25rem 1.6rem;
+  border-radius: var(--radius-sm);
+  list-style: none;
+  cursor: pointer;
+  transition: background-color var(--ease);
+}
+
+.redir-table summary::-webkit-details-marker {
+  display: none;
+}
+
+.redir-table summary:hover {
+  background-color: var(--surface-2);
+}
+
+.redir-table summary strong {
+  font-weight: 650;
+}
+
+/* ---------- Chevron shared by every disclosure ---------- */
+
+.redir-table summary::before,
+.answer-block summary::before {
+  content: "";
+  display: inline-block;
+  width: 0.45em;
+  height: 0.45em;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform var(--ease);
+}
+
+.redir-table summary::before {
+  position: absolute;
+  left: 0.55rem;
+  top: 0.8em;
+  color: var(--muted);
+}
+
+.redir-table details[open] summary::before,
+.answer-block[open] summary::before {
+  transform: rotate(45deg);
+}
+
+.redir-table details ul {
+  margin: 0.4rem 0 0.25rem 1.1rem;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+.redir-table details li {
+  margin-bottom: 0.2em;
+}
+
+/* ---------- Callouts ----------
+   One shared shape (soft tint + thin coloured stripe); the role decides the
+   tint. Roles:
+     .highlight-block   note / requirements        neutral
+     .highlight-block1  recap                      neutral
+     .highlight-block2  tip, reminder, objectives  green
+     .highlight-block3  QUICK TEST                 amber
+     .highlight-block4  HARD TEST                  red
+     .highlight-block6  EXERCISE n                 accent
+     .takeaways         aside                      neutral
+     .keys              key takeaways              accent
+   The same classes carrying an id (and .highlight-block5, .highlight-block7,
+   .highlight-git) are sub-headings: see the next section. */
+
+.highlight-block, .highlight-block1, .highlight-block2, .highlight-block3,
+.highlight-block4, .highlight-block5, .highlight-block6, .highlight-block7,
+.highlight-git, .takeaways, .keys {
+  --c-stripe: var(--line-strong);
+  --c-soft: var(--surface);
+  --c-ink: var(--muted);
+
+  display: block;
+  width: 100%;
+  margin: 1.25rem 0;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid transparent;
+  border-left: 3px solid var(--c-stripe);
+  border-radius: var(--radius);
+  background-color: var(--c-soft);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.97rem;
+  font-style: normal;
+  font-weight: 400;
+  list-style: none;
+}
+
+.highlight-block2 {
+  --c-stripe: var(--tip);
+  --c-soft: var(--tip-soft);
+  --c-ink: var(--tip-ink);
+}
+
+.highlight-block3 {
+  --c-stripe: var(--test);
+  --c-soft: var(--test-soft);
+  --c-ink: var(--test-ink);
+}
+
+.highlight-block4 {
+  --c-stripe: var(--hard);
+  --c-soft: var(--hard-soft);
+  --c-ink: var(--hard-ink);
+}
+
+.highlight-block6, .highlight-block7, .highlight-git, .keys {
+  --c-stripe: var(--accent);
+  --c-soft: var(--accent-soft);
+  --c-ink: var(--accent-ink);
+}
+
+/* Callout label: the leading <strong> ("EXERCISE 1", "OBJECTIVES", ...) */
+.highlight-block > strong:first-child,
+.highlight-block1 > strong:first-child,
+.highlight-block2 > strong:first-child,
+.highlight-block3 > strong:first-child,
+.highlight-block4 > strong:first-child,
+.highlight-block6 > strong:first-child,
+.takeaways > strong:first-child,
+.keys > strong:first-child {
+  display: inline-block;
+  margin-bottom: 0.15rem;
+  color: var(--c-ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+/* "QUICK TEST" / "HARD TEST" are plain text on the first line */
+.highlight-block3:not([id])::first-line,
+.highlight-block4:not([id])::first-line {
+  color: var(--c-ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+}
+
+.highlight-block6 {
+  box-shadow: var(--shadow);
+}
+
+.keys ul {
+  margin: 0.4rem 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.takeaways ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+/* ---------- Sub-headings (commands, files, git states) ----------
+   Un-numbered TOC entries point at these. No box: a marker, the name and a
+   hairline. Commands and files are monospace. */
+
+.highlight-block[id], .highlight-block2[id], .highlight-block4[id],
+.highlight-block5, .highlight-block7, .highlight-git {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1.5rem 0 1rem;
+  padding: 0 0 0.45rem;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--heading);
+  font-size: 1.2rem;
+  font-weight: 650;
+  line-height: 1.3;
+  scroll-margin-top: 24px;
+}
+
+.highlight-block[id], .highlight-git {
+  --c-stripe: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
   font-weight: 700;
 }
-.highlight-block1 {
-  background-color: #9d7fce;
-}
-.highlight-block2 {
-  color: #5ea105;
-  background-color: #c7f191;
-}
-.highlight-block3 {
-  color: #6b3102;   
-  background-color: #7e3a0380;
-}
-.highlight-block4 {
-  color: #770505;
-  background-color: #eb0b0b88;
-}
+
 .highlight-block5 {
-  background-color: #6e6e6e;
-  color: #ffffff;
-  font-family: "Inconsolata", "Courier New", monospace;
+  --c-stripe: var(--line-strong);
 }
-.highlight-block6 {
-  background-color: #cb9bd488;
-  color: #474746;
-  font-size: 16px;
+
+.highlight-block[id]::before, .highlight-block2[id]::before,
+.highlight-block4[id]::before, .highlight-block5::before,
+.highlight-block7::before, .highlight-git::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--c-stripe);
 }
-.highlight-block7 {
-  background-color: #16bcee88;
+
+/* ---------- Answers (collapsible) ---------- */
+
+.answer-block {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0.75rem 0 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  transition: border-color var(--ease), box-shadow var(--ease);
 }
-.highlight-git {
-  background-color: #d80beb88;
+
+.answer-block[open] {
+  width: 100%;
+  border-color: var(--accent-line);
 }
+
+.answer-block summary {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1rem 0.45rem 0.9rem;
+  border-radius: calc(var(--radius) - 1px);
+  color: var(--accent-ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--ease), color var(--ease);
+}
+
+.answer-block summary::-webkit-details-marker {
+  display: none;
+}
+
+.answer-block summary::before {
+  margin-top: -0.15em;
+}
+
+.answer-block[open] summary::before {
+  margin-top: -0.3em;
+}
+
+.answer-block summary:hover {
+  background-color: var(--accent-soft);
+}
+
+.answer-block[open] summary {
+  border-bottom: 1px solid var(--line);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.answer-block > :not(summary) {
+  margin: 0.75rem 1rem;
+  animation: answer-in 200ms ease both;
+}
+
+.answer-block p {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+}
+
+@keyframes answer-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- Folder chip ---------- */
+
 .folder {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  font-family: "Roboto Mono", "Courier New", monospace;
+  margin: 0.75rem 0;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
 }
+
 .folder .icon {
-  width: 1.1em;
-  height: 0.75em;
   position: relative;
   display: inline-block;
+  width: 1.1em;
+  height: 0.75em;
 }
+
 /* folder body */
 .folder .icon::before {
   content: "";
@@ -369,6 +838,7 @@ i.commit {
   border-radius: 3px;
   background: currentColor;
 }
+
 /* small tab */
 .folder .icon::after {
   content: "";
@@ -380,195 +850,122 @@ i.commit {
   border-radius: 2px;
   background: currentColor;
 }
-.folder.blue { color: #4dabf7; }
-.folder.green { color: #2ecc71; }
-.folder.orange { color: #e67e22; }
 
-.folder-name { color: var(--text, #5f5f5f); }
+.folder.blue, .folder.green, .folder.orange { color: var(--accent); }
 
-.answer-block summary {
-  cursor: pointer;
-  background-color: #8ac2fd; /* blue button */
-  color: white;
-  padding: 0.5em 1em;
-  border-radius: 6px;
-  font-weight: bold;
-  display: inline-block;
-  list-style: none; /* removes the default triangle */
-}
+.folder-name { color: var(--heading); }
 
-.answer-block summary::marker {
-  display: none; /* also removes marker in some browsers */
-}
+/* ---------- Narrower screens ---------- */
 
-.answer-block summary:hover {
-  background-color: #0056b3;
+@media (max-width: 1100px) {
+  :root {
+    --toc-w: 240px;
+  }
+
+  .content {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .toc {
+    padding: 20px 10px 20px 12px;
+    font-size: 0.85rem;
+  }
 }
 
-.answer-block[open] summary {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+/* Phones / very narrow windows: the TOC goes back into the flow */
+@media (max-width: 720px) {
+  .toc {
+    position: static;
+    width: auto;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 24px 18px 64px;
+  }
+
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.2rem; }
 }
 
-.answer-block p {
-  margin: 0;
-  padding: 0.5em 1em;
-  background-color: #f8f9fa;
-  border: 1px solid #007bff;
-  border-top: none;
-  font-family: "Courier New", Courier, monospace;
-}
+/* --------------------------------------------------------------------------
+   Command blocks with a copy-to-clipboard button
+   -------------------------------------------------------------------------- */
 
-
-.path-block {
-  font-family: "Roboto Mono", "Courier New", monospace;
-  background-color: #4dabf76c;    /* dark background */
-  color: #272726;             /* light text */
-  display: inline;
-}
-
-.redir-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
-  font-family: "Fira Code", "Courier New", monospace;
-  font-size: 13px;
-  table-layout: fixed;
-}
-
-.redir-table th,
-.redir-table td {
-  padding: 0.6rem 0.75rem;
-  border-bottom: 1px solid #ddd;
-  vertical-align: top;
-}
-
-/* make first column narrower */
-.redir-table th:first-child,
-.redir-table td:first-child {
-  width: 10%;   /* adjust as needed */
-  white-space: nowrap; /* prevent breaking operators */
-  text-align: left;
-}
-
-/* second column takes the rest */
-.redir-table th:last-child,
-.redir-table td:last-child {
-  width: 90%;
-}
-/* small responsive tweak */
-@media (max-width: 640px) {
-  .redir-table thead { display:none; }
-  .redir-table, .redir-table tbody, .redir-table tr, .redir-table td { display:block; width:100%; }
-  .redir-table tr { margin-bottom: 0.75rem; border: 1px solid #eee; padding: 0.5rem; border-radius:6px; }
-  .redir-table td { display:flex; justify-content:space-between; padding:0.5rem; }
-  .redir-table td::before { content: attr(data-label); font-weight:600; margin-right:0.5rem; color:#333; }
-}
-
-/* Style <details> and <summary> in the FUNCTION column */
-.redir-table details {
-  margin: 0; /* remove extra spacing */
-}
-
-.redir-table summary {
-  cursor: pointer;
-  font-weight: bold;
-  list-style: none; /* remove default marker */
-  position: relative;
-  padding-left: 1.2em; /* space for custom arrow */
-}
-
-/* Custom dropdown arrow */
-.redir-table summary::before {
-  content: "▶"; /* right-pointing arrow */
-  position: absolute;
-  left: 0;
-  transition: transform 0.2s ease;
-}
-
-/* Rotate arrow when open */
-.redir-table details[open] summary::before {
-  transform: rotate(90deg); /* arrow points down */
-}
-
-/* Substep list inside details */
-.redir-table details ul {
-  margin: 0.5em 0 0 1.5em;
-  padding: 0;
-  font-weight: normal;
-  font-size: 0.7rem;
-  color: #333;
-  list-style-type: none;
-}
-
-.takeaways {
-  padding-left: 1.2em;
-  font-size: 16px;
-  background-color: #1a92a154;
-  color: #0d6b77;           /* light text */
-  padding: 0.75em 1em;        /* space inside */
-  border-radius: 6px;         /* rounded corners */
-  margin: 1em 0;              /* spacing above/below */
-  display: block;             /* full-width element */
-  width: 100%;                /* stretch across container */
-  box-sizing: border-box;     /* include padding inside width */
-}
-.takeaways ul {
-  padding-left: 2em;
-  list-style-type: none; /* or none if you want no bullets */
-}
-
-.keys {
-  font-size: 16px;
-  background-color: #1aa18454;
-  color: #0f6350;           /* light text */
-  padding: 0.75em 1em;        /* space inside */
-  border-radius: 6px;         /* rounded corners */
-  margin: 1em 0;              /* spacing above/below */
-  display: block;             /* full-width element */
-  width: 100%;                /* stretch across container */
-  box-sizing: border-box;     /* include padding inside width */
-}
-.takeaways ul {
-  list-style-type: none; /* or none if you want no bullets */
-}
 .copy-block {
   position: relative;
-  background-color: #e0dcdcfd;
-  font-size: 13px;
-  color: #000000;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-family: "Fira Code", Consolas, "Courier New", monospace;
-  word-break: break-word;
-  overflow-x: auto;
+  margin: 0.75rem 0 1.25rem;
+  padding: 0.8rem 3rem 0.8rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--surface);
 }
 
 .copy-block pre {
-  margin: 0;             /* Prevents spacing that pushes button */
-  background: transparent; /* Inherit background from container */
+  margin: 0;
   padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
-/* Copy button (GitHub style) */
 button.copybtn {
   position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  top: .3em;
-  right: .3em;
-  width: 1.7em;
-  height: 1.7em;
-  opacity: 0;
-  transition: opacity 0.3s, border .3s, background-color .3s;
-  border: #1b1f2426 1px solid;
-  border-radius: 0.4em;
-  background-color: #f6f8fa;
-  color: #57606a;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg);
+  color: var(--muted);
+  font-size: 0.8rem;
   cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--ease), color var(--ease), border-color var(--ease), background-color var(--ease);
 }
 
-.copy-block:hover .copybtn {
+.copy-block:hover .copybtn,
+button.copybtn:focus-visible {
   opacity: 1;
+}
+
+button.copybtn:hover {
+  border-color: var(--accent-line);
+  background-color: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media print {
+  .toc {
+    display: none;
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 0;
+  }
+
+  .answer-block, table, .highlight-block6 {
+    box-shadow: none;
+  }
 }
